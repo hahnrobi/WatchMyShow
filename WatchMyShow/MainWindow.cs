@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WatchMyShow.DataClasses;
 
 namespace WatchMyShow
 {
@@ -15,6 +16,17 @@ namespace WatchMyShow
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Add(new TvProgramControl());
         }
     }
 }
