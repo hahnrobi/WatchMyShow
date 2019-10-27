@@ -66,7 +66,7 @@ namespace WatchMyShow
             {
                 Font = new System.Drawing.Font("Segoe UI", 14, System.Drawing.FontStyle.Bold),
                 Location = new Point(-2, 3),
-                Text = program.StartTime.ToString("H:mm")
+                Text = program.StartTime.ToString("HH:mm")
             };
             labelTimeLength = new Label()
             {

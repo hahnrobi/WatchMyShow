@@ -54,7 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses\Room.cs" />
+    <Compile Include="DataClasses\TvChannel.cs" />
     <Compile Include="DataClasses\TvProgram.cs" />
+    <Compile Include="Forms\TvProgramBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TvProgramBrowser.Designer.cs">
+      <DependentUpon>TvProgramBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +77,9 @@
     <Compile Include="TvProgramManager.cs" />
     <EmbeddedResource Include="Controls\TvProgramControl.resx">
       <DependentUpon>TvProgramControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TvProgramBrowser.resx">
+      <DependentUpon>TvProgramBrowser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

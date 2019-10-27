@@ -15,5 +15,6 @@ namespace WatchMyShow
         }
         public DbSet<TvProgram> Programs { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<TvChannel> ChannelInfo { get; set; }
     }
 }

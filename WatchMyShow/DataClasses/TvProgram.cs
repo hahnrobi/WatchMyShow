@@ -26,7 +26,7 @@ namespace WatchMyShow.DataClasses
     public enum TvProgramGenre : ushort
     {
         Series =1,
-        AnimatedSeries = 2,
+        Animated = 2,
         Comedy = 4,
         Documental = 8,
         Show = 16,
@@ -37,7 +37,8 @@ namespace WatchMyShow.DataClasses
         Drama = 512,
         Romantic = 1024,
         Family = 2048,
-        Music = 4096
+        Music = 4096,
+        Reality = 8192
 
     }
     public class TvProgram
@@ -80,11 +81,12 @@ namespace WatchMyShow.DataClasses
         /// TV műsor korhatára
         /// </summary>
         public AgeLimit AgeLimit { get; set; }
-
+        [XmlIgnoreAttribute]
         public int? ReservedRoomId { get; set; }
         /// <summary>
         /// Foglalás van-e és ha igen melyik szoba.
         /// </summary>
+        [XmlIgnoreAttribute]
         public virtual Room Reserved { get; set; }
 
     }
