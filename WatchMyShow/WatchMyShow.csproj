@@ -64,9 +64,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TvContext.cs" />
-    <Compile Include="TvProgramControl.cs">
+    <Compile Include="Controls\TvProgramControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TvProgramManager.cs" />
+    <EmbeddedResource Include="Controls\TvProgramControl.resx">
+      <DependentUpon>TvProgramControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

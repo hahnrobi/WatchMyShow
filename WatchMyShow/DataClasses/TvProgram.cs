@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace WatchMyShow.DataClasses
 {
@@ -44,7 +45,9 @@ namespace WatchMyShow.DataClasses
         /// <summary>
         /// TV műsor azonosítója az adatbázisban.
         /// </summary>
-        [System.ComponentModel.DataAnnotations.Key] public int ProgramId { get; set; }
+        [XmlIgnoreAttribute]
+        [System.ComponentModel.DataAnnotations.Key]
+        public int ProgramId { get; set; }
 
         /// <summary>
         /// TV műsor azonosítója az adatbázisban.
@@ -59,6 +62,7 @@ namespace WatchMyShow.DataClasses
         /// <summary>
         /// TV műsort sugárzó csatorna
         /// </summary>
+        [XmlElement(ElementName = "Channel")]
         public string TvChannel { get; set; }
 
 
@@ -82,6 +86,7 @@ namespace WatchMyShow.DataClasses
         /// Foglalás van-e és ha igen melyik szoba.
         /// </summary>
         public virtual Room Reserved { get; set; }
+
     }
 
 }
