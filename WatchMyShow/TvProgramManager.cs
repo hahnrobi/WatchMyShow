@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using WatchMyShow.DataClasses;
 using System.IO;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace WatchMyShow
 {
@@ -14,10 +15,10 @@ namespace WatchMyShow
     {
         private static string[] genreNames = new string[] { "sorozat", "animációs film", "vígjáték", "dokumentumfilm", "showműsor", "híradó/interjú", "horror", "thriller", "akció", "dráma", "romantikus", "családi", "zene", "reality" };
         private static string[] ageLimitMessages = new string[] {
-            "A műsorszám korhatárra való tekintet nélkül megtekinthető.", 
-            "A műsorszám megtekintése 6 éven aluliak számára nem ajánlott.", 
-            "A műsorszám megtekintése 12 éven aluliak számára nem ajánlott.", 
-            "A műsorszám megtekintése 16 éven aluliak számára nem ajánlott.", 
+            "A műsorszám korhatárra való tekintet nélkül megtekinthető.",
+            "A műsorszám megtekintése 6 éven aluliak számára nem ajánlott.",
+            "A műsorszám megtekintése 12 éven aluliak számára nem ajánlott.",
+            "A műsorszám megtekintése 16 éven aluliak számára nem ajánlott.",
             "A műsorszám megtekintése 18 éven aluliak számára nem ajánlott." };
 
         public TvProgramManager()
@@ -41,7 +42,7 @@ namespace WatchMyShow
         {
             return ageLimitMessages[(int)limit];
         }
-        public void ImportTvPrograms(string filepath) 
+        public void ImportTvPrograms(string filepath)
         {
             using (TvContext context = new TvContext())
             {
@@ -57,5 +58,30 @@ namespace WatchMyShow
                 }
             }
         }
+        public List<TvProgram> ParseXmlTvFile(string filepath)
+        {
+            List<TvProgram> programList = new List<TvProgram>();
+
+            XmlDocument xml = new XmlDocument();
+            xml.Load(filepath);
+            foreach (XmlNode node in xml.DocumentElement.ChildNodes)
+            {
+                if (node.Name == "programme")
+                {
+                    TvProgram newProgram = new TvProgram();
+                    foreach (XmlNode childNode in node.ChildNodes)
+                    {
+                        if(childNode.Name == "title")
+                        {
+                            Console.WriteLine(childNode.InnerText);
+                        }
+                    }
+
+                    programList.Add(newProgram);
+                }
+            }
+            return programList;
+        }
+
     }
 }

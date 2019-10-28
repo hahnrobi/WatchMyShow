@@ -53,9 +53,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\LoadingControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DataClasses\Room.cs" />
     <Compile Include="DataClasses\TvChannel.cs" />
     <Compile Include="DataClasses\TvProgram.cs" />
+    <Compile Include="Event\DateEventArgs.cs" />
+    <Compile Include="Event\TvProgramReceivedEventArgs.cs" />
+    <Compile Include="Forms\CalendarPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CalendarPicker.Designer.cs">
+      <DependentUpon>CalendarPicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TvProgramBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +81,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomTvProgramGenerator.cs" />
     <Compile Include="TvContext.cs" />
     <Compile Include="Controls\TvProgramControl.cs">
       <SubType>Component</SubType>
@@ -77,6 +89,9 @@
     <Compile Include="TvProgramManager.cs" />
     <EmbeddedResource Include="Controls\TvProgramControl.resx">
       <DependentUpon>TvProgramControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CalendarPicker.resx">
+      <DependentUpon>CalendarPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TvProgramBrowser.resx">
       <DependentUpon>TvProgramBrowser.cs</DependentUpon>

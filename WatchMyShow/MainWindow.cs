@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,8 +20,9 @@ namespace WatchMyShow
         public MainWindow()
         {
             InitializeComponent();
+            tvProgramManager = new TvProgramManager();
         }
-
+        TvProgramManager tvProgramManager;
         private void MainWindow_Load(object sender, EventArgs e)
         {
 
@@ -92,14 +94,35 @@ namespace WatchMyShow
             //{
             //    flowLayoutPanel1.Controls.Add(new TvProgramControl(item));
             //}
-            TvProgramManager tvProgramManager = new TvProgramManager();
+            
             tvProgramManager.ImportTvPrograms("tv.xml");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            TvProgramBrowser tpb = new TvProgramBrowser();
-            tpb.Show();
+                TvProgramBrowser tpb = new TvProgramBrowser();
+                tpb.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine("asd");
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            RandomTvProgramGenerator randomTv = new RandomTvProgramGenerator();
+            List<TvProgram> tvPrograms = randomTv.GenerateRandomPrograms("DUE Tv", DateTime.Now);
+            foreach (TvProgram item in tvPrograms)
+            {
+                flowLayoutPanel1.Controls.Add(new TvProgramControl(item));
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            RandomTvProgramGenerator randomTv = new RandomTvProgramGenerator();
+            randomTv.BulkGenerate(new string[] { "DTL", "DUE Tv", "Nagydorog Tv", "Piripócs Televízió" }, DateTime.Now, DateTime.Now.Date.AddDays(4));
         }
     }
 }
