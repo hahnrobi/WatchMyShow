@@ -10,7 +10,7 @@ namespace WatchMyShow
 {
     class TvContext : DbContext
     {
-        public TvContext() : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\hahnr\source\repos\WatchMyShow\tv.mdf;Integrated Security=True;Connect Timeout=30")
+        public TvContext() : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\hahnr\source\repos\hahnrobi\WatchMyShow\tv.mdf;Integrated Security=True;Connect Timeout=30")
         {
         }
         public DbSet<TvProgram> Programs { get; set; }

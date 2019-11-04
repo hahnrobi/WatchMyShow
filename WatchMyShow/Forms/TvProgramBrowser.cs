@@ -15,6 +15,7 @@ namespace WatchMyShow.Forms
     public partial class TvProgramBrowser : Form
     {
         CalendarPicker cp;
+        Room room;
         event EventHandler<TvProgramReceivedEventArgs> ProgramsReveiced;
         public TvProgramBrowser()
         {
@@ -26,11 +27,10 @@ namespace WatchMyShow.Forms
 
             using (TvContext context = new TvContext())
             {
-                var getChannels =
-                                        from program in context.Programs
-                                        group program by program.TvChannel into newGroup
-                                        orderby newGroup.Key
-                                        select newGroup;
+                var getChannels = from program in context.Programs
+                                  group program by program.TvChannel into newGroup
+                                  orderby newGroup.Key
+                                  select newGroup;
                 foreach (var channels in getChannels)
                 {
                     channelSelector.Items.Add(channels.Key);
@@ -50,7 +50,7 @@ namespace WatchMyShow.Forms
             else
             {
                 cp = new CalendarPicker(datePicker.Value);
-                cp.DateChanged += (o, i) => { this.datePicker.Value = i.Date; UpdateTvShowList(); };
+                cp.DateChanged += (o, i) => { this.datePicker.Value = i.Date;};
                 datePicker.ValueChanged += (o, i) => { cp.Date = datePicker.Value;};
                 cp.FormClosed += (o, i) => { dátumVálasztóToolStripMenuItem.Checked = false; };
                 cp.Load += (o, i) => { dátumVálasztóToolStripMenuItem.Checked = true; };
@@ -58,7 +58,7 @@ namespace WatchMyShow.Forms
             }
 
         }
-        private void UpdateTvShowList()
+        public void UpdateTvShowList()
         {
             this.loadingLabel.Text = "Betöltés...";
             string channel = channelSelector.Text;
@@ -99,7 +99,9 @@ namespace WatchMyShow.Forms
                 flowLayoutPanel1.Invoke(
                     (Action)(() =>
                     {
-                        flowLayoutPanel1.Controls.Add(new TvProgramControl(item));
+                        TvProgramControl ctrl = new TvProgramControl(item, room);
+                        ctrl.buttonFoglalas.Click += (o, i) => { this.UpdateTvShowList(); };
+                        flowLayoutPanel1.Controls.Add(ctrl);
                     })
                 );
             }
@@ -108,7 +110,7 @@ namespace WatchMyShow.Forms
                 flowLayoutPanel1.Invoke(
                     (Action)(() =>
                     {
-                        flowLayoutPanel1.Controls.Add(new Label() { Text = "Nem található műsor" });
+                        flowLayoutPanel1.Controls.Add(new Label() { Text = "Nem található műsor", Size = new Size(400,30)});
                     })
                 );
             }
@@ -117,6 +119,20 @@ namespace WatchMyShow.Forms
         private void channelSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateTvShowList();
+        }
+
+        private void szobaVálasszonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RoomBrowser rb = new RoomBrowser();
+            if(rb.ShowDialog() == DialogResult.OK)
+            {
+                
+                this.room = rb.Room;
+                szobaVálasszonToolStripMenuItem.Text = "Szoba: " + this.room.RoomId;
+                UpdateTvShowList();
+                Console.WriteLine(room.RoomId);
+            }
+            
         }
     }
 }

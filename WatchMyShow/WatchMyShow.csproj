@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,6 +67,24 @@
     </Compile>
     <Compile Include="Forms\CalendarPicker.Designer.cs">
       <DependentUpon>CalendarPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RoomBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RoomBrowser.Designer.cs">
+      <DependentUpon>RoomBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RoomManagingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RoomManagingForm.Designer.cs">
+      <DependentUpon>RoomManagingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TextBoxPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextBoxPopup.Designer.cs">
+      <DependentUpon>TextBoxPopup.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TvProgramBrowser.cs">
       <SubType>Form</SubType>
@@ -92,6 +111,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CalendarPicker.resx">
       <DependentUpon>CalendarPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RoomBrowser.resx">
+      <DependentUpon>RoomBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RoomManagingForm.resx">
+      <DependentUpon>RoomManagingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextBoxPopup.resx">
+      <DependentUpon>TextBoxPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TvProgramBrowser.resx">
       <DependentUpon>TvProgramBrowser.cs</DependentUpon>

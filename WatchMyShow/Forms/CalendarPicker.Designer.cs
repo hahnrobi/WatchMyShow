@@ -54,6 +54,7 @@
             this.MinimumSize = new System.Drawing.Size(215, 199);
             this.Name = "CalendarPicker";
             this.Text = "Dátum választó";
+            this.Load += new System.EventHandler(this.CalendarPicker_Load);
             this.ResumeLayout(false);
 
         }

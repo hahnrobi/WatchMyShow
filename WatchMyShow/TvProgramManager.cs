@@ -8,6 +8,7 @@ using WatchMyShow.DataClasses;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
+using WatchMyShow.Forms;
 
 namespace WatchMyShow
 {
@@ -55,6 +56,23 @@ namespace WatchMyShow
                         context.Programs.Add(prgm);
                     }
                     context.SaveChanges();
+                }
+            }
+        }
+        public static void ReserveTvProgram(TvProgram program, Room room)
+        {
+            using(TvContext context = new TvContext())
+            {
+                try
+                {
+                    TvProgram prg = context.Programs.Find(program.ProgramId);
+                    Room r = context.Rooms.Find(room.RoomId);
+                    prg.Reserved = r;
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Nem sikerült a foglalás.\nHiba lépett fel. Frissítsen és próbálja újra.", "Hiba.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

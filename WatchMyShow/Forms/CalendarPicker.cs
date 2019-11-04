@@ -33,6 +33,9 @@ namespace WatchMyShow.Forms
             DateChanged?.Invoke(this, new DateEventArgs(calendar.SelectionRange.Start));
         }
 
+        private void CalendarPicker_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

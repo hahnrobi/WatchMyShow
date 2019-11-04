@@ -124,5 +124,11 @@ namespace WatchMyShow
             RandomTvProgramGenerator randomTv = new RandomTvProgramGenerator();
             randomTv.BulkGenerate(new string[] { "DTL", "DUE Tv", "Nagydorog Tv", "Piripócs Televízió" }, DateTime.Now, DateTime.Now.Date.AddDays(4));
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            RoomManagingForm rmf = new RoomManagingForm();
+            rmf.Show();
+        }
     }
 }

@@ -17,10 +17,18 @@ namespace WatchMyShow
         private Label labelStartTime;
         private Label labelTimeLength;
         private PictureBox pictureKorhatar;
+        public Button buttonFoglalas;
         private TvProgram program;
+        private Room room;
                 
         public TvProgramControl(TvProgram program)
         {
+            this.program = program;
+            InitializeComponent();
+        }
+        public TvProgramControl(TvProgram program, Room room)
+        {
+            this.room = room;
             this.program = program;
             InitializeComponent();
         }
@@ -77,14 +85,63 @@ namespace WatchMyShow
             pictureKorhatar = new PictureBox()
             {
                 Image = getAgeLimitPic(),
-                Location = new Point(267, 5)
+                Location = new Point(267, 5),
+                Size = new Size(32, 32)
             };
+            buttonFoglalas = new Button()
+            {
+                Text = "Foglalás",
+                Location = new Point(223, 52),
+                BackColor = Color.LemonChiffon,
+            };
+
+            if (room != null)
+            {
+
+                using (TvContext context = new TvContext()) 
+                {
+                    var shows = from p in context.Programs
+                                where 
+                                    p.Reserved != null && 
+                                    p.StartTime <= program.StartTime && 
+                                    p.EndTime > program.StartTime
+                                select p;
+
+                    buttonFoglalas.Visible = true;
+                    if (shows.Count() > 0)
+                    {
+                        buttonFoglalas.Enabled = false;
+                        buttonFoglalas.Text = "Nem foglalható.";
+                        buttonFoglalas.BackColor = Color.Gray;
+                        buttonFoglalas.Size = new Size(123, 23);
+                    }
+                    else {
+                        buttonFoglalas.Click += (o, i) => { TvProgramManager.ReserveTvProgram(program, room); };
+                    }
+                    
+                }
+                if (program.Reserved != null)
+                {
+                    if (program.Reserved.RoomId == room.RoomId)
+                    {
+                        buttonFoglalas.BackColor = Color.Green;
+                        buttonFoglalas.Text = "Saját foglalás";
+                        buttonFoglalas.Size = new Size(123, 23);
+                    }
+                    buttonFoglalas.Enabled = false;
+                }
+            }
+            else
+            {
+                buttonFoglalas.Visible = false;
+            }
 
             Controls.Add(labelTitle);
             Controls.Add(labelGenre);
             Controls.Add(labelTimeLength);
             Controls.Add(pictureKorhatar);
             Controls.Add(labelStartTime);
+            Controls.Add(buttonFoglalas);
 
             System.Windows.Forms.ToolTip tt = new System.Windows.Forms.ToolTip();
             tt.SetToolTip(this.pictureKorhatar, TvProgramManager.GetAgeLimitMessage(this.program.AgeLimit));

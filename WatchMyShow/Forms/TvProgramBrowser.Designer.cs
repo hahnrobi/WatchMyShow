@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.loadingLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.szobaVálasszonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +47,7 @@
             // 
             this.channelSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.channelSelector.FormattingEnabled = true;
-            this.channelSelector.Location = new System.Drawing.Point(80, 74);
+            this.channelSelector.Location = new System.Drawing.Point(79, 56);
             this.channelSelector.Name = "channelSelector";
             this.channelSelector.Size = new System.Drawing.Size(336, 21);
             this.channelSelector.TabIndex = 0;
@@ -54,7 +55,7 @@
             // 
             // datePicker
             // 
-            this.datePicker.Location = new System.Drawing.Point(80, 48);
+            this.datePicker.Location = new System.Drawing.Point(80, 27);
             this.datePicker.Name = "datePicker";
             this.datePicker.Size = new System.Drawing.Size(336, 20);
             this.datePicker.TabIndex = 1;
@@ -62,7 +63,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.eszközökToolStripMenuItem});
+            this.eszközökToolStripMenuItem,
+            this.szobaVálasszonToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(428, 24);
@@ -88,16 +90,16 @@
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 111);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 83);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(404, 495);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(404, 523);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.WrapContents = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 54);
+            this.label1.Location = new System.Drawing.Point(9, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 4;
@@ -106,7 +108,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 77);
+            this.label2.Location = new System.Drawing.Point(9, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 5;
@@ -127,6 +129,13 @@
             this.loadingLabel.Name = "loadingLabel";
             this.loadingLabel.Size = new System.Drawing.Size(33, 17);
             this.loadingLabel.Text = "Kész.";
+            // 
+            // szobaVálasszonToolStripMenuItem
+            // 
+            this.szobaVálasszonToolStripMenuItem.Name = "szobaVálasszonToolStripMenuItem";
+            this.szobaVálasszonToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.szobaVálasszonToolStripMenuItem.Text = "Szoba: Válasszon!";
+            this.szobaVálasszonToolStripMenuItem.Click += new System.EventHandler(this.szobaVálasszonToolStripMenuItem_Click);
             // 
             // TvProgramBrowser
             // 
@@ -166,5 +175,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel loadingLabel;
+        private System.Windows.Forms.ToolStripMenuItem szobaVálasszonToolStripMenuItem;
     }
 }

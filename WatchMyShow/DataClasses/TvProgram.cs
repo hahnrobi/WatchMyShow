@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -23,7 +25,7 @@ namespace WatchMyShow.DataClasses
     /// <summary>
     /// Különféle TV műsor műfajok. Több is kiválasztható.
     /// </summary>
-    public enum TvProgramGenre : ushort
+    public enum TvProgramGenre
     {
         Series =1,
         Animated = 2,
@@ -87,6 +89,7 @@ namespace WatchMyShow.DataClasses
         /// Foglalás van-e és ha igen melyik szoba.
         /// </summary>
         [XmlIgnoreAttribute]
+        [ForeignKey("ReservedRoomId")]
         public virtual Room Reserved { get; set; }
 
     }
