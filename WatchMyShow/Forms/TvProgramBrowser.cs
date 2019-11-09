@@ -50,18 +50,32 @@ namespace WatchMyShow.Forms
             else
             {
                 cp = new CalendarPicker(datePicker.Value);
-                cp.DateChanged += (o, i) => { this.datePicker.Value = i.Date;};
-                datePicker.ValueChanged += (o, i) => { cp.Date = datePicker.Value;};
+                cp.DateChanged += (o, i) => { this.datePicker.Value = i.Date; };
+                datePicker.ValueChanged += (o, i) => { cp.Date = datePicker.Value; };
                 cp.FormClosed += (o, i) => { dátumVálasztóToolStripMenuItem.Checked = false; };
                 cp.Load += (o, i) => { dátumVálasztóToolStripMenuItem.Checked = true; };
                 cp.Show();
             }
 
         }
+
+        private void ChangeChannel(string channel)
+        {
+            int i = 0;
+            while (channel != (string)channelSelector.Items[i] && i < channelSelector.Items.Count)
+            {
+                i++;
+            }
+            if (i < channelSelector.Items.Count)
+            {
+                channelSelector.SelectedIndex = i;
+            }
+        }
         public void UpdateTvShowList()
         {
             this.loadingLabel.Text = "Betöltés...";
             string channel = channelSelector.Text;
+            Console.WriteLine(channel);
             DateTime time = datePicker.Value;
             Task.Run(() =>
             {
@@ -102,18 +116,20 @@ namespace WatchMyShow.Forms
                         TvProgramControl ctrl = new TvProgramControl(item, room);
                         ctrl.buttonFoglalas.Click += (o, i) => { this.UpdateTvShowList(); };
                         flowLayoutPanel1.Controls.Add(ctrl);
+                        ctrl.SelectedProgramChaned += (o, args) => { this.ChangeChannel(args.Program.TvChannel); };
                     })
                 );
             }
-            if(e.Programs.Count == 0)
+            if (e.Programs.Count == 0)
             {
                 flowLayoutPanel1.Invoke(
                     (Action)(() =>
                     {
-                        flowLayoutPanel1.Controls.Add(new Label() { Text = "Nem található műsor", Size = new Size(400,30)});
+                        flowLayoutPanel1.Controls.Add(new Label() { Text = "Nem található műsor", Size = new Size(400, 30) });
                     })
                 );
             }
+            
             this.loadingLabel.Text = "Kész.";
         }
         private void channelSelector_SelectedIndexChanged(object sender, EventArgs e)
@@ -124,15 +140,16 @@ namespace WatchMyShow.Forms
         private void szobaVálasszonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RoomBrowser rb = new RoomBrowser();
-            if(rb.ShowDialog() == DialogResult.OK)
+            if (rb.ShowDialog() == DialogResult.OK)
             {
-                
+
                 this.room = rb.Room;
                 szobaVálasszonToolStripMenuItem.Text = "Szoba: " + this.room.RoomId;
                 UpdateTvShowList();
                 Console.WriteLine(room.RoomId);
             }
-            
+
         }
+
     }
 }

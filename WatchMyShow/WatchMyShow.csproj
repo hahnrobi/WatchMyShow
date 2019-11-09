@@ -61,6 +61,7 @@
     <Compile Include="DataClasses\TvChannel.cs" />
     <Compile Include="DataClasses\TvProgram.cs" />
     <Compile Include="Event\DateEventArgs.cs" />
+    <Compile Include="Event\ProgramChangeEventArgs.cs" />
     <Compile Include="Event\TvProgramReceivedEventArgs.cs" />
     <Compile Include="Forms\CalendarPicker.cs">
       <SubType>Form</SubType>

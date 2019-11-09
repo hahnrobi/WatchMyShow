@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using WatchMyShow.DataClasses;
+using WatchMyShow.Event;
 
 namespace WatchMyShow
 {
     class TvProgramControl : Panel
     {
-        
+
         private Label labelTitle;
         private Label labelGenre;
         private Label labelStartTime;
         private Label labelTimeLength;
+        private Label labelStatus;
         private PictureBox pictureKorhatar;
         public Button buttonFoglalas;
         private TvProgram program;
         private Room room;
-                
+
+        public EventHandler<ProgramChangeEventArgs> SelectedProgramChaned;
+
         public TvProgramControl(TvProgram program)
         {
             this.program = program;
@@ -82,6 +86,12 @@ namespace WatchMyShow
                 Location = new Point(3, 26),
                 Text = (program.EndTime - program.StartTime).TotalMinutes.ToString("0") + " perc"
             };
+            labelStatus = new Label()
+            {
+                Location = new Point(200, 60),
+                Font = new System.Drawing.Font("Segoe UI", 8, System.Drawing.FontStyle.Bold),
+                Visible = false
+            };
             pictureKorhatar = new PictureBox()
             {
                 Image = getAgeLimitPic(),
@@ -92,53 +102,111 @@ namespace WatchMyShow
             {
                 Text = "Foglalás",
                 Location = new Point(223, 52),
-                BackColor = Color.LemonChiffon,
+                BackColor = Control.DefaultBackColor,
+                Visible = false
             };
 
-            if (room != null)
+            //FOGLALÁS BEGINS
+            using (TvContext context = new TvContext())
             {
-
-                using (TvContext context = new TvContext()) 
+                //Olyan műsorok lekérése, amelyek ugyanabban az időpontban vannak műsoron, mint ebbe a Controlba kapott műsor.
+                //Olyan műsor ami foglalva van, hamarabb, vagy ugyanakkor kezdődik mint a kiválasztott és később van vége, mint ahogy a kiválasztott elkezdődne.
+                var shows = from p in context.Programs
+                            where
+                                p.Reserved != null &&
+                                p.StartTime <= program.StartTime &&
+                                p.EndTime > program.StartTime
+                            select p;
+                //Látható legyen a foglalás gomb. Minden más többi esetben csak eltüntetve lesz.
+                if (room != null) { buttonFoglalas.Visible = true; }
+                //Ha van olyan műsor amivel átfedésben van
+                if (shows.Count() > 0)
                 {
-                    var shows = from p in context.Programs
-                                where 
-                                    p.Reserved != null && 
-                                    p.StartTime <= program.StartTime && 
-                                    p.EndTime > program.StartTime
-                                select p;
+                    //Ha ütközik másik programmal, megnézzük, hogy önmaga is a foglalt műsorok között van.
+                    bool isSelf = (from p in shows
+                                   where p.ProgramId == program.ProgramId
+                                   select p)
+                                     .Count() > 0;
 
-                    buttonFoglalas.Visible = true;
-                    if (shows.Count() > 0)
+                    buttonFoglalas.Visible = false;
+
+                    //Ha önmaga az éppen ütköző foglalt műsorok között van, akkor tudatjuk a felhasználóval, ez van az adott időpotban lefoglalva.
+                    if (isSelf)
                     {
-                        buttonFoglalas.Enabled = false;
-                        buttonFoglalas.Text = "Nem foglalható.";
-                        buttonFoglalas.BackColor = Color.Gray;
-                        buttonFoglalas.Size = new Size(123, 23);
+                        labelStatus.Text = "Lefoglalt";
+                        System.Windows.Forms.ToolTip ttt = new System.Windows.Forms.ToolTip();
+                        ttt.SetToolTip(labelStatus, "Ez a műsor már le van foglalva, így nézhető lesz.");
                     }
-                    else {
-                        buttonFoglalas.Click += (o, i) => { TvProgramManager.ReserveTvProgram(program, room); };
+                    else
+                    {
+                        //Ebben az esetben a műsor nem foglalható le, mert ekkor másik lefoglalt műsor fut. Hogy a felhasználó tudja, hogy mi, 
+                        //jobb kattintásra context menüben megjelenik a műsor, rákattintva ahhoz a tv csatornához ugrik a program.
+                        var reservedShows = from p in shows
+                                            where p.ProgramId != program.ProgramId
+                                            select p;
+
+                        ContextMenuStrip cm = new ContextMenuStrip() { RenderMode = ToolStripRenderMode.System };
+                        //Alap foglalt műsor szöveg és egy divider.
+                        ToolStripMenuItem menuItem = new ToolStripMenuItem() { Text = "Foglalt műsor", Enabled = false };
+                        cm.Items.Add(menuItem);
+                        cm.Items.Add(new ToolStripSeparator());
+
+                        //Ütköző műsor berakása a listába.
+                        foreach (var show in reservedShows)
+                        {
+                            ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem()
+                            {
+                                Text = String.Format(
+                                    "{0} {1}:{2}-{3}:{4} ({5})",
+                                    show.Title, //0
+                                    show.StartTime.Hour, //1
+                                    show.StartTime.Minute, //2
+                                    show.EndTime.Hour, //3
+                                    show.EndTime.Minute, //4
+                                    show.TvChannel //5
+                                )
+                            };
+                            //Kattintásra elsütjük a SelectedProgramChanged eseményt, ami megváltoztatja a megjelenített csatornát
+                            toolStripMenuItem.Click += (i, o) => { SelectedProgramChaned?.Invoke(this, new ProgramChangeEventArgs() { Program = show }); };
+                            //És hozzá is adjuk a menühöz az elemet.
+                            cm.Items.Add(toolStripMenuItem);
+                        }
+                        labelStatus.ContextMenuStrip = cm;
+                        //Kis tooltip, hogy érthető legyen miért van kint a felirat.
+                        System.Windows.Forms.ToolTip ttt = new System.Windows.Forms.ToolTip();
+                        ttt.SetToolTip(labelStatus, "Ebben az időpontban egy másik lefoglalt műsorral van átfedésben.");
+
+                        labelStatus.Text = "Nem foglalható";
                     }
-                    
+                    labelStatus.ForeColor = Color.Gray;
+                    labelStatus.Visible = true;
                 }
-                if (program.Reserved != null)
+                else
                 {
-                    if (program.Reserved.RoomId == room.RoomId)
-                    {
-                        buttonFoglalas.BackColor = Color.Green;
-                        buttonFoglalas.Text = "Saját foglalás";
-                        buttonFoglalas.Size = new Size(123, 23);
-                    }
-                    buttonFoglalas.Enabled = false;
+                    //Ha pedig nincs foglalt program ennek az időpontjában, akkor a gombhoz hozzárendeljük a foglalást megvalósító metódust.
+                    buttonFoglalas.Click += (o, i) => { TvProgramManager.ReserveTvProgram(program, room); };
                 }
+
             }
-            else
+
+            //Itt pedig felülírjuk a dolgokat annyival, hogyha az adott műsor saját szoba foglalása.
+            if (program.Reserved != null)
             {
+                if (room != null && program.Reserved.RoomId == room.RoomId)
+                {
+                    labelStatus.ForeColor = Color.Green;
+                    labelStatus.Text = "Saját foglalás";
+                    labelStatus.Visible = true;
+                }
                 buttonFoglalas.Visible = false;
             }
+
+            //FOGLALÁS ENDS
 
             Controls.Add(labelTitle);
             Controls.Add(labelGenre);
             Controls.Add(labelTimeLength);
+            Controls.Add(labelStatus);
             Controls.Add(pictureKorhatar);
             Controls.Add(labelStartTime);
             Controls.Add(buttonFoglalas);

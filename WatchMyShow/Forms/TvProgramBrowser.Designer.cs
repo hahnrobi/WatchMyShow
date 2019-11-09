@@ -33,12 +33,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.eszközökToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dátumVálasztóToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.szobaVálasszonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.loadingLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.szobaVálasszonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +86,13 @@
             this.dátumVálasztóToolStripMenuItem.Text = "Dátum választó";
             this.dátumVálasztóToolStripMenuItem.Click += new System.EventHandler(this.dátumVálasztóToolStripMenuItem_Click_1);
             // 
+            // szobaVálasszonToolStripMenuItem
+            // 
+            this.szobaVálasszonToolStripMenuItem.Name = "szobaVálasszonToolStripMenuItem";
+            this.szobaVálasszonToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.szobaVálasszonToolStripMenuItem.Text = "Szoba: Válasszon!";
+            this.szobaVálasszonToolStripMenuItem.Click += new System.EventHandler(this.szobaVálasszonToolStripMenuItem_Click);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
@@ -129,13 +136,6 @@
             this.loadingLabel.Name = "loadingLabel";
             this.loadingLabel.Size = new System.Drawing.Size(33, 17);
             this.loadingLabel.Text = "Kész.";
-            // 
-            // szobaVálasszonToolStripMenuItem
-            // 
-            this.szobaVálasszonToolStripMenuItem.Name = "szobaVálasszonToolStripMenuItem";
-            this.szobaVálasszonToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-            this.szobaVálasszonToolStripMenuItem.Text = "Szoba: Válasszon!";
-            this.szobaVálasszonToolStripMenuItem.Click += new System.EventHandler(this.szobaVálasszonToolStripMenuItem_Click);
             // 
             // TvProgramBrowser
             // 

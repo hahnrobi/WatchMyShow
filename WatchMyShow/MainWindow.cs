@@ -130,5 +130,10 @@ namespace WatchMyShow
             RoomManagingForm rmf = new RoomManagingForm();
             rmf.Show();
         }
+
+        private void dsadaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
