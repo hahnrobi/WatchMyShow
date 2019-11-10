@@ -43,6 +43,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +69,12 @@
     </Compile>
     <Compile Include="Forms\CalendarPicker.Designer.cs">
       <DependentUpon>CalendarPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PieStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PieStatistics.Designer.cs">
+      <DependentUpon>PieStatistics.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RoomBrowser.cs">
       <SubType>Form</SubType>
@@ -107,11 +114,15 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="TvProgramManager.cs" />
+    <Compile Include="TvProgramStatistics.cs" />
     <EmbeddedResource Include="Controls\TvProgramControl.resx">
       <DependentUpon>TvProgramControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CalendarPicker.resx">
       <DependentUpon>CalendarPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PieStatistics.resx">
+      <DependentUpon>PieStatistics.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RoomBrowser.resx">
       <DependentUpon>RoomBrowser.cs</DependentUpon>

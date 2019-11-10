@@ -17,12 +17,15 @@ namespace WatchMyShow
 {
     public partial class MainWindow : Form
     {
+        TvProgramManager tvProgramManager;
+        TvProgramStatistics TvProgramStatistics;
         public MainWindow()
         {
             InitializeComponent();
             tvProgramManager = new TvProgramManager();
+            TvProgramStatistics = new TvProgramStatistics();
         }
-        TvProgramManager tvProgramManager;
+        
         private void MainWindow_Load(object sender, EventArgs e)
         {
 
@@ -134,6 +137,11 @@ namespace WatchMyShow
         private void dsadaToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            TvProgramStatistics.getStatistics(Stats.ByGenre);
         }
     }
 }

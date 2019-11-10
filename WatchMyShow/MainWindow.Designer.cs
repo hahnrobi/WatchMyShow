@@ -48,9 +48,10 @@
             this.button7 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sasdaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.dsadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sasdaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button8 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -245,24 +246,34 @@
             this.dsadaToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 76);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // dsadaToolStripMenuItem
-            // 
-            this.dsadaToolStripMenuItem.Name = "dsadaToolStripMenuItem";
-            this.dsadaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.dsadaToolStripMenuItem.Text = "dsada";
-            this.dsadaToolStripMenuItem.Click += new System.EventHandler(this.dsadaToolStripMenuItem_Click);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(106, 54);
             // 
             // sasdaToolStripMenuItem
             // 
             this.sasdaToolStripMenuItem.Name = "sasdaToolStripMenuItem";
-            this.sasdaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sasdaToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(102, 6);
+            // 
+            // dsadaToolStripMenuItem
+            // 
+            this.dsadaToolStripMenuItem.Name = "dsadaToolStripMenuItem";
+            this.dsadaToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.dsadaToolStripMenuItem.Text = "dsada";
+            this.dsadaToolStripMenuItem.Click += new System.EventHandler(this.dsadaToolStripMenuItem_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(629, 368);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 11;
+            this.button8.Text = "Stat";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // MainWindow
             // 
@@ -270,6 +281,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(739, 542);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -318,5 +330,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem dsadaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sasdaToolStripMenuItem;
+        private System.Windows.Forms.Button button8;
     }
 }
