@@ -141,7 +141,9 @@ namespace WatchMyShow
 
         private void button8_Click(object sender, EventArgs e)
         {
-            TvProgramStatistics.getStatistics(Stats.ByGenre);
+            Dictionary<string, int> stat = (Dictionary<string, int>)TvProgramStatistics.getStatistics(Stats.ByTvChannel);
+            PieStatistics ps = new PieStatistics(stat);
+            ps.ShowDialog();
         }
     }
 }

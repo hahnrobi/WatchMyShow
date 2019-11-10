@@ -30,6 +30,18 @@ namespace WatchMyShow.Forms
             }
             chart1.Series.Add(s);
         }
+        public PieStatistics(Dictionary<string, int> channelStats)
+        {
+            InitializeComponent();
+            chart1.Series.Clear();
+            Series s = new Series();
+            s.ChartType = SeriesChartType.Pie;
+            foreach (KeyValuePair<string, int> item in channelStats)
+            {
+                s.Points.AddXY(item.Key, item.Value);
+            }
+            chart1.Series.Add(s);
+        }
 
         private void PieStatistics_Load(object sender, EventArgs e)
         {

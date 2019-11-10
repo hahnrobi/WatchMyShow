@@ -21,11 +21,11 @@ namespace WatchMyShow
             return Enum.GetValues(typeof(TvProgramGenre)).Cast<TvProgramGenre>()
                .Where(f => input.HasFlag(f));
         }
-        public void getStatistics(Stats stats)
+        public object getStatistics(Stats stats)
         {
             using (TvContext context = new TvContext())
             {
-                if(stats == Stats.ByGenre)
+                if (stats == Stats.ByGenre)
                 {
                     Dictionary<TvProgramGenre, int> genreStats = new Dictionary<TvProgramGenre, int>();
 
@@ -37,7 +37,7 @@ namespace WatchMyShow
                     {
                         foreach (var flag in GetFlags(item))
                         {
-                            if(genreStats.ContainsKey(flag))
+                            if (genreStats.ContainsKey(flag))
                             {
                                 genreStats[flag]++;
                             }
@@ -47,13 +47,23 @@ namespace WatchMyShow
                             }
                         }
                     }
-                    foreach (KeyValuePair<TvProgramGenre, int> item in genreStats)
-                    {
-                        Console.WriteLine(TvProgramManager.GetGenresAsString(item.Key) + " - " + item.Value);
-                    }
-                    PieStatistics pieStats = new PieStatistics(genreStats);
-                    pieStats.ShowDialog();
+                    return genreStats;
                 }
+                if (stats == Stats.ByTvChannel)
+                {
+                    var pl = from p in context.Programs
+                             where p.Reserved != null
+                            orderby p.TvChannel
+                            group p by p.TvChannel into grp
+                            select new { key = grp.Key, cnt = grp.Count() };
+                    Dictionary<string, int> channelStats = new Dictionary<string, int>();
+                    foreach (var item in pl)
+                    {
+                        channelStats.Add(item.key, item.cnt);
+                    }
+                    return channelStats;
+                }
+                return null;
             }
         }
     }
