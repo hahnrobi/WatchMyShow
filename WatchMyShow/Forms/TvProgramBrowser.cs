@@ -16,10 +16,29 @@ namespace WatchMyShow.Forms
     {
         CalendarPicker cp;
         Room room;
+        TvProgramManager ProgramManager;
+        ProgramDisplay programDisplay = ProgramDisplay.OnlyFree | ProgramDisplay.OnlyReserved;
         event EventHandler<TvProgramReceivedEventArgs> ProgramsReveiced;
         public TvProgramBrowser()
         {
             InitializeComponent();
+            ProgramManager = new TvProgramManager();
+            channelSelector.SelectedIndexChanged += UpdateChannelChangeButtons;
+            buttonChannelBackward.Click += (s, args) => { ChangeChannel(-1); };
+            buttonChannelForward.Click += (s, args) => { ChangeChannel(1); };
+
+            datePicker.ValueChanged += UpdateCalendarChangeButtons;
+            buttonCalendarForward.Click += (s, args) => { ChangeDate(1); };
+            buttonCalendarBackward.Click += (s, args) => { ChangeDate(-1); };
+
+            foreach (ToolStripMenuItem item in korhatárToolStripMenuItem.DropDownItems)
+            {
+                item.Click += (sender, args) => { UpdateTvShowList(); };
+            }
+
+            reserveProgramDisplayMenuItem.Click += UpdateProgramDisplay;
+            freeProgramDisplayMenuItem.Click += UpdateProgramDisplay;
+
         }
 
         private void TvProgramBrowser_Load(object sender, EventArgs e)
@@ -58,7 +77,81 @@ namespace WatchMyShow.Forms
             }
 
         }
+        private void UpdateChannelChangeButtons(object sender, EventArgs e)
+        {
+            #region GombUpdate
+            int currrentChannel = channelSelector.SelectedIndex;
+            if (currrentChannel == 0)
+            {
+                buttonChannelBackward.Enabled = false;
+            }
+            else
+            {
+                buttonChannelBackward.Enabled = true;
+            }
+            if (currrentChannel + 1 >= channelSelector.Items.Count)
+            {
+                buttonChannelForward.Enabled = false;
+            }
+            else
+            {
+                buttonChannelForward.Enabled = true;
+            }
+            #endregion
+        }
+        private void ChangeDate(int days)
+        {
+            DateTime now = datePicker.Value;
+            DateTime min = DateTime.MinValue;
+            DateTime max = DateTime.MaxValue;
 
+            if (!(now.AddDays(days) > max || now.AddDays(2) < min))
+            {
+                datePicker.Value = now.AddDays(days);
+            }
+        }
+        private void UpdateCalendarChangeButtons(object sender, EventArgs e)
+        {
+            DateTime now = datePicker.Value;
+            DateTime max = DateTime.MaxValue;
+            DateTime min = DateTime.MinValue;
+            if (now.AddDays(-1) <= min)
+            {
+                buttonCalendarBackward.Enabled = false;
+            }
+            else
+            {
+                buttonCalendarBackward.Enabled = true;
+            }
+            if (now.AddDays(1) >= max)
+            {
+                buttonCalendarForward.Enabled = false;
+            }
+            else
+            {
+                buttonCalendarForward.Enabled = true;
+            }
+        }
+        private void UpdateProgramDisplay(object sender, EventArgs e)
+        {
+            if (reserveProgramDisplayMenuItem.Checked)
+            {
+                programDisplay = programDisplay | ProgramDisplay.OnlyReserved;
+            }
+            else
+            {
+                programDisplay = programDisplay & ~ProgramDisplay.OnlyReserved;
+            }
+            if (freeProgramDisplayMenuItem.Checked)
+            {
+                programDisplay = programDisplay | ProgramDisplay.OnlyFree;
+            }
+            else
+            {
+                programDisplay = programDisplay & ~ProgramDisplay.OnlyFree;
+            }
+            UpdateTvShowList();
+        }
         private void ChangeChannel(string channel)
         {
             int i = 0;
@@ -71,6 +164,46 @@ namespace WatchMyShow.Forms
                 channelSelector.SelectedIndex = i;
             }
         }
+        private void ChangeChannel(int jump)
+        {
+            int channels = channelSelector.Items.Count;
+            int currrentChannel = channelSelector.SelectedIndex;
+            if (jump != 0)
+            {
+                if (!(currrentChannel + jump >= channels || currrentChannel + jump < 0))
+                {
+                    channelSelector.SelectedIndex = currrentChannel + jump;
+                    currrentChannel += jump;
+                }
+            }
+
+        }
+        private AgeLimit FetchAgeLimitMenuSelect()
+        {
+            AgeLimit ageLimit = new AgeLimit();
+            if (korhatarNelkulMenuItem.Checked)
+            {
+                ageLimit = ageLimit | AgeLimit.NoLimit;
+            }
+            if (korhatar6MenuItem.Checked)
+            {
+                ageLimit = ageLimit | AgeLimit.Above6;
+            }
+            if (korhatar12MenuItem.Checked)
+            {
+                ageLimit = ageLimit | AgeLimit.Above12;
+            }
+            if (korhatar16MenuItem.Checked)
+            {
+                ageLimit = ageLimit | AgeLimit.Above16;
+            }
+            if (korhatar18MenuItem.Checked)
+            {
+                ageLimit = ageLimit | AgeLimit.Above18;
+            }
+            return ageLimit;
+        }
+
         public void UpdateTvShowList()
         {
             this.loadingLabel.Text = "Betöltés...";
@@ -79,20 +212,23 @@ namespace WatchMyShow.Forms
             DateTime time = datePicker.Value;
             Task.Run(() =>
             {
-                using (TvContext context = new TvContext())
-                {
-                    var shows = from p in context.Programs
-                                where System.Data.Entity.Core.Objects.EntityFunctions.DiffDays(p.StartTime, time) == 0 && p.TvChannel == channel
-                                select p;
+                    //AgeLimit ageLimit = FetchAgeLimitMenuSelect();
+                    //var shows = from p in context.Programs
+                    //            where 
+                    //            System.Data.Entity.Core.Objects.EntityFunctions.DiffDays(p.StartTime, time) == 0 
+                    //            &&
+                    //            p.TvChannel == channel
+                    //            &&
+                    //            ((p.AgeLimit & ageLimit) != 0)
+                    //            select p;
 
-                    List<TvProgram> programs = new List<TvProgram>();
-                    foreach (TvProgram item in shows)
-                    {
-                        programs.Add(item);
-                    }
-
+                    //List<TvProgram> programs = new List<TvProgram>();
+                    //foreach (TvProgram item in shows)
+                    //{
+                    //    programs.Add(item);
+                    //}
+                    List<TvProgram> programs = ProgramManager.RetrieveTvPrograms(time, channel, programDisplay, FetchAgeLimitMenuSelect());
                     ProgramsReveiced?.Invoke(null, new TvProgramReceivedEventArgs() { Programs = programs });
-                }
             });
         }
         private void TvProgramBrowser_FormClosing(object sender, FormClosingEventArgs e)
@@ -129,7 +265,7 @@ namespace WatchMyShow.Forms
                     })
                 );
             }
-            
+
             this.loadingLabel.Text = "Kész.";
         }
         private void channelSelector_SelectedIndexChanged(object sender, EventArgs e)
@@ -151,5 +287,16 @@ namespace WatchMyShow.Forms
 
         }
 
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AgeLimit ageLimit = FetchAgeLimitMenuSelect();
+            Console.WriteLine(typeof(AgeLimit));
+
+        }
     }
 }

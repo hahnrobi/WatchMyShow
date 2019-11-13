@@ -12,13 +12,14 @@ namespace WatchMyShow.DataClasses
     /// <summary>
     /// Korhatár ami meghatározza, hogy az adott műsor mely kor felett nézhető.
     /// </summary>
+    [Flags]
     public enum AgeLimit
     {
-        NoLimit,
-        Above6,
-        Above12,
-        Above16,
-        Above18
+        NoLimit = 1,
+        Above6 = 2,
+        Above12 = 4,
+        Above16 = 8,
+        Above18 = 16
     }
 
     [Flags]
@@ -27,7 +28,7 @@ namespace WatchMyShow.DataClasses
     /// </summary>
     public enum TvProgramGenre
     {
-        Series =1,
+        Series = 1,
         Animated = 2,
         Comedy = 4,
         Documental = 8,
@@ -89,7 +90,6 @@ namespace WatchMyShow.DataClasses
         /// Foglalás van-e és ha igen melyik szoba.
         /// </summary>
         [XmlIgnoreAttribute]
-        [ForeignKey("ReservedRoomId")]
         public virtual Room Reserved { get; set; }
 
     }

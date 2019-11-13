@@ -12,6 +12,12 @@ using WatchMyShow.Forms;
 
 namespace WatchMyShow
 {
+    [Flags]
+    enum ProgramDisplay
+    {
+        OnlyFree = 1,
+        OnlyReserved = 2
+    }
     class TvProgramManager
     {
         private static string[] genreNames = new string[] { "sorozat", "animációs film", "vígjáték", "dokumentumfilm", "showműsor", "híradó/interjú", "horror", "thriller", "akció", "dráma", "romantikus", "családi", "zene", "reality" };
@@ -25,8 +31,85 @@ namespace WatchMyShow
         public TvProgramManager()
         {
         }
+        ///<summary>
+        ///Visszaadja a Tv műsorokat egy List adatszerekezetben.
+        ///</summary>
+        public List<TvProgram> RetrieveTvPrograms(DateTime time, string channel)
+        {
+            ProgramDisplay programDisplay = ProgramDisplay.OnlyFree | ProgramDisplay.OnlyReserved;
+            AgeLimit limit = AgeLimit.Above12 | AgeLimit.Above16 | AgeLimit.Above18 | AgeLimit.Above6 | AgeLimit.NoLimit;
+            return RetrieveTvPrograms(time, channel, programDisplay, limit);
+        }
+        ///<summary>
+        ///Visszaadja a Tv műsorokat egy List adatszerekezetben.
+        ///</summary>
+        public List<TvProgram> RetrieveTvPrograms(DateTime time, string channel, ProgramDisplay display)
+        {
+            AgeLimit limit = AgeLimit.Above12 | AgeLimit.Above16 | AgeLimit.Above18 | AgeLimit.Above6 | AgeLimit.NoLimit;
+            return RetrieveTvPrograms(time, channel, display, limit);
+        }
+        ///<summary>
+        ///Visszaadja a Tv műsorokat egy List adatszerekezetben.
+        ///</summary>
+        public List<TvProgram> RetrieveTvPrograms(DateTime time, string channel, AgeLimit ageLimit)
+        {
+            ProgramDisplay programDisplay = ProgramDisplay.OnlyFree | ProgramDisplay.OnlyReserved;
 
+            return RetrieveTvPrograms(time, channel, programDisplay, ageLimit);
+        }
+        ///<summary>
+        ///Visszaadja a Tv műsorokat egy List adatszerekezetben.
+        ///</summary>
+        public List<TvProgram> RetrieveTvPrograms(DateTime time, string channel, ProgramDisplay display, AgeLimit ageLimit)
+        {
+            using (TvContext context = new TvContext())
+            {
+                //Alap lekérés
+                var shows = from p in context.Programs
+                            where
+                            System.Data.Entity.Core.Objects.EntityFunctions.DiffDays(p.StartTime, time) == 0
+                            &&
+                            p.TvChannel == channel
+                            &&
+                            ((p.AgeLimit & ageLimit) != 0)
+                            select p;
 
+                //Ha mindkettő be van pipálva akkor ne variáljunk.
+                if (!((display & ProgramDisplay.OnlyFree) != 0 && (display & ProgramDisplay.OnlyReserved) != 0))
+                {
+                    //Szabad időpontok
+                    if ((display & ProgramDisplay.OnlyFree) != 0)
+                    {
+                        shows = from p in shows
+                                where p.Reserved == null
+                                select p;
+                    }
+                    //Ffoglalt időpontok
+                    if ((display & ProgramDisplay.OnlyReserved) != 0)
+                    {
+                        shows = from p in shows
+                                where p.Reserved != null
+                                select p;
+                    }
+                    //Ha egyik sincs kipipálva
+                    if (display == 0)
+                    {
+                        shows = from p in shows
+                                where false
+                                select p;
+                    }
+                }
+
+                //Tv Műsorok visszaadása
+                List<TvProgram> programs = new List<TvProgram>();
+                foreach (TvProgram item in shows)
+                {
+                    programs.Add(item);
+                }
+                return programs;
+            }
+        }
+        //Műfaj enumokhoz tartozó szöveges értékek visszaadása.
         public static string GetGenresAsString(TvProgramGenre genre)
         {
             List<string> genres = new List<string>();
@@ -39,10 +122,26 @@ namespace WatchMyShow
             }
             return String.Join(",", genres.ToArray());
         }
+        //Korhatárhoz tartozó hosszabb szövege üzenet.
         public static string GetAgeLimitMessage(AgeLimit limit)
         {
-            return ageLimitMessages[(int)limit];
+            switch (limit)
+            {
+                case AgeLimit.NoLimit:
+                    return ageLimitMessages[0];
+                case AgeLimit.Above6:
+                    return ageLimitMessages[1];
+                case AgeLimit.Above12:
+                    return ageLimitMessages[2];
+                case AgeLimit.Above16:
+                    return ageLimitMessages[3];
+                case AgeLimit.Above18:
+                    return ageLimitMessages[4];
+                default:
+                    return "Ismeretlen korhatár";
+            }
         }
+        //Tv programok importálása XML fájlból. --> TODO: try catch
         public void ImportTvPrograms(string filepath)
         {
             using (TvContext context = new TvContext())
@@ -59,9 +158,10 @@ namespace WatchMyShow
                 }
             }
         }
+        //TV program lefoglalása.
         public static void ReserveTvProgram(TvProgram program, Room room)
         {
-            using(TvContext context = new TvContext())
+            using (TvContext context = new TvContext())
             {
                 try
                 {
@@ -76,6 +176,8 @@ namespace WatchMyShow
                 }
             }
         }
+        //XMLTV fájl parse => TvProgram fájlba. DEV
+        [Obsolete("Ne használd. Az XMLTV nem ad elegendő paramértert ahhoz, hogy teljes értékű TvProgram példányt lehessen létrehozni", true)]
         public List<TvProgram> ParseXmlTvFile(string filepath)
         {
             List<TvProgram> programList = new List<TvProgram>();
@@ -89,7 +191,7 @@ namespace WatchMyShow
                     TvProgram newProgram = new TvProgram();
                     foreach (XmlNode childNode in node.ChildNodes)
                     {
-                        if(childNode.Name == "title")
+                        if (childNode.Name == "title")
                         {
                             Console.WriteLine(childNode.InnerText);
                         }

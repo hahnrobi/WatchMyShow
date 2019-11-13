@@ -28,6 +28,7 @@ namespace WatchMyShow
         public TvProgramControl(TvProgram program)
         {
             this.program = program;
+            this.room = program.Reserved;
             InitializeComponent();
         }
         public TvProgramControl(TvProgram program, Room room)
@@ -135,7 +136,7 @@ namespace WatchMyShow
                     {
                         labelStatus.Text = "Lefoglalt";
                         System.Windows.Forms.ToolTip ttt = new System.Windows.Forms.ToolTip();
-                        ttt.SetToolTip(labelStatus, "Ez a műsor már le van foglalva, így nézhető lesz.");
+                        ttt.SetToolTip(labelStatus, "Ez a műsor már le van foglalva, így nézhető lesz.\nLefoglaló szoba: "+this.program.ReservedRoomId);
                     }
                     else
                     {
@@ -174,7 +175,7 @@ namespace WatchMyShow
                         labelStatus.ContextMenuStrip = cm;
                         //Kis tooltip, hogy érthető legyen miért van kint a felirat.
                         System.Windows.Forms.ToolTip ttt = new System.Windows.Forms.ToolTip();
-                        ttt.SetToolTip(labelStatus, "Ebben az időpontban egy másik lefoglalt műsorral van átfedésben.");
+                        ttt.SetToolTip(labelStatus, "Ebben az időpontban egy másik lefoglalt műsorral van átfedésben.\nJobb kattintással többet megtudhat.");
 
                         labelStatus.Text = "Nem foglalható";
                     }
@@ -186,20 +187,21 @@ namespace WatchMyShow
                     //Ha pedig nincs foglalt program ennek az időpontjában, akkor a gombhoz hozzárendeljük a foglalást megvalósító metódust.
                     buttonFoglalas.Click += (o, i) => { TvProgramManager.ReserveTvProgram(program, room); };
                 }
-
-            }
-
-            //Itt pedig felülírjuk a dolgokat annyival, hogyha az adott műsor saját szoba foglalása.
-            if (program.Reserved != null)
-            {
-                if (room != null && program.Reserved.RoomId == room.RoomId)
+                //Itt pedig felülírjuk a dolgokat annyival, hogyha az adott műsor saját szoba foglalása.
+                Console.WriteLine(program.ReservedRoomId);
+                if (context.Rooms.Find(program.ReservedRoomId) != null)
                 {
-                    labelStatus.ForeColor = Color.Green;
-                    labelStatus.Text = "Saját foglalás";
-                    labelStatus.Visible = true;
+                    
+                    if (room != null && context.Rooms.Find(program.ReservedRoomId).RoomId == room.RoomId)
+                    {
+                        labelStatus.ForeColor = Color.Green;
+                        labelStatus.Text = "Saját foglalás";
+                        labelStatus.Visible = true;
+                    }
+                    buttonFoglalas.Visible = false;
                 }
-                buttonFoglalas.Visible = false;
             }
+
 
             //FOGLALÁS ENDS
 
