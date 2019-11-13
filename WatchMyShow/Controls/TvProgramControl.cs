@@ -188,10 +188,8 @@ namespace WatchMyShow
                     buttonFoglalas.Click += (o, i) => { TvProgramManager.ReserveTvProgram(program, room); };
                 }
                 //Itt pedig felülírjuk a dolgokat annyival, hogyha az adott műsor saját szoba foglalása.
-                Console.WriteLine(program.ReservedRoomId);
                 if (context.Rooms.Find(program.ReservedRoomId) != null)
                 {
-                    
                     if (room != null && context.Rooms.Find(program.ReservedRoomId).RoomId == room.RoomId)
                     {
                         labelStatus.ForeColor = Color.Green;

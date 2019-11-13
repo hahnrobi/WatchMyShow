@@ -208,7 +208,6 @@ namespace WatchMyShow.Forms
         {
             this.loadingLabel.Text = "Betöltés...";
             string channel = channelSelector.Text;
-            Console.WriteLine(channel);
             DateTime time = datePicker.Value;
             Task.Run(() =>
             {
@@ -265,7 +264,6 @@ namespace WatchMyShow.Forms
                     })
                 );
             }
-
             this.loadingLabel.Text = "Kész.";
         }
         private void channelSelector_SelectedIndexChanged(object sender, EventArgs e)

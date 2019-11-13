@@ -210,6 +210,7 @@
             this.korhatarNelkulMenuItem.Checked = true;
             this.korhatarNelkulMenuItem.CheckOnClick = true;
             this.korhatarNelkulMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatarNelkulMenuItem.Image = global::WatchMyShow.Properties.Resources.nokorhatar;
             this.korhatarNelkulMenuItem.Name = "korhatarNelkulMenuItem";
             this.korhatarNelkulMenuItem.Size = new System.Drawing.Size(180, 22);
             this.korhatarNelkulMenuItem.Text = "Korhatár nélkül";
@@ -219,36 +220,40 @@
             this.korhatar6MenuItem.Checked = true;
             this.korhatar6MenuItem.CheckOnClick = true;
             this.korhatar6MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatar6MenuItem.Image = global::WatchMyShow.Properties.Resources._6felett;
             this.korhatar6MenuItem.Name = "korhatar6MenuItem";
             this.korhatar6MenuItem.Size = new System.Drawing.Size(180, 22);
-            this.korhatar6MenuItem.Text = "6";
+            this.korhatar6MenuItem.Text = "6 éves kor felett";
             // 
             // korhatar12MenuItem
             // 
             this.korhatar12MenuItem.Checked = true;
             this.korhatar12MenuItem.CheckOnClick = true;
             this.korhatar12MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatar12MenuItem.Image = global::WatchMyShow.Properties.Resources._12felett;
             this.korhatar12MenuItem.Name = "korhatar12MenuItem";
             this.korhatar12MenuItem.Size = new System.Drawing.Size(180, 22);
-            this.korhatar12MenuItem.Text = "12";
+            this.korhatar12MenuItem.Text = "12 éves kor felett";
             // 
             // korhatar16MenuItem
             // 
             this.korhatar16MenuItem.Checked = true;
             this.korhatar16MenuItem.CheckOnClick = true;
             this.korhatar16MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatar16MenuItem.Image = global::WatchMyShow.Properties.Resources._16felett;
             this.korhatar16MenuItem.Name = "korhatar16MenuItem";
             this.korhatar16MenuItem.Size = new System.Drawing.Size(180, 22);
-            this.korhatar16MenuItem.Text = "16";
+            this.korhatar16MenuItem.Text = "16 éves kor felett";
             // 
             // korhatar18MenuItem
             // 
             this.korhatar18MenuItem.Checked = true;
             this.korhatar18MenuItem.CheckOnClick = true;
             this.korhatar18MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatar18MenuItem.Image = global::WatchMyShow.Properties.Resources._18felett;
             this.korhatar18MenuItem.Name = "korhatar18MenuItem";
             this.korhatar18MenuItem.Size = new System.Drawing.Size(180, 22);
-            this.korhatar18MenuItem.Text = "18";
+            this.korhatar18MenuItem.Text = "18 éves kor felett";
             // 
             // nézetToolStripMenuItem
             // 
