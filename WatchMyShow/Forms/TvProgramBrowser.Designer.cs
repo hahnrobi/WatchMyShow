@@ -33,6 +33,15 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.eszközökToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dátumVálasztóToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.korhatárToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.korhatarNelkulMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.korhatar6MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.korhatar12MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.korhatar16MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.korhatar18MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nézetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reserveProgramDisplayMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.freeProgramDisplayMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.szobaVálasszonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,15 +52,6 @@
             this.buttonChannelForward = new System.Windows.Forms.Button();
             this.buttonCalendarBackward = new System.Windows.Forms.Button();
             this.buttonCalendarForward = new System.Windows.Forms.Button();
-            this.korhatárToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.korhatarNelkulMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.korhatar6MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.korhatar12MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.korhatar16MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.korhatar18MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nézetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reserveProgramDisplayMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.freeProgramDisplayMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -102,6 +102,96 @@
             this.dátumVálasztóToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.dátumVálasztóToolStripMenuItem.Text = "Dátum választó";
             this.dátumVálasztóToolStripMenuItem.Click += new System.EventHandler(this.dátumVálasztóToolStripMenuItem_Click_1);
+            // 
+            // korhatárToolStripMenuItem
+            // 
+            this.korhatárToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.korhatárToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.korhatarNelkulMenuItem,
+            this.korhatar6MenuItem,
+            this.korhatar12MenuItem,
+            this.korhatar16MenuItem,
+            this.korhatar18MenuItem});
+            this.korhatárToolStripMenuItem.Name = "korhatárToolStripMenuItem";
+            this.korhatárToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.korhatárToolStripMenuItem.Text = "Korhatár";
+            // 
+            // korhatarNelkulMenuItem
+            // 
+            this.korhatarNelkulMenuItem.Checked = true;
+            this.korhatarNelkulMenuItem.CheckOnClick = true;
+            this.korhatarNelkulMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatarNelkulMenuItem.Image = global::WatchMyShow.Properties.Resources.nokorhatar;
+            this.korhatarNelkulMenuItem.Name = "korhatarNelkulMenuItem";
+            this.korhatarNelkulMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.korhatarNelkulMenuItem.Text = "Korhatár nélkül";
+            // 
+            // korhatar6MenuItem
+            // 
+            this.korhatar6MenuItem.Checked = true;
+            this.korhatar6MenuItem.CheckOnClick = true;
+            this.korhatar6MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatar6MenuItem.Image = global::WatchMyShow.Properties.Resources._6felett;
+            this.korhatar6MenuItem.Name = "korhatar6MenuItem";
+            this.korhatar6MenuItem.Size = new System.Drawing.Size(162, 22);
+            this.korhatar6MenuItem.Text = "6 éves kor felett";
+            // 
+            // korhatar12MenuItem
+            // 
+            this.korhatar12MenuItem.Checked = true;
+            this.korhatar12MenuItem.CheckOnClick = true;
+            this.korhatar12MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatar12MenuItem.Image = global::WatchMyShow.Properties.Resources._12felett;
+            this.korhatar12MenuItem.Name = "korhatar12MenuItem";
+            this.korhatar12MenuItem.Size = new System.Drawing.Size(162, 22);
+            this.korhatar12MenuItem.Text = "12 éves kor felett";
+            // 
+            // korhatar16MenuItem
+            // 
+            this.korhatar16MenuItem.Checked = true;
+            this.korhatar16MenuItem.CheckOnClick = true;
+            this.korhatar16MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatar16MenuItem.Image = global::WatchMyShow.Properties.Resources._16felett;
+            this.korhatar16MenuItem.Name = "korhatar16MenuItem";
+            this.korhatar16MenuItem.Size = new System.Drawing.Size(162, 22);
+            this.korhatar16MenuItem.Text = "16 éves kor felett";
+            // 
+            // korhatar18MenuItem
+            // 
+            this.korhatar18MenuItem.Checked = true;
+            this.korhatar18MenuItem.CheckOnClick = true;
+            this.korhatar18MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.korhatar18MenuItem.Image = global::WatchMyShow.Properties.Resources._18felett;
+            this.korhatar18MenuItem.Name = "korhatar18MenuItem";
+            this.korhatar18MenuItem.Size = new System.Drawing.Size(162, 22);
+            this.korhatar18MenuItem.Text = "18 éves kor felett";
+            // 
+            // nézetToolStripMenuItem
+            // 
+            this.nézetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reserveProgramDisplayMenuItem,
+            this.freeProgramDisplayMenuItem});
+            this.nézetToolStripMenuItem.Name = "nézetToolStripMenuItem";
+            this.nézetToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.nézetToolStripMenuItem.Text = "Nézet";
+            // 
+            // reserveProgramDisplayMenuItem
+            // 
+            this.reserveProgramDisplayMenuItem.Checked = true;
+            this.reserveProgramDisplayMenuItem.CheckOnClick = true;
+            this.reserveProgramDisplayMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.reserveProgramDisplayMenuItem.Name = "reserveProgramDisplayMenuItem";
+            this.reserveProgramDisplayMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.reserveProgramDisplayMenuItem.Text = "Foglalt műsorok";
+            // 
+            // freeProgramDisplayMenuItem
+            // 
+            this.freeProgramDisplayMenuItem.Checked = true;
+            this.freeProgramDisplayMenuItem.CheckOnClick = true;
+            this.freeProgramDisplayMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.freeProgramDisplayMenuItem.Name = "freeProgramDisplayMenuItem";
+            this.freeProgramDisplayMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.freeProgramDisplayMenuItem.Text = "Szabad műsorok";
             // 
             // szobaVálasszonToolStripMenuItem
             // 
@@ -191,96 +281,6 @@
             this.buttonCalendarForward.TabIndex = 10;
             this.buttonCalendarForward.Text = ">";
             this.buttonCalendarForward.UseVisualStyleBackColor = true;
-            // 
-            // korhatárToolStripMenuItem
-            // 
-            this.korhatárToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.korhatárToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.korhatarNelkulMenuItem,
-            this.korhatar6MenuItem,
-            this.korhatar12MenuItem,
-            this.korhatar16MenuItem,
-            this.korhatar18MenuItem});
-            this.korhatárToolStripMenuItem.Name = "korhatárToolStripMenuItem";
-            this.korhatárToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.korhatárToolStripMenuItem.Text = "Korhatár";
-            // 
-            // korhatarNelkulMenuItem
-            // 
-            this.korhatarNelkulMenuItem.Checked = true;
-            this.korhatarNelkulMenuItem.CheckOnClick = true;
-            this.korhatarNelkulMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.korhatarNelkulMenuItem.Image = global::WatchMyShow.Properties.Resources.nokorhatar;
-            this.korhatarNelkulMenuItem.Name = "korhatarNelkulMenuItem";
-            this.korhatarNelkulMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.korhatarNelkulMenuItem.Text = "Korhatár nélkül";
-            // 
-            // korhatar6MenuItem
-            // 
-            this.korhatar6MenuItem.Checked = true;
-            this.korhatar6MenuItem.CheckOnClick = true;
-            this.korhatar6MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.korhatar6MenuItem.Image = global::WatchMyShow.Properties.Resources._6felett;
-            this.korhatar6MenuItem.Name = "korhatar6MenuItem";
-            this.korhatar6MenuItem.Size = new System.Drawing.Size(180, 22);
-            this.korhatar6MenuItem.Text = "6 éves kor felett";
-            // 
-            // korhatar12MenuItem
-            // 
-            this.korhatar12MenuItem.Checked = true;
-            this.korhatar12MenuItem.CheckOnClick = true;
-            this.korhatar12MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.korhatar12MenuItem.Image = global::WatchMyShow.Properties.Resources._12felett;
-            this.korhatar12MenuItem.Name = "korhatar12MenuItem";
-            this.korhatar12MenuItem.Size = new System.Drawing.Size(180, 22);
-            this.korhatar12MenuItem.Text = "12 éves kor felett";
-            // 
-            // korhatar16MenuItem
-            // 
-            this.korhatar16MenuItem.Checked = true;
-            this.korhatar16MenuItem.CheckOnClick = true;
-            this.korhatar16MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.korhatar16MenuItem.Image = global::WatchMyShow.Properties.Resources._16felett;
-            this.korhatar16MenuItem.Name = "korhatar16MenuItem";
-            this.korhatar16MenuItem.Size = new System.Drawing.Size(180, 22);
-            this.korhatar16MenuItem.Text = "16 éves kor felett";
-            // 
-            // korhatar18MenuItem
-            // 
-            this.korhatar18MenuItem.Checked = true;
-            this.korhatar18MenuItem.CheckOnClick = true;
-            this.korhatar18MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.korhatar18MenuItem.Image = global::WatchMyShow.Properties.Resources._18felett;
-            this.korhatar18MenuItem.Name = "korhatar18MenuItem";
-            this.korhatar18MenuItem.Size = new System.Drawing.Size(180, 22);
-            this.korhatar18MenuItem.Text = "18 éves kor felett";
-            // 
-            // nézetToolStripMenuItem
-            // 
-            this.nézetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reserveProgramDisplayMenuItem,
-            this.freeProgramDisplayMenuItem});
-            this.nézetToolStripMenuItem.Name = "nézetToolStripMenuItem";
-            this.nézetToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.nézetToolStripMenuItem.Text = "Nézet";
-            // 
-            // reserveProgramDisplayMenuItem
-            // 
-            this.reserveProgramDisplayMenuItem.Checked = true;
-            this.reserveProgramDisplayMenuItem.CheckOnClick = true;
-            this.reserveProgramDisplayMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.reserveProgramDisplayMenuItem.Name = "reserveProgramDisplayMenuItem";
-            this.reserveProgramDisplayMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.reserveProgramDisplayMenuItem.Text = "Foglalt műsorok";
-            // 
-            // freeProgramDisplayMenuItem
-            // 
-            this.freeProgramDisplayMenuItem.Checked = true;
-            this.freeProgramDisplayMenuItem.CheckOnClick = true;
-            this.freeProgramDisplayMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.freeProgramDisplayMenuItem.Name = "freeProgramDisplayMenuItem";
-            this.freeProgramDisplayMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.freeProgramDisplayMenuItem.Text = "Szabad műsorok";
             // 
             // TvProgramBrowser
             // 

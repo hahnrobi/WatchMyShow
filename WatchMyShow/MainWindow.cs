@@ -145,5 +145,11 @@ namespace WatchMyShow
             PieStatistics ps = new PieStatistics(stat);
             ps.ShowDialog();
         }
+
+        private void műsorokKezeléseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TvProgramManageForm TvPMF = new TvProgramManageForm();
+            TvPMF.ShowDialog();
+        }
     }
 }

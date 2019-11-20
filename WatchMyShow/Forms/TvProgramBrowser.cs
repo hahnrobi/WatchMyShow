@@ -112,9 +112,9 @@ namespace WatchMyShow.Forms
         }
         private void UpdateCalendarChangeButtons(object sender, EventArgs e)
         {
-            DateTime now = datePicker.Value;
-            DateTime max = DateTime.MaxValue;
-            DateTime min = DateTime.MinValue;
+            DateTime now = this.datePicker.Value;
+            DateTime max = this.datePicker.MaxDate;
+            DateTime min = this.datePicker.MinDate;
             if (now.AddDays(-1) <= min)
             {
                 buttonCalendarBackward.Enabled = false;
@@ -290,11 +290,6 @@ namespace WatchMyShow.Forms
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AgeLimit ageLimit = FetchAgeLimitMenuSelect();
-            Console.WriteLine(typeof(AgeLimit));
 
-        }
     }
 }

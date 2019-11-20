@@ -100,6 +100,12 @@
     <Compile Include="Forms\TvProgramBrowser.Designer.cs">
       <DependentUpon>TvProgramBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TvProgramManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TvProgramManageForm.Designer.cs">
+      <DependentUpon>TvProgramManageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TvProgramBrowser.resx">
       <DependentUpon>TvProgramBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TvProgramManageForm.resx">
+      <DependentUpon>TvProgramManageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

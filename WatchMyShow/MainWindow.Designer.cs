@@ -38,7 +38,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -52,10 +51,15 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.dsadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button8 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.kezelésToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.műsorokKezeléseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -149,15 +153,6 @@
             this.label2.Size = new System.Drawing.Size(136, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "dokumentumfilm, családi";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::WatchMyShow.Properties.Resources._12felett;
-            this.pictureBox1.Location = new System.Drawing.Point(266, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -275,6 +270,40 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::WatchMyShow.Properties.Resources._12felett;
+            this.pictureBox1.Location = new System.Drawing.Point(266, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kezelésToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(739, 24);
+            this.menuStrip1.TabIndex = 12;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // kezelésToolStripMenuItem
+            // 
+            this.kezelésToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.műsorokKezeléseToolStripMenuItem});
+            this.kezelésToolStripMenuItem.Name = "kezelésToolStripMenuItem";
+            this.kezelésToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.kezelésToolStripMenuItem.Text = "Kezelés";
+            // 
+            // műsorokKezeléseToolStripMenuItem
+            // 
+            this.műsorokKezeléseToolStripMenuItem.Name = "műsorokKezeléseToolStripMenuItem";
+            this.műsorokKezeléseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.műsorokKezeléseToolStripMenuItem.Text = "Műsorok kezelése";
+            this.műsorokKezeléseToolStripMenuItem.Click += new System.EventHandler(this.műsorokKezeléseToolStripMenuItem_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,6 +321,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainWindow";
             this.Text = "MainWindow";
             this.Load += new System.EventHandler(this.MainWindow_Load);
@@ -299,8 +330,10 @@
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,5 +364,8 @@
         private System.Windows.Forms.ToolStripMenuItem dsadaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sasdaToolStripMenuItem;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem kezelésToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem műsorokKezeléseToolStripMenuItem;
     }
 }

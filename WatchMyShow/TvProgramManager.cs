@@ -27,7 +27,11 @@ namespace WatchMyShow
             "A műsorszám megtekintése 12 éven aluliak számára nem ajánlott.",
             "A műsorszám megtekintése 16 éven aluliak számára nem ajánlott.",
             "A műsorszám megtekintése 18 éven aluliak számára nem ajánlott." };
-
+        public static AgeLimit AllAgeLimit()
+        {
+            AgeLimit limit = AgeLimit.Above12 | AgeLimit.Above16 | AgeLimit.Above18 | AgeLimit.Above6 | AgeLimit.NoLimit;
+            return limit;
+        }
         public TvProgramManager()
         {
         }
@@ -57,6 +61,18 @@ namespace WatchMyShow
 
             return RetrieveTvPrograms(time, channel, programDisplay, ageLimit);
         }
+        public List<TvProgram> RetrieveTvPrograms(DateTime time, CheckedListBox channels, ProgramDisplay display, AgeLimit ageLimit)
+        {
+            LinkedList<TvProgram> list = new LinkedList<TvProgram>();
+            foreach (string channel in channels.CheckedItems)
+            {
+                foreach (TvProgram program in RetrieveTvPrograms(time, channel, display, ageLimit)) 
+                {
+                    list.AddFirst(program);
+                }
+            }
+            return list.ToList();
+        }
         ///<summary>
         ///Visszaadja a Tv műsorokat egy List adatszerekezetben.
         ///</summary>
@@ -64,16 +80,16 @@ namespace WatchMyShow
         {
             using (TvContext context = new TvContext())
             {
+                
                 //Alap lekérés
                 var shows = from p in context.Programs
                             where
                             System.Data.Entity.Core.Objects.EntityFunctions.DiffDays(p.StartTime, time) == 0
                             &&
-                            p.TvChannel == channel
+                            (channel == null ? true : p.TvChannel == channel)
                             &&
                             ((p.AgeLimit & ageLimit) != 0)
                             select p;
-
                 //Ha mindkettő be van pipálva akkor ne variáljunk.
                 if (!((display & ProgramDisplay.OnlyFree) != 0 && (display & ProgramDisplay.OnlyReserved) != 0))
                 {
@@ -201,6 +217,22 @@ namespace WatchMyShow
                 }
             }
             return programList;
+        }
+        public List<string> GetTvChannels()
+        {
+            List<string> channels = new List<string>();
+            using (TvContext context = new TvContext())
+            {
+                var getChannels = from program in context.Programs
+                                  group program by program.TvChannel into newGroup
+                                  orderby newGroup.Key
+                                  select newGroup;
+                foreach (var ch in getChannels)
+                {
+                    channels.Add(ch.Key);
+                }
+            }
+            return channels;
         }
 
     }
