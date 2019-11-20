@@ -33,21 +33,29 @@
             this.tvChannel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.programDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.startTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.endTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ageLimit = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.endTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.reservedRoom = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.channelSelector = new System.Windows.Forms.CheckedListBox();
+            this.FilterButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.datePicker = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.channelSelector = new System.Windows.Forms.CheckedListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.datePickerStart = new System.Windows.Forms.DateTimePicker();
+            this.datePickerEnd = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.resetFilterButton = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.loadingLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // programList
@@ -61,13 +69,18 @@
             this.endTime,
             this.reservedRoom});
             this.programList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.programList.FullRowSelect = true;
+            this.programList.GridLines = true;
             this.programList.HideSelection = false;
             this.programList.Location = new System.Drawing.Point(3, 103);
+            this.programList.MultiSelect = false;
             this.programList.Name = "programList";
             this.programList.Size = new System.Drawing.Size(618, 105);
             this.programList.TabIndex = 0;
             this.programList.UseCompatibleStateImageBehavior = false;
             this.programList.View = System.Windows.Forms.View.Details;
+            this.programList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.programList_ColumnClick);
+            this.programList.SelectedIndexChanged += new System.EventHandler(this.programList_SelectedIndexChanged);
             // 
             // programTitle
             // 
@@ -87,15 +100,15 @@
             // 
             this.startTime.Text = "Kezdés";
             // 
-            // endTime
-            // 
-            this.endTime.DisplayIndex = 4;
-            this.endTime.Text = "Vége";
-            // 
             // ageLimit
             // 
             this.ageLimit.DisplayIndex = 5;
             this.ageLimit.Text = "Korhatár";
+            // 
+            // endTime
+            // 
+            this.endTime.DisplayIndex = 4;
+            this.endTime.Text = "Vége";
             // 
             // reservedRoom
             // 
@@ -118,17 +131,55 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.resetFilterButton);
+            this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.FilterButton);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.datePicker);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(618, 94);
             this.panel1.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.channelSelector);
+            this.groupBox1.Location = new System.Drawing.Point(9, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(152, 82);
+            this.groupBox1.TabIndex = 23;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Csatorna";
+            // 
+            // channelSelector
+            // 
+            this.channelSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.channelSelector.FormattingEnabled = true;
+            this.channelSelector.Location = new System.Drawing.Point(3, 16);
+            this.channelSelector.Name = "channelSelector";
+            this.channelSelector.Size = new System.Drawing.Size(146, 63);
+            this.channelSelector.TabIndex = 22;
+            // 
+            // FilterButton
+            // 
+            this.FilterButton.Location = new System.Drawing.Point(540, 61);
+            this.FilterButton.Name = "FilterButton";
+            this.FilterButton.Size = new System.Drawing.Size(75, 23);
+            this.FilterButton.TabIndex = 21;
+            this.FilterButton.Text = "Szűrés";
+            this.FilterButton.UseVisualStyleBackColor = true;
+            this.FilterButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Innen:";
             // 
             // label2
             // 
@@ -148,56 +199,76 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Dátum:";
             // 
-            // datePicker
+            // datePickerStart
             // 
-            this.datePicker.Location = new System.Drawing.Point(279, 3);
-            this.datePicker.Name = "datePicker";
-            this.datePicker.Size = new System.Drawing.Size(240, 20);
-            this.datePicker.TabIndex = 12;
+            this.datePickerStart.Location = new System.Drawing.Point(59, 19);
+            this.datePickerStart.Name = "datePickerStart";
+            this.datePickerStart.Size = new System.Drawing.Size(240, 20);
+            this.datePickerStart.TabIndex = 12;
+            this.datePickerStart.ValueChanged += new System.EventHandler(this.datePickerStart_ValueChanged);
             // 
-            // label4
+            // datePickerEnd
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(193, 35);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Dátum:";
+            this.datePickerEnd.Location = new System.Drawing.Point(59, 45);
+            this.datePickerEnd.Name = "datePickerEnd";
+            this.datePickerEnd.Size = new System.Drawing.Size(240, 20);
+            this.datePickerEnd.TabIndex = 24;
+            this.datePickerEnd.ValueChanged += new System.EventHandler(this.datePickerEnd_ValueChanged);
             // 
-            // button1
+            // label3
             // 
-            this.button1.Location = new System.Drawing.Point(463, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "Eddig:";
             // 
-            // channelSelector
+            // groupBox2
             // 
-            this.channelSelector.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.channelSelector.FormattingEnabled = true;
-            this.channelSelector.Location = new System.Drawing.Point(3, 16);
-            this.channelSelector.Name = "channelSelector";
-            this.channelSelector.Size = new System.Drawing.Size(146, 63);
-            this.channelSelector.TabIndex = 22;
+            this.groupBox2.Controls.Add(this.datePickerStart);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.datePickerEnd);
+            this.groupBox2.Location = new System.Drawing.Point(167, 5);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(309, 79);
+            this.groupBox2.TabIndex = 26;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Dátum";
             // 
-            // groupBox1
+            // resetFilterButton
             // 
-            this.groupBox1.Controls.Add(this.channelSelector);
-            this.groupBox1.Location = new System.Drawing.Point(9, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(152, 82);
-            this.groupBox1.TabIndex = 23;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Csatorna";
+            this.resetFilterButton.Location = new System.Drawing.Point(526, 32);
+            this.resetFilterButton.Name = "resetFilterButton";
+            this.resetFilterButton.Size = new System.Drawing.Size(89, 23);
+            this.resetFilterButton.TabIndex = 27;
+            this.resetFilterButton.Text = "Szűrő törlése";
+            this.resetFilterButton.UseVisualStyleBackColor = true;
+            this.resetFilterButton.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadingLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 139);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(624, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // loadingLabel
+            // 
+            this.loadingLabel.Name = "loadingLabel";
+            this.loadingLabel.Size = new System.Drawing.Size(33, 17);
+            this.loadingLabel.Text = "Kész.";
             // 
             // TvProgramManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 161);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(640, 200);
             this.Name = "TvProgramManageForm";
@@ -207,7 +278,12 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -225,10 +301,16 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker datePicker;
+        private System.Windows.Forms.DateTimePicker datePickerStart;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button FilterButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckedListBox channelSelector;
+        private System.Windows.Forms.DateTimePicker datePickerEnd;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button resetFilterButton;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel loadingLabel;
     }
 }

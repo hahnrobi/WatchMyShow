@@ -35,6 +35,24 @@ namespace WatchMyShow
         public TvProgramManager()
         {
         }
+        public Tuple<DateTime, DateTime> GetFirstLastProgramDate()
+        {
+            Tuple<DateTime, DateTime> result;
+            try
+            {
+                using (TvContext context = new TvContext())
+                {
+                    var minDate = (from d in context.Programs select d.StartTime).Min();
+                    var maxDate = (from d in context.Programs select d.StartTime).Max();
+                    result = new Tuple<DateTime, DateTime>(minDate, maxDate);
+                }
+            }
+            catch (Exception)
+            {
+                result = new Tuple<DateTime, DateTime>(DateTime.Now, DateTime.Now);
+            }
+            return result;
+        }
         ///<summary>
         ///Visszaadja a Tv műsorokat egy List adatszerekezetben.
         ///</summary>
@@ -61,16 +79,25 @@ namespace WatchMyShow
 
             return RetrieveTvPrograms(time, channel, programDisplay, ageLimit);
         }
-        public List<TvProgram> RetrieveTvPrograms(DateTime time, CheckedListBox channels, ProgramDisplay display, AgeLimit ageLimit)
+        public List<TvProgram> RetrieveTvPrograms(Tuple<DateTime, DateTime> dateRange, List<string> channels, ProgramDisplay display, AgeLimit ageLimit)
         {
             LinkedList<TvProgram> list = new LinkedList<TvProgram>();
-            foreach (string channel in channels.CheckedItems)
+            DateTime startDay = dateRange.Item1.Date;
+            DateTime endDay = dateRange.Item2.Date;
+            while (startDay.Date <= endDay.Date)
             {
-                foreach (TvProgram program in RetrieveTvPrograms(time, channel, display, ageLimit)) 
+                foreach (string channel in channels)
                 {
-                    list.AddFirst(program);
+
+                    foreach (TvProgram program in RetrieveTvPrograms(startDay, channel, display, ageLimit))
+                    {
+                        list.AddFirst(program);
+                    }
+                    startDay.AddDays(1);
                 }
+                startDay = startDay.AddDays(1);
             }
+
             return list.ToList();
         }
         ///<summary>
@@ -80,7 +107,7 @@ namespace WatchMyShow
         {
             using (TvContext context = new TvContext())
             {
-                
+
                 //Alap lekérés
                 var shows = from p in context.Programs
                             where
