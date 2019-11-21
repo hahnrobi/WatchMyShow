@@ -16,13 +16,21 @@ namespace WatchMyShow
         {
             r = new Random();
         }
-        public void BulkGenerate(string[] channels, DateTime from, DateTime to)
+        public void BulkGenerate(string[] channels, DateTime fromDate, DateTime toDate)
         {
             using (TvContext context = new TvContext())
             {
-                
-                DateTime now = new DateTime(from.Year, from.Month, from.Day);
-                while (now.Date != to.Date)
+                var collision = from p in context.Programs
+                                where p.StartTime >= fromDate
+                                &&
+                                p.EndTime <= toDate
+                                select p;
+                if(collision.Count() >0)
+                {
+                    throw new TvProgramCreateEditException("Az adott invervallumban már léteznek műsorok.", TvProgramCreateEditExceptionDetails.Collision);
+                }
+                DateTime now = new DateTime(fromDate.Year, fromDate.Month, fromDate.Day);
+                while (now.Date != toDate.Date)
                 {
                     foreach (string channel in channels)
                     {

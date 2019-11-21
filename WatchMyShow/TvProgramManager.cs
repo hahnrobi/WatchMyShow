@@ -163,6 +163,19 @@ namespace WatchMyShow
 
             }
         }
+        public void DeleteProgram(TvProgram program)
+        {
+            if (program != null)
+            {
+                using (TvContext context = new TvContext())
+                {
+                    TvProgram p = context.Programs.Find(program.ProgramId);
+                    context.Entry(p).State = System.Data.Entity.EntityState.Deleted;
+                    context.Programs.Remove(p);
+                    context.SaveChanges();
+                }
+            }
+        }
         ///<summary>
         ///Visszaadja a Tv műsorokat egy List adatszerekezetben.
         ///</summary>

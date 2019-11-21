@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TvProgramManageForm));
             this.programList = new System.Windows.Forms.ListView();
             this.programTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tvChannel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -37,8 +38,10 @@
             this.endTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.reservedRoom = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.resetFilterButton = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.onlyReserverProgramsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.datePickerStart = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,9 +49,11 @@
             this.datePickerEnd = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.channelSelector = new System.Windows.Forms.CheckedListBox();
-            this.FilterButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.resetFilterButton = new System.Windows.Forms.Button();
+            this.FilterButton = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.loadingLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -58,11 +63,16 @@
             this.törlésToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kezelésToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importálásToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xMLFájlbólToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.műsorokVéletlenszerűGenerálásaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tVCsatornaListaFrissítéseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -81,16 +91,17 @@
             this.programList.FullRowSelect = true;
             this.programList.GridLines = true;
             this.programList.HideSelection = false;
-            this.programList.Location = new System.Drawing.Point(3, 103);
+            this.programList.Location = new System.Drawing.Point(3, 133);
             this.programList.MultiSelect = false;
             this.programList.Name = "programList";
-            this.programList.Size = new System.Drawing.Size(907, 105);
+            this.programList.Size = new System.Drawing.Size(1020, 298);
             this.programList.TabIndex = 0;
             this.programList.UseCompatibleStateImageBehavior = false;
             this.programList.View = System.Windows.Forms.View.Details;
             this.programList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.programList_ColumnClick);
             this.programList.SelectedIndexChanged += new System.EventHandler(this.programList_SelectedIndexChanged);
             this.programList.DoubleClick += new System.EventHandler(this.programList_DoubleClick);
+            this.programList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.programList_KeyDown);
             // 
             // programTitle
             // 
@@ -128,40 +139,64 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.programList, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 130F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(913, 185);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1026, 434);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 346F));
+            this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.panel2, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1020, 124);
+            this.tableLayoutPanel2.TabIndex = 4;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.resetFilterButton);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.FilterButton);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(3, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(907, 94);
+            this.panel1.Size = new System.Drawing.Size(668, 97);
             this.panel1.TabIndex = 1;
             // 
-            // resetFilterButton
+            // groupBox3
             // 
-            this.resetFilterButton.Location = new System.Drawing.Point(755, 27);
-            this.resetFilterButton.Name = "resetFilterButton";
-            this.resetFilterButton.Size = new System.Drawing.Size(89, 23);
-            this.resetFilterButton.TabIndex = 27;
-            this.resetFilterButton.Text = "Szűrő törlése";
-            this.resetFilterButton.UseVisualStyleBackColor = true;
-            this.resetFilterButton.Click += new System.EventHandler(this.button2_Click);
+            this.groupBox3.Controls.Add(this.onlyReserverProgramsCheckBox);
+            this.groupBox3.Location = new System.Drawing.Point(483, 5);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(149, 41);
+            this.groupBox3.TabIndex = 27;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Foglalás";
+            // 
+            // onlyReserverProgramsCheckBox
+            // 
+            this.onlyReserverProgramsCheckBox.AutoSize = true;
+            this.onlyReserverProgramsCheckBox.Location = new System.Drawing.Point(7, 20);
+            this.onlyReserverProgramsCheckBox.Name = "onlyReserverProgramsCheckBox";
+            this.onlyReserverProgramsCheckBox.Size = new System.Drawing.Size(124, 17);
+            this.onlyReserverProgramsCheckBox.TabIndex = 0;
+            this.onlyReserverProgramsCheckBox.Text = "Csak foglalt műsorok";
+            this.onlyReserverProgramsCheckBox.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -171,14 +206,14 @@
             this.groupBox2.Controls.Add(this.datePickerEnd);
             this.groupBox2.Location = new System.Drawing.Point(167, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(309, 79);
+            this.groupBox2.Size = new System.Drawing.Size(309, 82);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Dátum";
             // 
             // datePickerStart
             // 
-            this.datePickerStart.Location = new System.Drawing.Point(59, 19);
+            this.datePickerStart.Location = new System.Drawing.Point(56, 25);
             this.datePickerStart.Name = "datePickerStart";
             this.datePickerStart.Size = new System.Drawing.Size(240, 20);
             this.datePickerStart.TabIndex = 12;
@@ -187,7 +222,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 48);
+            this.label3.Location = new System.Drawing.Point(11, 54);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 25;
@@ -196,7 +231,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 22);
+            this.label4.Location = new System.Drawing.Point(11, 28);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 13);
             this.label4.TabIndex = 19;
@@ -204,7 +239,7 @@
             // 
             // datePickerEnd
             // 
-            this.datePickerEnd.Location = new System.Drawing.Point(59, 45);
+            this.datePickerEnd.Location = new System.Drawing.Point(56, 51);
             this.datePickerEnd.Name = "datePickerEnd";
             this.datePickerEnd.Size = new System.Drawing.Size(240, 20);
             this.datePickerEnd.TabIndex = 24;
@@ -222,22 +257,17 @@
             // 
             // channelSelector
             // 
+            this.channelSelector.BackColor = System.Drawing.SystemColors.Control;
+            this.channelSelector.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.channelSelector.CheckOnClick = true;
             this.channelSelector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.channelSelector.FormattingEnabled = true;
             this.channelSelector.Location = new System.Drawing.Point(3, 16);
             this.channelSelector.Name = "channelSelector";
             this.channelSelector.Size = new System.Drawing.Size(146, 63);
+            this.channelSelector.Sorted = true;
             this.channelSelector.TabIndex = 22;
-            // 
-            // FilterButton
-            // 
-            this.FilterButton.Location = new System.Drawing.Point(769, 56);
-            this.FilterButton.Name = "FilterButton";
-            this.FilterButton.Size = new System.Drawing.Size(75, 23);
-            this.FilterButton.TabIndex = 21;
-            this.FilterButton.Text = "Szűrés";
-            this.FilterButton.UseVisualStyleBackColor = true;
-            this.FilterButton.Click += new System.EventHandler(this.button1_Click);
+            this.channelSelector.ThreeDCheckBoxes = true;
             // 
             // label2
             // 
@@ -257,13 +287,45 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Dátum:";
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.resetFilterButton);
+            this.panel2.Controls.Add(this.FilterButton);
+            this.panel2.Location = new System.Drawing.Point(920, 21);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(97, 100);
+            this.panel2.TabIndex = 2;
+            // 
+            // resetFilterButton
+            // 
+            this.resetFilterButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.resetFilterButton.Location = new System.Drawing.Point(5, 44);
+            this.resetFilterButton.Name = "resetFilterButton";
+            this.resetFilterButton.Size = new System.Drawing.Size(89, 23);
+            this.resetFilterButton.TabIndex = 28;
+            this.resetFilterButton.Text = "Szűrő törlése";
+            this.resetFilterButton.UseVisualStyleBackColor = true;
+            this.resetFilterButton.Click += new System.EventHandler(this.resetFilterButton_Click);
+            // 
+            // FilterButton
+            // 
+            this.FilterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.FilterButton.Location = new System.Drawing.Point(5, 73);
+            this.FilterButton.Name = "FilterButton";
+            this.FilterButton.Size = new System.Drawing.Size(89, 23);
+            this.FilterButton.TabIndex = 21;
+            this.FilterButton.Text = "Szűrés";
+            this.FilterButton.UseVisualStyleBackColor = true;
+            this.FilterButton.Click += new System.EventHandler(this.button1_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadingLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 163);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 412);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(913, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1026, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -275,12 +337,13 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.műsorToolStripMenuItem,
             this.kezelésToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(913, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1026, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -296,24 +359,30 @@
             // 
             // létrehozásToolStripMenuItem
             // 
-            this.létrehozásToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources._6felett;
+            this.létrehozásToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.add;
             this.létrehozásToolStripMenuItem.Name = "létrehozásToolStripMenuItem";
-            this.létrehozásToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.létrehozásToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.létrehozásToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.létrehozásToolStripMenuItem.Text = "Létrehozás";
             this.létrehozásToolStripMenuItem.Click += new System.EventHandler(this.létrehozásToolStripMenuItem_Click);
             // 
             // szerkesztésToolStripMenuItem
             // 
+            this.szerkesztésToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("szerkesztésToolStripMenuItem.Image")));
             this.szerkesztésToolStripMenuItem.Name = "szerkesztésToolStripMenuItem";
-            this.szerkesztésToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.szerkesztésToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.szerkesztésToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.szerkesztésToolStripMenuItem.Text = "Szerkesztés";
             this.szerkesztésToolStripMenuItem.Click += new System.EventHandler(this.szerkesztésToolStripMenuItem_Click);
             // 
             // törlésToolStripMenuItem
             // 
+            this.törlésToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.delete;
             this.törlésToolStripMenuItem.Name = "törlésToolStripMenuItem";
-            this.törlésToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.törlésToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.törlésToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.törlésToolStripMenuItem.Text = "Törlés";
+            this.törlésToolStripMenuItem.Click += new System.EventHandler(this.törlésToolStripMenuItem_Click);
             // 
             // kezelésToolStripMenuItem
             // 
@@ -326,9 +395,26 @@
             // 
             // importálásToolStripMenuItem
             // 
+            this.importálásToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xMLFájlbólToolStripMenuItem,
+            this.műsorokVéletlenszerűGenerálásaToolStripMenuItem});
             this.importálásToolStripMenuItem.Name = "importálásToolStripMenuItem";
-            this.importálásToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importálásToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.importálásToolStripMenuItem.Text = "Importálás";
+            // 
+            // xMLFájlbólToolStripMenuItem
+            // 
+            this.xMLFájlbólToolStripMenuItem.Name = "xMLFájlbólToolStripMenuItem";
+            this.xMLFájlbólToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.xMLFájlbólToolStripMenuItem.Text = "XML fájlból";
+            this.xMLFájlbólToolStripMenuItem.Click += new System.EventHandler(this.xMLFájlbólToolStripMenuItem_Click);
+            // 
+            // műsorokVéletlenszerűGenerálásaToolStripMenuItem
+            // 
+            this.műsorokVéletlenszerűGenerálásaToolStripMenuItem.Name = "műsorokVéletlenszerűGenerálásaToolStripMenuItem";
+            this.műsorokVéletlenszerűGenerálásaToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.műsorokVéletlenszerűGenerálásaToolStripMenuItem.Text = "Műsorok véletlenszerű generálása";
+            this.műsorokVéletlenszerűGenerálásaToolStripMenuItem.Click += new System.EventHandler(this.műsorokVéletlenszerűGenerálásaToolStripMenuItem_Click);
             // 
             // tVCsatornaListaFrissítéseToolStripMenuItem
             // 
@@ -341,21 +427,26 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(913, 185);
+            this.ClientSize = new System.Drawing.Size(1026, 434);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(640, 200);
             this.Name = "TvProgramManageForm";
-            this.Text = "TvProgramManageForm";
+            this.Text = "TV műsor kezelő";
             this.Load += new System.EventHandler(this.TvProgramManageForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -386,7 +477,6 @@
         private System.Windows.Forms.CheckedListBox channelSelector;
         private System.Windows.Forms.DateTimePicker datePickerEnd;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button resetFilterButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel loadingLabel;
@@ -398,5 +488,12 @@
         private System.Windows.Forms.ToolStripMenuItem kezelésToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importálásToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tVCsatornaListaFrissítéseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xMLFájlbólToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem műsorokVéletlenszerűGenerálásaToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button resetFilterButton;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox onlyReserverProgramsCheckBox;
     }
 }

@@ -37,7 +37,7 @@ namespace WatchMyShow.Forms
         }
         private void DoOrderBy(ref List<TvProgram> programs)
         {
-            switch(orderColumn)
+            switch (orderColumn)
             {
                 case 0:
                     programs = programs.OrderBy(p => p.Title).ToList();
@@ -56,9 +56,9 @@ namespace WatchMyShow.Forms
                     break;
                 default:
 
-                break;
+                    break;
             }
-            if(!this.orderAscending)
+            if (!this.orderAscending)
             {
                 programs.Reverse();
             }
@@ -74,13 +74,18 @@ namespace WatchMyShow.Forms
             {
                 selectedChannels.Add(item);
             }
+            ProgramDisplay display = this.programDisplay;
+            if(onlyReserverProgramsCheckBox.Checked)
+            {
+                display = ProgramDisplay.OnlyReserved;
+            }
             string channel = channelSelector.Text;
             DateTime startTime = datePickerStart.Value;
             DateTime endTime = datePickerEnd.Value;
             Tuple<DateTime, DateTime> dateRange = new Tuple<DateTime, DateTime>(startTime, endTime);
             Task.Run(() =>
             {
-                List<TvProgram> programs = ProgramManager.RetrieveTvPrograms(dateRange, selectedChannels, programDisplay, TvProgramManager.AllAgeLimit());
+                List<TvProgram> programs = ProgramManager.RetrieveTvPrograms(dateRange, selectedChannels, display, TvProgramManager.AllAgeLimit());
                 ProgramsReveiced?.Invoke(null, new TvProgramReceivedEventArgs() { Programs = programs });
             });
         }
@@ -102,7 +107,7 @@ namespace WatchMyShow.Forms
                 );
             }
             this.loadingLabel.Text = "Kész.";
-            
+
             if (this.FilterButton.InvokeRequired)
             {
                 this.FilterButton.Invoke((Action)(() => { this.FilterButton.Enabled = true; }));
@@ -126,6 +131,7 @@ namespace WatchMyShow.Forms
             Tuple<DateTime, DateTime> firstLastDate = ProgramManager.GetFirstLastProgramDate();
             datePickerStart.Value = firstLastDate.Item1;
             datePickerEnd.Value = firstLastDate.Item2;
+            onlyReserverProgramsCheckBox.Checked = false;
             for (int i = 0; i < channelSelector.Items.Count; i++)
             {
                 channelSelector.SetItemCheckState(i, CheckState.Checked);
@@ -140,11 +146,11 @@ namespace WatchMyShow.Forms
             item.SubItems.Add(program.StartTime.ToString("HH:mm:ss"));
             item.SubItems.Add(program.AgeLimit.ToString());
             item.SubItems.Add(program.EndTime.ToString("HH:mm:ss"));
-            if(program.ReservedRoomId != null)
+            if (program.ReservedRoomId != null)
             {
                 item.SubItems.Add(program.ReservedRoomId.ToString());
             }
-            
+
             item.Text = program.Title;
             programList.Items.Add(item);
         }
@@ -156,7 +162,7 @@ namespace WatchMyShow.Forms
 
         private void datePickerEnd_ValueChanged(object sender, EventArgs e)
         {
-            if(datePickerEnd.Value < datePickerStart.Value)
+            if (datePickerEnd.Value < datePickerStart.Value)
             {
                 datePickerStart.Value = datePickerEnd.Value;
             }
@@ -164,7 +170,7 @@ namespace WatchMyShow.Forms
 
         private void datePickerStart_ValueChanged(object sender, EventArgs e)
         {
-            if(datePickerStart.Value > datePickerEnd.Value)
+            if (datePickerStart.Value > datePickerEnd.Value)
             {
                 datePickerEnd.Value = datePickerStart.Value;
             }
@@ -177,12 +183,12 @@ namespace WatchMyShow.Forms
 
         private void programList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void programList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if(this.orderColumn == e.Column)
+            if (this.orderColumn == e.Column)
             {
                 this.orderAscending = !this.orderAscending;
             }
@@ -191,7 +197,6 @@ namespace WatchMyShow.Forms
                 this.orderAscending = true;
             }
             this.orderColumn = e.Column;
-            Console.WriteLine(this.orderColumn);
             UpdateTvShowList();
         }
 
@@ -229,6 +234,66 @@ namespace WatchMyShow.Forms
             {
                 channelSelector.SetItemCheckState(i, CheckState.Checked);
             }
+        }
+
+        private void törlésToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (programList.SelectedItems.Count > 0)
+            {
+                if (MessageBox.Show("Biztosan törli a kiválasztott műsort?", "Törlés", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    foreach (ListViewItem item in programList.SelectedItems)
+                    {
+                        ProgramManager.DeleteProgram(item.Tag as TvProgram);
+                        UpdateTvShowList();
+                    }
+                }
+            }
+
+        }
+
+        private void műsorokVéletlenszerűGenerálásaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Biztosan szeretnél generálni új műsorokat?\nA program a szűrésnél beállított időintervallumra és kiválasztott csatornákra fog véletlenszerű műsorokat generálni.", "Generálás", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    List<string> selectedChannels = new List<string>();
+                    for (int i = 0; i < channelSelector.Items.Count; i++)
+                    {
+                        if (channelSelector.GetItemChecked(i))
+                        {
+                            selectedChannels.Add(channelSelector.Items[i].ToString());
+                        }
+                    }
+                    RandomTvProgramGenerator randomTv = new RandomTvProgramGenerator();
+                    randomTv.BulkGenerate(selectedChannels.ToArray(), datePickerStart.Value, datePickerEnd.Value.AddDays(1));
+                    UpdateTvShowList();
+                }
+                catch (TvProgramCreateEditException ex)
+                {
+                    MessageBox.Show(ex.Msg);
+                }
+            }
+        }
+
+
+        private void programList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                törlésToolStripMenuItem.PerformClick();
+            }
+        }
+
+        private void xMLFájlbólToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProgramManager.ImportTvPrograms("tv.xml");
+        }
+
+        private void resetFilterButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

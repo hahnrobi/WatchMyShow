@@ -29,64 +29,59 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.labelConnectedStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sasdaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.dsadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button8 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fájlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bezárásToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.műsorfoglalásToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kezelésToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.műsorokKezeléseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1.SuspendLayout();
+            this.szobaKezelésToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statisztikaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.legtöbbetNézettMűfajokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.legtöbbetNézettCsatornákToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.labelConnectedStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 520);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(739, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
-            // 
-            // labelConnectedStatus
-            // 
-            this.labelConnectedStatus.Name = "labelConnectedStatus";
-            this.labelConnectedStatus.Size = new System.Drawing.Size(106, 17);
-            this.labelConnectedStatus.Text = "Nincs kapcsolódva";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(13, 13);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(404, 495);
-            this.flowLayoutPanel1.TabIndex = 2;
-            this.flowLayoutPanel1.WrapContents = false;
             // 
             // panel1
             // 
@@ -99,10 +94,11 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(424, 13);
+            this.panel1.Location = new System.Drawing.Point(742, 57);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(303, 80);
             this.panel1.TabIndex = 3;
+            this.panel1.Visible = false;
             // 
             // label4
             // 
@@ -154,6 +150,15 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "dokumentumfilm, családi";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::WatchMyShow.Properties.Resources._12felett;
+            this.pictureBox1.Location = new System.Drawing.Point(266, 4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -164,74 +169,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Frakk a macskák réme";
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(428, 100);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(428, 129);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(444, 232);
+            this.button4.Location = new System.Drawing.Point(91, 121);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(167, 23);
             this.button4.TabIndex = 6;
             this.button4.Text = "Műsor böngésző";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(532, 100);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(444, 261);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(167, 23);
-            this.button6.TabIndex = 8;
-            this.button6.Text = "Mass Show Add";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(444, 291);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 9;
-            this.button7.Text = "button7";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(448, 351);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "label6";
             // 
             // contextMenuStrip1
             // 
@@ -262,37 +208,56 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(629, 368);
+            this.button8.Location = new System.Drawing.Point(91, 150);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.Size = new System.Drawing.Size(167, 23);
             this.button8.TabIndex = 11;
-            this.button8.Text = "Stat";
+            this.button8.Text = "Statisztika";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::WatchMyShow.Properties.Resources._12felett;
-            this.pictureBox1.Location = new System.Drawing.Point(266, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.kezelésToolStripMenuItem});
+            this.fájlToolStripMenuItem,
+            this.műsorfoglalásToolStripMenuItem,
+            this.kezelésToolStripMenuItem,
+            this.statisztikaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(739, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // fájlToolStripMenuItem
+            // 
+            this.fájlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bezárásToolStripMenuItem});
+            this.fájlToolStripMenuItem.Name = "fájlToolStripMenuItem";
+            this.fájlToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fájlToolStripMenuItem.Text = "Fájl";
+            // 
+            // bezárásToolStripMenuItem
+            // 
+            this.bezárásToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.delete;
+            this.bezárásToolStripMenuItem.Name = "bezárásToolStripMenuItem";
+            this.bezárásToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.bezárásToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bezárásToolStripMenuItem.Text = "Bezárás";
+            this.bezárásToolStripMenuItem.Click += new System.EventHandler(this.bezárásToolStripMenuItem_Click);
+            // 
+            // műsorfoglalásToolStripMenuItem
+            // 
+            this.műsorfoglalásToolStripMenuItem.Name = "műsorfoglalásToolStripMenuItem";
+            this.műsorfoglalásToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.műsorfoglalásToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.műsorfoglalásToolStripMenuItem.Text = "Műsorfoglalás";
+            // 
             // kezelésToolStripMenuItem
             // 
             this.kezelésToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.műsorokKezeléseToolStripMenuItem});
+            this.műsorokKezeléseToolStripMenuItem,
+            this.szobaKezelésToolStripMenuItem});
             this.kezelésToolStripMenuItem.Name = "kezelésToolStripMenuItem";
             this.kezelésToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.kezelésToolStripMenuItem.Text = "Kezelés";
@@ -300,9 +265,152 @@
             // műsorokKezeléseToolStripMenuItem
             // 
             this.műsorokKezeléseToolStripMenuItem.Name = "műsorokKezeléseToolStripMenuItem";
-            this.műsorokKezeléseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.műsorokKezeléseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.műsorokKezeléseToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.műsorokKezeléseToolStripMenuItem.Text = "Műsorok kezelése";
             this.műsorokKezeléseToolStripMenuItem.Click += new System.EventHandler(this.műsorokKezeléseToolStripMenuItem_Click);
+            // 
+            // szobaKezelésToolStripMenuItem
+            // 
+            this.szobaKezelésToolStripMenuItem.Name = "szobaKezelésToolStripMenuItem";
+            this.szobaKezelésToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+?";
+            this.szobaKezelésToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemQuestion)));
+            this.szobaKezelésToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.szobaKezelésToolStripMenuItem.Text = "Szoba kezelés";
+            this.szobaKezelésToolStripMenuItem.Click += new System.EventHandler(this.szobaKezelésToolStripMenuItem_Click);
+            // 
+            // statisztikaToolStripMenuItem
+            // 
+            this.statisztikaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.legtöbbetNézettMűfajokToolStripMenuItem,
+            this.legtöbbetNézettCsatornákToolStripMenuItem});
+            this.statisztikaToolStripMenuItem.Name = "statisztikaToolStripMenuItem";
+            this.statisztikaToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.statisztikaToolStripMenuItem.Text = "Statisztika";
+            // 
+            // legtöbbetNézettMűfajokToolStripMenuItem
+            // 
+            this.legtöbbetNézettMűfajokToolStripMenuItem.Name = "legtöbbetNézettMűfajokToolStripMenuItem";
+            this.legtöbbetNézettMűfajokToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.legtöbbetNézettMűfajokToolStripMenuItem.Text = "Legtöbbet nézett műfajok";
+            // 
+            // legtöbbetNézettCsatornákToolStripMenuItem
+            // 
+            this.legtöbbetNézettCsatornákToolStripMenuItem.Name = "legtöbbetNézettCsatornákToolStripMenuItem";
+            this.legtöbbetNézettCsatornákToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.legtöbbetNézettCsatornákToolStripMenuItem.Text = "Legtöbbet nézett csatornák";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::WatchMyShow.Properties.Resources.wms_big;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 9);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(293, 290);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 13;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Location = new System.Drawing.Point(31, 318);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(237, 40);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Watch My Show";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label8.Location = new System.Drawing.Point(35, 358);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 15);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Verzió: v1.0";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label9.Location = new System.Drawing.Point(97, 21);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(152, 32);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "Üdvözöljük!";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label10.Location = new System.Drawing.Point(48, 73);
+            this.label10.MaximumSize = new System.Drawing.Size(280, 100);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(251, 30);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "A programot a felső menüből, vagy az alábbi vezérlőkkel használhatja.";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(20, 211);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(318, 17);
+            this.checkBox1.TabIndex = 18;
+            this.checkBox1.Text = "Értesítés megjelenítése foglalt műsor kezdése előtt 15 perccel";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.button4);
+            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.button8);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Location = new System.Drawing.Point(335, 126);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(362, 243);
+            this.panel2.TabIndex = 19;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.pictureBox2);
+            this.panel3.Controls.Add(this.label7);
+            this.panel3.Controls.Add(this.label8);
+            this.panel3.Location = new System.Drawing.Point(24, 49);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(305, 397);
+            this.panel3.TabIndex = 20;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.06089F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.93911F));
+            this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(739, 496);
+            this.tableLayoutPanel1.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.Location = new System.Drawing.Point(35, 374);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(131, 15);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Készítette: Hahn Róbert";
             // 
             // MainWindow
             // 
@@ -310,30 +418,28 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(739, 542);
             this.ContextMenuStrip = this.contextMenuStrip1;
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(650, 400);
             this.Name = "MainWindow";
             this.Text = "MainWindow";
             this.Load += new System.EventHandler(this.MainWindow_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,23 +448,15 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel labelConnectedStatus;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem dsadaToolStripMenuItem;
@@ -367,5 +465,22 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem kezelésToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem műsorokKezeléseToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ToolStripMenuItem fájlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bezárásToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem műsorfoglalásToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem szobaKezelésToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem statisztikaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem legtöbbetNézettMűfajokToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem legtöbbetNézettCsatornákToolStripMenuItem;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label6;
     }
 }

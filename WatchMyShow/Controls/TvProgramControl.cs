@@ -22,6 +22,7 @@ namespace WatchMyShow
         public Button buttonFoglalas;
         private TvProgram program;
         private Room room;
+        private ProgressBar elapsedTimeProgress;
 
         public EventHandler<ProgramChangeEventArgs> SelectedProgramChaned;
 
@@ -36,6 +37,23 @@ namespace WatchMyShow
             this.room = room;
             this.program = program;
             InitializeComponent();
+        }
+        private void CheckProgramElapsedTime()
+        {
+            if (this.program.StartTime.TimeOfDay <= DateTime.Now.TimeOfDay && this.program.EndTime.TimeOfDay >= DateTime.Now.TimeOfDay)
+            {
+                TimeSpan fullTime = program.EndTime.TimeOfDay - program.StartTime.TimeOfDay;
+                TimeSpan elapsedTime = DateTime.Now.TimeOfDay - program.StartTime.TimeOfDay;
+                elapsedTimeProgress.Maximum = (int)fullTime.TotalMinutes;
+                elapsedTimeProgress.Minimum = 0;
+                elapsedTimeProgress.Value = (int)elapsedTime.TotalMinutes;
+                elapsedTimeProgress.Visible = true;
+
+            }
+            else
+            {
+                elapsedTimeProgress.Visible = false;
+            }
         }
         private Bitmap getAgeLimitPic()
         {
@@ -64,6 +82,8 @@ namespace WatchMyShow
             {
                 Location = new System.Drawing.Point(55, 4),
                 Size = new Size(177, 21),
+                AutoSize = true,
+                MaximumSize = new Size(220, 21),
                 Font = new System.Drawing.Font("Segoe UI", 12, System.Drawing.FontStyle.Bold),
                 Text = program.Title
             };
@@ -72,6 +92,8 @@ namespace WatchMyShow
                 Font = new System.Drawing.Font("Segoe UI", 8, System.Drawing.FontStyle.Regular),
                 Location = new Point(56, 28),
                 Size = new Size(156, 30),
+                AutoSize = true,
+                MaximumSize = new Size(156, 70),
                 Text = TvProgramManager.GetGenresAsString(program.Genre)
             };
 
@@ -106,6 +128,15 @@ namespace WatchMyShow
                 BackColor = Control.DefaultBackColor,
                 Visible = false
             };
+            elapsedTimeProgress = new ProgressBar()
+            {
+                Visible = false,
+                Location = new Point(0, 0),
+                Size = new Size(303, 5),
+                BackColor = Color.MediumVioletRed,
+
+            };
+            CheckProgramElapsedTime();
 
             //FOGLALÁS BEGINS
             using (TvContext context = new TvContext())
@@ -210,6 +241,13 @@ namespace WatchMyShow
             Controls.Add(pictureKorhatar);
             Controls.Add(labelStartTime);
             Controls.Add(buttonFoglalas);
+            Controls.Add(elapsedTimeProgress);
+            elapsedTimeProgress.BringToFront();
+
+            Timer timer = new Timer() { Interval = 5000 };
+            timer.Tick += (obj, args) => { CheckProgramElapsedTime(); };
+            timer.Start();
+
 
             System.Windows.Forms.ToolTip tt = new System.Windows.Forms.ToolTip();
             tt.SetToolTip(this.pictureKorhatar, TvProgramManager.GetAgeLimitMessage(this.program.AgeLimit));
