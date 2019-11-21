@@ -100,6 +100,69 @@ namespace WatchMyShow
 
             return list.ToList();
         }
+        public void DeleteReservation(TvProgram program)
+        {
+            using (TvContext context = new TvContext())
+            {
+                TvProgram old = context.Programs.First(p => p.ProgramId == program.ProgramId);
+                context.Entry(old).State = System.Data.Entity.EntityState.Modified;
+                context.Entry(old).Entity.Reserved = null;
+                context.Entry(old).Entity.ReservedRoomId = null;
+                context.SaveChanges();
+            }
+        }
+        public void AddTvProgram(TvProgram program)
+        {
+            if(program.Title == "")
+            {
+                throw new TvProgramCreateEditException("Kötelező címet megadni.", TvProgramCreateEditExceptionDetails.EmptyField);
+            }
+            if (program.TvChannel == "")
+            {
+                throw new TvProgramCreateEditException("Kötelező TV csatornát megadni.", TvProgramCreateEditExceptionDetails.EmptyField);
+            }
+            if (program.Genre == 0)
+            {
+                throw new TvProgramCreateEditException("Kötelező legalább egy műfajt megadni.", TvProgramCreateEditExceptionDetails.EmptyField);
+            }
+            if (program.StartTime > program.EndTime)
+            {
+                throw new TvProgramCreateEditException("Nem kezdődhet később a műsor, mint ahogy vége van.", TvProgramCreateEditExceptionDetails.WrongDateRange);
+            }
+            using (TvContext context = new TvContext())
+            {
+                var collision = from p in context.Programs
+                                where
+                                p.TvChannel == program.TvChannel
+                                &&
+                                System.Data.Entity.Core.Objects.EntityFunctions.DiffDays(p.StartTime, program.StartTime) == 0
+                                &&
+                                p.StartTime <= program.StartTime
+                                &&
+                                p.EndTime > program.StartTime
+                                &&
+                                p.ProgramId != program.ProgramId
+                                select p;
+                if (collision.Count() > 0)
+                {
+                    throw new TvProgramCreateEditException("Ebben az időpontban már van felvéve Tv műsor", TvProgramCreateEditExceptionDetails.Collision);
+                }
+                if (program.ProgramId != 0)
+                {
+                    TvProgram old = context.Programs.First(p => p.ProgramId == program.ProgramId);
+                    context.Entry(old).State = System.Data.Entity.EntityState.Modified;
+                    context.Entry(old).CurrentValues.SetValues(program);
+                    Console.WriteLine(context.Entry(old).Entity.Title);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    context.Programs.Add(program);
+                    context.SaveChanges();
+                }
+
+            }
+        }
         ///<summary>
         ///Visszaadja a Tv műsorokat egy List adatszerekezetben.
         ///</summary>
@@ -164,6 +227,14 @@ namespace WatchMyShow
                 i++;
             }
             return String.Join(",", genres.ToArray());
+        }
+        public static string[] GetAllGenresAsString()
+        {
+            return genreNames;
+        }
+        public static string[] GetAllAgeLimitMessages()
+        {
+            return ageLimitMessages;
         }
         //Korhatárhoz tartozó hosszabb szövege üzenet.
         public static string GetAgeLimitMessage(AgeLimit limit)

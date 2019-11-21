@@ -67,6 +67,7 @@ namespace WatchMyShow.Forms
         public void UpdateTvShowList()
         {
             this.loadingLabel.Text = "Betöltés...";
+            this.programList.Enabled = false;
             this.FilterButton.Enabled = false;
             List<string> selectedChannels = new List<string>();
             foreach (string item in channelSelector.CheckedItems)
@@ -101,6 +102,7 @@ namespace WatchMyShow.Forms
                 );
             }
             this.loadingLabel.Text = "Kész.";
+            
             if (this.FilterButton.InvokeRequired)
             {
                 this.FilterButton.Invoke((Action)(() => { this.FilterButton.Enabled = true; }));
@@ -108,6 +110,14 @@ namespace WatchMyShow.Forms
             else
             {
                 this.FilterButton.Enabled = true;
+            }
+            if (this.programList.InvokeRequired)
+            {
+                this.programList.Invoke((Action)(() => { this.programList.Enabled = true; }));
+            }
+            else
+            {
+                this.programList.Enabled = true;
             }
 
         }
@@ -181,9 +191,44 @@ namespace WatchMyShow.Forms
                 this.orderAscending = true;
             }
             this.orderColumn = e.Column;
-            
-            Console.WriteLine(this.orderAscending);
+            Console.WriteLine(this.orderColumn);
             UpdateTvShowList();
+        }
+
+        private void szerkesztésToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in programList.SelectedItems)
+            {
+                TvProgramEditor tvProgramEditor = new TvProgramEditor(item.Tag as TvProgram);
+                if (tvProgramEditor.ShowDialog() == DialogResult.OK)
+                {
+                    UpdateTvShowList();
+                }
+            }
+        }
+
+        private void programList_DoubleClick(object sender, EventArgs e)
+        {
+            szerkesztésToolStripMenuItem.PerformClick();
+        }
+
+        private void létrehozásToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TvProgramEditor tvProgramEditor = new TvProgramEditor();
+            if (tvProgramEditor.ShowDialog() == DialogResult.OK)
+            {
+                UpdateTvShowList();
+            }
+        }
+
+        private void tVCsatornaListaFrissítéseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            channelSelector.Items.Clear();
+            channelSelector.Items.AddRange(ProgramManager.GetTvChannels().ToArray());
+            for (int i = 0; i < channelSelector.Items.Count; i++)
+            {
+                channelSelector.SetItemCheckState(i, CheckState.Checked);
+            }
         }
     }
 }

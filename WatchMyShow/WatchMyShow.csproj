@@ -100,6 +100,12 @@
     <Compile Include="Forms\TvProgramBrowser.Designer.cs">
       <DependentUpon>TvProgramBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TvProgramEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TvProgramEditor.Designer.cs">
+      <DependentUpon>TvProgramEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TvProgramManageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +125,7 @@
     <Compile Include="Controls\TvProgramControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TvProgramCreateEditException.cs" />
     <Compile Include="TvProgramManager.cs" />
     <Compile Include="TvProgramStatistics.cs" />
     <EmbeddedResource Include="Controls\TvProgramControl.resx">
@@ -141,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TvProgramBrowser.resx">
       <DependentUpon>TvProgramBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TvProgramEditor.resx">
+      <DependentUpon>TvProgramEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TvProgramManageForm.resx">
       <DependentUpon>TvProgramManageForm.cs</DependentUpon>
