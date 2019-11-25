@@ -28,8 +28,6 @@ namespace WatchMyShow
         
         private void MainWindow_Load(object sender, EventArgs e)
         {
-
-
         }
 
 
