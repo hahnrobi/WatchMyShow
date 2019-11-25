@@ -9,6 +9,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
 using WatchMyShow.Forms;
+using System.Data.Entity;
 
 namespace WatchMyShow
 {
@@ -346,5 +347,26 @@ namespace WatchMyShow
             return channels;
         }
 
+        public static TvProgram GetNextProgram(TimeSpan maxRemainingTime)
+        {
+            using(TvContext context = new TvContext())
+            {
+                try
+                {
+                    var nextProgram = (from p in context.Programs
+                                       where p.StartTime > DateTime.Now && p.Reserved != null
+                                       select p).First();
+                    if ((nextProgram.StartTime - DateTime.Now) <= maxRemainingTime)
+                    {
+                        return (TvProgram)nextProgram;
+                    }
+                    return null;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

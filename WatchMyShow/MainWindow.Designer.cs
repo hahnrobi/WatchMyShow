@@ -60,11 +60,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxCountdown = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -242,7 +242,7 @@
             this.bezárásToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.delete;
             this.bezárásToolStripMenuItem.Name = "bezárásToolStripMenuItem";
             this.bezárásToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.bezárásToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bezárásToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.bezárásToolStripMenuItem.Text = "Bezárás";
             this.bezárásToolStripMenuItem.Click += new System.EventHandler(this.bezárásToolStripMenuItem_Click);
             // 
@@ -352,22 +352,23 @@
             this.label10.Text = "A programot a felső menüből, vagy az alábbi vezérlőkkel használhatja.";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // checkBox1
+            // checkBoxCountdown
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(20, 211);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(318, 17);
-            this.checkBox1.TabIndex = 18;
-            this.checkBox1.Text = "Értesítés megjelenítése foglalt műsor kezdése előtt 15 perccel";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxCountdown.AutoSize = true;
+            this.checkBoxCountdown.Location = new System.Drawing.Point(20, 211);
+            this.checkBoxCountdown.Name = "checkBoxCountdown";
+            this.checkBoxCountdown.Size = new System.Drawing.Size(318, 17);
+            this.checkBoxCountdown.TabIndex = 18;
+            this.checkBoxCountdown.Text = "Értesítés megjelenítése foglalt műsor kezdése előtt 15 perccel";
+            this.checkBoxCountdown.UseVisualStyleBackColor = true;
+            this.checkBoxCountdown.CheckedChanged += new System.EventHandler(this.checkBoxCountdown_CheckedChanged);
             // 
             // panel2
             // 
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.checkBoxCountdown);
             this.panel2.Controls.Add(this.button8);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Location = new System.Drawing.Point(335, 126);
@@ -387,6 +388,16 @@
             this.panel3.Size = new System.Drawing.Size(305, 397);
             this.panel3.TabIndex = 20;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.Location = new System.Drawing.Point(35, 374);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(131, 15);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Készítette: Hahn Róbert";
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -401,16 +412,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(739, 496);
             this.tableLayoutPanel1.TabIndex = 21;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(35, 374);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(131, 15);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Készítette: Hahn Róbert";
             // 
             // MainWindow
             // 
@@ -477,7 +478,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxCountdown;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using WatchMyShow.DataClasses;
 using WatchMyShow.Forms;
+using WatchMyShow.Event;
 
 namespace WatchMyShow
 {
@@ -19,11 +20,14 @@ namespace WatchMyShow
     {
         TvProgramManager tvProgramManager;
         TvProgramStatistics TvProgramStatistics;
+        Countdown countdown;
         public MainWindow()
         {
             InitializeComponent();
             tvProgramManager = new TvProgramManager();
             TvProgramStatistics = new TvProgramStatistics();
+            countdown = new Countdown();
+            countdown.ProgramIncoming += DisplayAlert;
         }
         
         private void MainWindow_Load(object sender, EventArgs e)
@@ -77,6 +81,25 @@ namespace WatchMyShow
         private void bezárásToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void DisplayAlert(object sender, TvProgramIncomingEventArgs args)
+        {
+            TvProgramAlert alert = new TvProgramAlert(args.TVProgram);
+            countdown.Stop();
+            alert.ShowDialog();
+            countdown.Start();
+            
+        }
+        private void checkBoxCountdown_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxCountdown.Checked)
+            {
+                countdown.Start();
+            }
+            else
+            {
+                countdown.Stop();
+            }
         }
     }
 }

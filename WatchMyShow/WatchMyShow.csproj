@@ -58,11 +58,13 @@
     <Compile Include="Controls\LoadingControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Countdown.cs" />
     <Compile Include="DataClasses\Room.cs" />
     <Compile Include="DataClasses\TvChannel.cs" />
     <Compile Include="DataClasses\TvProgram.cs" />
     <Compile Include="Event\DateEventArgs.cs" />
     <Compile Include="Event\ProgramChangeEventArgs.cs" />
+    <Compile Include="Event\TvProgramIncomingEventArgs.cs" />
     <Compile Include="Event\TvProgramReceivedEventArgs.cs" />
     <Compile Include="Forms\CalendarPicker.cs">
       <SubType>Form</SubType>
@@ -93,6 +95,12 @@
     </Compile>
     <Compile Include="Forms\TextBoxPopup.Designer.cs">
       <DependentUpon>TextBoxPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TvProgramAlert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TvProgramAlert.Designer.cs">
+      <DependentUpon>TvProgramAlert.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\TvProgramBrowser.cs">
       <SubType>Form</SubType>
@@ -145,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TextBoxPopup.resx">
       <DependentUpon>TextBoxPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TvProgramAlert.resx">
+      <DependentUpon>TvProgramAlert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TvProgramBrowser.resx">
       <DependentUpon>TvProgramBrowser.cs</DependentUpon>
