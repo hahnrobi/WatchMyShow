@@ -150,7 +150,12 @@ namespace WatchMyShow
                                 p.EndTime > program.StartTime
                             select p;
                 //Látható legyen a foglalás gomb. Minden más többi esetben csak eltüntetve lesz.
-                if (room != null) { buttonFoglalas.Visible = true; }
+                if (room != null) {
+                    if (this.program.StartTime >= DateTime.Now || this.program.StartTime <= DateTime.Now && this.program.EndTime >= DateTime.Now)
+                    {
+                        buttonFoglalas.Visible = true;
+                    }
+                }
                 //Ha van olyan műsor amivel átfedésben van
                 if (shows.Count() > 0)
                 {

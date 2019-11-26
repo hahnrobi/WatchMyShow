@@ -92,7 +92,6 @@
             this.programList.GridLines = true;
             this.programList.HideSelection = false;
             this.programList.Location = new System.Drawing.Point(3, 133);
-            this.programList.MultiSelect = false;
             this.programList.Name = "programList";
             this.programList.Size = new System.Drawing.Size(1020, 298);
             this.programList.TabIndex = 0;
@@ -399,7 +398,7 @@
             this.xMLFájlbólToolStripMenuItem,
             this.műsorokVéletlenszerűGenerálásaToolStripMenuItem});
             this.importálásToolStripMenuItem.Name = "importálásToolStripMenuItem";
-            this.importálásToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.importálásToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.importálásToolStripMenuItem.Text = "Importálás";
             // 
             // xMLFájlbólToolStripMenuItem
@@ -419,7 +418,7 @@
             // tVCsatornaListaFrissítéseToolStripMenuItem
             // 
             this.tVCsatornaListaFrissítéseToolStripMenuItem.Name = "tVCsatornaListaFrissítéseToolStripMenuItem";
-            this.tVCsatornaListaFrissítéseToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.tVCsatornaListaFrissítéseToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.tVCsatornaListaFrissítéseToolStripMenuItem.Text = "TV csatorna lista frissítése";
             this.tVCsatornaListaFrissítéseToolStripMenuItem.Click += new System.EventHandler(this.tVCsatornaListaFrissítéseToolStripMenuItem_Click);
             // 

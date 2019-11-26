@@ -61,7 +61,7 @@ namespace WatchMyShow
 
         private void button8_Click(object sender, EventArgs e)
         {
-            Dictionary<string, int> stat = (Dictionary<string, int>)TvProgramStatistics.getStatistics(Stats.ByTvChannel);
+            Dictionary<string, int> stat = (Dictionary<string, int>)TvProgramStatistics.getPieStatistics(Stats.ByTvChannel);
             PieStatistics ps = new PieStatistics(stat);
             ps.ShowDialog();
         }
@@ -100,6 +100,24 @@ namespace WatchMyShow
             {
                 countdown.Stop();
             }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            WatchTimeStatistics wts = new WatchTimeStatistics();
+            wts.ShowDialog();
+        }
+
+        private void legtöbbetNézettMűfajokToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PieStatistics ps = new PieStatistics((Dictionary<TvProgramGenre, int>)TvProgramStatistics.getPieStatistics(Stats.ByGenre));
+            ps.ShowDialog();
+        }
+
+        private void legtöbbetNézettCsatornákToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PieStatistics ps = new PieStatistics((Dictionary<string, int>)TvProgramStatistics.getPieStatistics(Stats.ByTvChannel));
+            ps.ShowDialog();
         }
     }
 }

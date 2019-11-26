@@ -25,7 +25,7 @@ namespace WatchMyShow
                                 &&
                                 p.EndTime <= toDate
                                 select p;
-                if(collision.Count() >0)
+                if (collision.Count() > 0)
                 {
                     throw new TvProgramCreateEditException("Az adott invervallumban már léteznek műsorok.", TvProgramCreateEditExceptionDetails.Collision);
                 }
@@ -36,11 +36,11 @@ namespace WatchMyShow
                     {
                         List<TvProgram> todayPrograms = GenerateRandomPrograms(channel, now);
                         context.Programs.AddRange(todayPrograms);
-                    
+
                     }
-                    
+
                     now = now.Date.AddDays(1);
-                    
+
                 }
                 context.SaveChanges();
             }
@@ -51,7 +51,7 @@ namespace WatchMyShow
             try
             {
                 List<string> names = new List<string>();
-                using (StreamReader sr = new StreamReader("tvShowNames.txt",Encoding.UTF8))
+                using (StreamReader sr = new StreamReader("tvShowNames.txt", Encoding.UTF8))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -61,7 +61,7 @@ namespace WatchMyShow
                 }
                 DateTime[] times = WatchTimeGenerator(new DateTime(day.Year, day.Month, day.Day, 0, 0, 0));
 
-                while(times[0].Hour != 23 && times[0].Minute != 59 && times[0].Second != 59)
+                while (times[0].Hour != 23 && times[0].Minute != 59 && times[0].Second != 59)
                 {
                     TvProgram newProgram = new TvProgram();
                     newProgram.TvChannel = channel;
@@ -132,14 +132,12 @@ namespace WatchMyShow
         private TvProgramGenre GenreGenerator()
         {
             TvProgramGenre genre;
-            if (r.Next(0, 101) < 70)
+            int random = r.Next(Enum.GetNames(typeof(TvProgramGenre)).Length);
+
+            genre = (TvProgramGenre)(int)Math.Pow(2, random);
+            if (r.Next(101) > 70)
             {
-                genre = (TvProgramGenre)r.Next(Enum.GetNames(typeof(TvProgramGenre)).Length);
-            }
-            else
-            {
-                genre = (TvProgramGenre)r.Next(Enum.GetNames(typeof(TvProgramGenre)).Length);
-                genre = genre | (TvProgramGenre)r.Next(Enum.GetNames(typeof(TvProgramGenre)).Length);
+                genre = genre | this.GenreGenerator();
             }
             return genre;
         }

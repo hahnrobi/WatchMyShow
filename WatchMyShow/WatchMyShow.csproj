@@ -120,6 +120,12 @@
     <Compile Include="Forms\TvProgramManageForm.Designer.cs">
       <DependentUpon>TvProgramManageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\WatchTimeStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WatchTimeStatistics.Designer.cs">
+      <DependentUpon>WatchTimeStatistics.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TvProgramManageForm.resx">
       <DependentUpon>TvProgramManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WatchTimeStatistics.resx">
+      <DependentUpon>WatchTimeStatistics.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

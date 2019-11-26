@@ -55,6 +55,7 @@
             this.statisztikaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.legtöbbetNézettMűfajokToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.legtöbbetNézettCsatornákToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -283,7 +284,8 @@
             // 
             this.statisztikaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.legtöbbetNézettMűfajokToolStripMenuItem,
-            this.legtöbbetNézettCsatornákToolStripMenuItem});
+            this.legtöbbetNézettCsatornákToolStripMenuItem,
+            this.toolStripMenuItem1});
             this.statisztikaToolStripMenuItem.Name = "statisztikaToolStripMenuItem";
             this.statisztikaToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.statisztikaToolStripMenuItem.Text = "Statisztika";
@@ -293,12 +295,21 @@
             this.legtöbbetNézettMűfajokToolStripMenuItem.Name = "legtöbbetNézettMűfajokToolStripMenuItem";
             this.legtöbbetNézettMűfajokToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.legtöbbetNézettMűfajokToolStripMenuItem.Text = "Legtöbbet nézett műfajok";
+            this.legtöbbetNézettMűfajokToolStripMenuItem.Click += new System.EventHandler(this.legtöbbetNézettMűfajokToolStripMenuItem_Click);
             // 
             // legtöbbetNézettCsatornákToolStripMenuItem
             // 
             this.legtöbbetNézettCsatornákToolStripMenuItem.Name = "legtöbbetNézettCsatornákToolStripMenuItem";
             this.legtöbbetNézettCsatornákToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.legtöbbetNézettCsatornákToolStripMenuItem.Text = "Legtöbbet nézett csatornák";
+            this.legtöbbetNézettCsatornákToolStripMenuItem.Click += new System.EventHandler(this.legtöbbetNézettCsatornákToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(217, 22);
+            this.toolStripMenuItem1.Text = "TV nézési statisztika";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // pictureBox2
             // 
@@ -483,5 +494,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
