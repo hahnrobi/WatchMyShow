@@ -121,14 +121,9 @@ namespace WatchMyShow.Forms
             DateTime picker = programDatePicker.Value;
             DateTime start = programStartPicker.Value;
             DateTime end = programEndPicker.Value;
-            Console.WriteLine(tvProgram.StartTime.ToString());
-            Console.WriteLine(tvProgram.EndTime.ToString());
+
             tvProgram.StartTime = new DateTime(picker.Year, picker.Month, picker.Day, start.Hour, start.Minute, 0);
             tvProgram.EndTime = new DateTime(picker.Year, picker.Month, picker.Day, end.Hour, end.Minute, 0);
-
-            Console.WriteLine("NEW TIME:");
-            Console.WriteLine(tvProgram.StartTime.ToString());
-            Console.WriteLine(tvProgram.EndTime.ToString());
         }
         private void saveButton_Click(object sender, EventArgs e)
         {
@@ -148,9 +143,6 @@ namespace WatchMyShow.Forms
             catch (Exception ex)
             {
                 MessageBox.Show("Ismeretlen hiba történt");
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
-                Console.WriteLine(ex.InnerException);
             }
         }
         private int calcScreenTime()

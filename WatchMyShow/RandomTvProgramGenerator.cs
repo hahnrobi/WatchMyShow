@@ -26,10 +26,6 @@ namespace WatchMyShow
                                 select p;
                 if (collision.Count() > 0)
                 {
-                    foreach (TvProgram item in collision)
-                    {
-                        Console.WriteLine(item.Title);
-                    }
                     throw new TvProgramCreateEditException("Az adott invervallumban már léteznek műsorok.", TvProgramCreateEditExceptionDetails.Collision);
                 }
                 DateTime now = new DateTime(fromDate.Year, fromDate.Month, fromDate.Day);

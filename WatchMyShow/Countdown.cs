@@ -36,7 +36,6 @@ namespace WatchMyShow
             {
                 tvProgram = newProgram;
                 ProgramIncoming?.Invoke(this, new TvProgramIncomingEventArgs() { TVProgram = tvProgram });
-                Console.WriteLine(tvProgram.Title);
             }
         }
     }

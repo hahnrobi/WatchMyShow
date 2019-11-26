@@ -279,7 +279,6 @@ namespace WatchMyShow.Forms
                 room = rb.Room;
                 szobaVálasszonToolStripMenuItem.Text = "Szoba: " + room.RoomId;
                 UpdateTvShowList();
-                Console.WriteLine(room.RoomId);
             }
 
         }

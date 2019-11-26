@@ -143,10 +143,6 @@ namespace WatchMyShow
                                 select p;
                 if (collision.Count() > 0)
                 {
-                    foreach (TvProgram item in collision)
-                    {
-                        Console.WriteLine(item.Title);
-                    }
                     throw new TvProgramCreateEditException($"Ebben az időpontban már van felvéve Tv műsor\n{program.Title} {program.StartTime.TimeOfDay} - {program.EndTime.TimeOfDay}", TvProgramCreateEditExceptionDetails.Collision);
                 }
                 if (program.ProgramId != 0)
@@ -154,7 +150,7 @@ namespace WatchMyShow
                     TvProgram old = context.Programs.First(p => p.ProgramId == program.ProgramId);
                     context.Entry(old).State = System.Data.Entity.EntityState.Modified;
                     context.Entry(old).CurrentValues.SetValues(program);
-                    Console.WriteLine(context.Entry(old).Entity.Title);
+                    //Console.WriteLine(context.Entry(old).Entity.Title);
                     context.SaveChanges();
                 }
                 else
@@ -373,30 +369,30 @@ namespace WatchMyShow
         }
         //XMLTV fájl parse => TvProgram fájlba. DEV
         [Obsolete("Ne használd. Az XMLTV nem ad elegendő paramértert ahhoz, hogy teljes értékű TvProgram példányt lehessen létrehozni", true)]
-        public List<TvProgram> ParseXmlTvFile(string filepath)
-        {
-            List<TvProgram> programList = new List<TvProgram>();
+        //public List<TvProgram> ParseXmlTvFile(string filepath)
+        //{
+        //    List<TvProgram> programList = new List<TvProgram>();
 
-            XmlDocument xml = new XmlDocument();
-            xml.Load(filepath);
-            foreach (XmlNode node in xml.DocumentElement.ChildNodes)
-            {
-                if (node.Name == "programme")
-                {
-                    TvProgram newProgram = new TvProgram();
-                    foreach (XmlNode childNode in node.ChildNodes)
-                    {
-                        if (childNode.Name == "title")
-                        {
-                            Console.WriteLine(childNode.InnerText);
-                        }
-                    }
+        //    XmlDocument xml = new XmlDocument();
+        //    xml.Load(filepath);
+        //    foreach (XmlNode node in xml.DocumentElement.ChildNodes)
+        //    {
+        //        if (node.Name == "programme")
+        //        {
+        //            TvProgram newProgram = new TvProgram();
+        //            foreach (XmlNode childNode in node.ChildNodes)
+        //            {
+        //                if (childNode.Name == "title")
+        //                {
+        //                    Console.WriteLine(childNode.InnerText);
+        //                }
+        //            }
 
-                    programList.Add(newProgram);
-                }
-            }
-            return programList;
-        }
+        //            programList.Add(newProgram);
+        //        }
+        //    }
+        //    return programList;
+        //}
         public List<string> GetTvChannels()
         {
             List<string> channels = new List<string>();

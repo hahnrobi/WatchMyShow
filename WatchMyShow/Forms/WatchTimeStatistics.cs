@@ -35,15 +35,6 @@ namespace WatchMyShow.Forms
             Dictionary<DateTime, List<TvProgram>> s = stat.getWatchedTvPrograms(fromCalendarPicker.Value, toCalendarPicker.Value);
             Dictionary<DateTime, TimeSpan> wStat = stat.getWatchTimeStatistics(s);
 
-
-            foreach (KeyValuePair<DateTime, List<TvProgram>> item in s)
-            {
-                Console.WriteLine("Dátum: " + item.Key);
-                foreach (TvProgram program in item.Value)
-                {
-                    Console.WriteLine(program.Title);
-                }
-            }
             Series ser = new Series();
             ser.Name = " ";
             ser.ChartType = SeriesChartType.Column;
