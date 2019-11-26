@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WatchMyShow.Forms
@@ -15,7 +8,7 @@ namespace WatchMyShow.Forms
         public TextBoxPopup(string text)
         {
             InitializeComponent();
-            this.Text = text;
+            Text = text;
         }
         public string Input { get; private set; }
 
@@ -26,7 +19,7 @@ namespace WatchMyShow.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Input = inputText.Text;
+            Input = inputText.Text;
         }
     }
 }

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 using WatchMyShow.DataClasses;
 using WatchMyShow.Event;
 
 namespace WatchMyShow
 {
-    class TvProgramControl : Panel
+    internal class TvProgramControl : Panel
     {
 
         private Label labelTitle;
@@ -29,7 +26,7 @@ namespace WatchMyShow
         public TvProgramControl(TvProgram program)
         {
             this.program = program;
-            this.room = program.Reserved;
+            room = program.Reserved;
             InitializeComponent();
         }
         public TvProgramControl(TvProgram program, Room room)
@@ -40,7 +37,7 @@ namespace WatchMyShow
         }
         private void CheckProgramElapsedTime()
         {
-            if (this.program.StartTime.TimeOfDay <= DateTime.Now.TimeOfDay && this.program.EndTime.TimeOfDay >= DateTime.Now.TimeOfDay)
+            if (program.StartTime.TimeOfDay <= DateTime.Now.TimeOfDay && program.EndTime.TimeOfDay >= DateTime.Now.TimeOfDay)
             {
                 TimeSpan fullTime = program.EndTime.TimeOfDay - program.StartTime.TimeOfDay;
                 TimeSpan elapsedTime = DateTime.Now.TimeOfDay - program.StartTime.TimeOfDay;
@@ -150,8 +147,9 @@ namespace WatchMyShow
                                 p.EndTime > program.StartTime
                             select p;
                 //Látható legyen a foglalás gomb. Minden más többi esetben csak eltüntetve lesz.
-                if (room != null) {
-                    if (this.program.StartTime >= DateTime.Now || this.program.StartTime <= DateTime.Now && this.program.EndTime >= DateTime.Now)
+                if (room != null)
+                {
+                    if (program.StartTime >= DateTime.Now || program.StartTime <= DateTime.Now && program.EndTime >= DateTime.Now)
                     {
                         buttonFoglalas.Visible = true;
                     }
@@ -172,7 +170,7 @@ namespace WatchMyShow
                     {
                         labelStatus.Text = "Lefoglalt";
                         System.Windows.Forms.ToolTip ttt = new System.Windows.Forms.ToolTip();
-                        ttt.SetToolTip(labelStatus, "Ez a műsor már le van foglalva, így nézhető lesz.\nLefoglaló szoba: "+this.program.ReservedRoomId);
+                        ttt.SetToolTip(labelStatus, "Ez a műsor már le van foglalva, így nézhető lesz.\nLefoglaló szoba: " + program.ReservedRoomId);
                     }
                     else
                     {
@@ -255,7 +253,7 @@ namespace WatchMyShow
 
 
             System.Windows.Forms.ToolTip tt = new System.Windows.Forms.ToolTip();
-            tt.SetToolTip(this.pictureKorhatar, TvProgramManager.GetAgeLimitMessage(this.program.AgeLimit));
+            tt.SetToolTip(pictureKorhatar, TvProgramManager.GetAgeLimitMessage(program.AgeLimit));
         }
     }
 }

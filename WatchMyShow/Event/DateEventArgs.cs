@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WatchMyShow.Event
 {
@@ -10,7 +6,7 @@ namespace WatchMyShow.Event
     {
         public DateEventArgs(DateTime date)
         {
-            this.Date = date;
+            Date = date;
         }
         public DateTime Date { get; set; }
     }

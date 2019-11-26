@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WatchMyShow.DataClasses;
 
 namespace WatchMyShow
 {
-    class RandomTvProgramGenerator
+    internal class RandomTvProgramGenerator
     {
-        Random r;
+        private Random r;
         public RandomTvProgramGenerator()
         {
             r = new Random();
@@ -27,9 +26,14 @@ namespace WatchMyShow
                                 select p;
                 if (collision.Count() > 0)
                 {
+                    foreach (TvProgram item in collision)
+                    {
+                        Console.WriteLine(item.Title);
+                    }
                     throw new TvProgramCreateEditException("Az adott invervallumban már léteznek műsorok.", TvProgramCreateEditExceptionDetails.Collision);
                 }
                 DateTime now = new DateTime(fromDate.Year, fromDate.Month, fromDate.Day);
+                toDate = toDate.AddDays(1);
                 while (now.Date != toDate.Date)
                 {
                     foreach (string channel in channels)
@@ -57,7 +61,6 @@ namespace WatchMyShow
                     {
                         names.Add(sr.ReadLine());
                     }
-                    sr.Close();
                 }
                 DateTime[] times = WatchTimeGenerator(new DateTime(day.Year, day.Month, day.Day, 0, 0, 0));
 
@@ -137,7 +140,7 @@ namespace WatchMyShow
             genre = (TvProgramGenre)(int)Math.Pow(2, random);
             if (r.Next(101) > 70)
             {
-                genre = genre | this.GenreGenerator();
+                genre = genre | GenreGenerator();
             }
             return genre;
         }

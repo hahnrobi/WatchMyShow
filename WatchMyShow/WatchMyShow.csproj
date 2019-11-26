@@ -60,7 +60,6 @@
     </Compile>
     <Compile Include="Countdown.cs" />
     <Compile Include="DataClasses\Room.cs" />
-    <Compile Include="DataClasses\TvChannel.cs" />
     <Compile Include="DataClasses\TvProgram.cs" />
     <Compile Include="Event\DateEventArgs.cs" />
     <Compile Include="Event\ProgramChangeEventArgs.cs" />
@@ -210,7 +209,10 @@
     <Content Include="Images\delete.png" />
     <Content Include="Images\edit.png" />
     <Content Include="Images\nokorhatar.png" />
+    <Content Include="Images\refresh.png" />
     <Content Include="Images\wms_big.png" />
+    <Content Include="Images\wms_export.png" />
+    <Content Include="Images\wms_import.png" />
     <Content Include="Images\wms_logo.ico" />
     <Content Include="Images\wms_logo.png" />
     <None Include="Resources\nokorhatar.png" />

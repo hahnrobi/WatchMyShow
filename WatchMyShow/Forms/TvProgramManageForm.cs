@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WatchMyShow.DataClasses;
@@ -14,19 +11,21 @@ namespace WatchMyShow.Forms
 {
     public partial class TvProgramManageForm : Form
     {
-        TvProgramManager ProgramManager;
-        ProgramDisplay programDisplay = ProgramDisplay.OnlyFree | ProgramDisplay.OnlyReserved;
-        event EventHandler<TvProgramReceivedEventArgs> ProgramsReveiced;
-        List<TvProgram> programs;
-        int orderColumn = 2;
-        bool orderAscending = true;
+        private TvProgramManager ProgramManager;
+        private ProgramDisplay programDisplay = ProgramDisplay.OnlyFree | ProgramDisplay.OnlyReserved;
+
+        private event EventHandler<TvProgramReceivedEventArgs> ProgramsReveiced;
+
+        private List<TvProgram> programs;
+        private int orderColumn = 2;
+        private bool orderAscending = true;
 
         public TvProgramManageForm()
         {
             InitializeComponent();
             ProgramManager = new TvProgramManager();
             channelSelector.Items.AddRange(ProgramManager.GetTvChannels().ToArray());
-            this.ResetFilters();
+            ResetFilters();
             ProgramsReveiced += OnTvProgramsReveived;
             programs = new List<TvProgram>();
         }
@@ -58,7 +57,7 @@ namespace WatchMyShow.Forms
 
                     break;
             }
-            if (!this.orderAscending)
+            if (!orderAscending)
             {
                 programs.Reverse();
             }
@@ -66,16 +65,16 @@ namespace WatchMyShow.Forms
 
         public void UpdateTvShowList()
         {
-            this.loadingLabel.Text = "Betöltés...";
-            this.programList.Enabled = false;
-            this.FilterButton.Enabled = false;
+            loadingLabel.Text = "Betöltés...";
+            programList.Enabled = false;
+            FilterButton.Enabled = false;
             List<string> selectedChannels = new List<string>();
             foreach (string item in channelSelector.CheckedItems)
             {
                 selectedChannels.Add(item);
             }
-            ProgramDisplay display = this.programDisplay;
-            if(onlyReserverProgramsCheckBox.Checked)
+            ProgramDisplay display = programDisplay;
+            if (onlyReserverProgramsCheckBox.Checked)
             {
                 display = ProgramDisplay.OnlyReserved;
             }
@@ -96,7 +95,7 @@ namespace WatchMyShow.Forms
                 programList.Items.Clear();
             }));
             programs = e.Programs;
-            this.DoOrderBy(ref programs);
+            DoOrderBy(ref programs);
             foreach (TvProgram item in programs)
             {
                 programList.Invoke(
@@ -106,23 +105,23 @@ namespace WatchMyShow.Forms
                     })
                 );
             }
-            this.loadingLabel.Text = "Kész.";
+            loadingLabel.Text = "Kész.";
 
-            if (this.FilterButton.InvokeRequired)
+            if (FilterButton.InvokeRequired)
             {
-                this.FilterButton.Invoke((Action)(() => { this.FilterButton.Enabled = true; }));
+                FilterButton.Invoke((Action)(() => { FilterButton.Enabled = true; }));
             }
             else
             {
-                this.FilterButton.Enabled = true;
+                FilterButton.Enabled = true;
             }
-            if (this.programList.InvokeRequired)
+            if (programList.InvokeRequired)
             {
-                this.programList.Invoke((Action)(() => { this.programList.Enabled = true; }));
+                programList.Invoke((Action)(() => { programList.Enabled = true; }));
             }
             else
             {
-                this.programList.Enabled = true;
+                programList.Enabled = true;
             }
 
         }
@@ -188,15 +187,15 @@ namespace WatchMyShow.Forms
 
         private void programList_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if (this.orderColumn == e.Column)
+            if (orderColumn == e.Column)
             {
-                this.orderAscending = !this.orderAscending;
+                orderAscending = !orderAscending;
             }
             else
             {
-                this.orderAscending = true;
+                orderAscending = true;
             }
-            this.orderColumn = e.Column;
+            orderColumn = e.Column;
             UpdateTvShowList();
         }
 
@@ -267,7 +266,7 @@ namespace WatchMyShow.Forms
                         }
                     }
                     RandomTvProgramGenerator randomTv = new RandomTvProgramGenerator();
-                    randomTv.BulkGenerate(selectedChannels.ToArray(), datePickerStart.Value, datePickerEnd.Value.AddDays(1));
+                    randomTv.BulkGenerate(selectedChannels.ToArray(), datePickerStart.Value, datePickerEnd.Value);
                     UpdateTvShowList();
                 }
                 catch (TvProgramCreateEditException ex)
@@ -288,12 +287,70 @@ namespace WatchMyShow.Forms
 
         private void xMLFájlbólToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProgramManager.ImportTvPrograms("tv.xml");
+            //ProgramManager.ImportTvPrograms("tv.xml");
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "XML Fájlok | *.xml";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if (ProgramManager.ImportTvPrograms(ofd.FileName))
+                    {
+                        MessageBox.Show("A műsorok importálás sikeresen megtörtént");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hiba történt importálás közben.\nLehet, hogy csak a műsorok egy része, vagy egy műsor sem került importálásra.", "HIBA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (TvProgramCreateEditException programEx)
+                {
+                    MessageBox.Show(programEx.Msg);
+                }
+            }
+
         }
 
         private void resetFilterButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void exportálásToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> selectedChannels = new List<string>();
+            for (int i = 0; i < channelSelector.Items.Count; i++)
+            {
+                if (channelSelector.GetItemChecked(i))
+                {
+                    selectedChannels.Add(channelSelector.Items[i].ToString());
+                }
+            }
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "XML Fájlok | *.xml";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                if (ProgramManager.ExportTvPrograms(sfd.FileName, datePickerStart.Value.Date, datePickerEnd.Value.Date, selectedChannels))
+                {
+                    MessageBox.Show("Mentés sikeresen megtörtént!", "Mentés", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("A mentés sikertelen volt.\nLehet, hogy a fájl írásvédett, vagy egy másik folyamat használja.", "Sikertelen mentés", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    while (result != DialogResult.Cancel)
+                    {
+                        if (ProgramManager.ExportTvPrograms(sfd.FileName, datePickerStart.Value.Date, datePickerEnd.Value.Date, selectedChannels))
+                        {
+                            result = DialogResult.Cancel;
+                        }
+                        else
+                        {
+                            result = MessageBox.Show("A mentés sikertelen volt.\nLehet, hogy a fájl írásvédett, vagy egy másik folyamat használja.", "Sikertelen mentés", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
         }
     }
 }

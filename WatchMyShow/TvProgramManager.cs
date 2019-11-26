@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WatchMyShow.DataClasses;
 using System.IO;
-using System.Xml.Serialization;
+using System.Linq;
+using System.Windows.Forms;
 using System.Xml;
-using WatchMyShow.Forms;
-using System.Data.Entity;
+using System.Xml.Serialization;
+using WatchMyShow.DataClasses;
 
 namespace WatchMyShow
 {
     [Flags]
-    enum ProgramDisplay
+    internal enum ProgramDisplay
     {
         OnlyFree = 1,
         OnlyReserved = 2
     }
-    class TvProgramManager
+
+    internal class TvProgramManager
     {
         private static string[] genreNames = new string[] { "sorozat", "animációs film", "vígjáték", "dokumentumfilm", "showműsor", "híradó/interjú", "horror", "thriller", "akció", "dráma", "romantikus", "családi", "zene", "reality" };
         private static string[] ageLimitMessages = new string[] {
@@ -114,7 +111,7 @@ namespace WatchMyShow
         }
         public void AddTvProgram(TvProgram program)
         {
-            if(program.Title == "")
+            if (program.Title == "")
             {
                 throw new TvProgramCreateEditException("Kötelező címet megadni.", TvProgramCreateEditExceptionDetails.EmptyField);
             }
@@ -146,7 +143,11 @@ namespace WatchMyShow
                                 select p;
                 if (collision.Count() > 0)
                 {
-                    throw new TvProgramCreateEditException("Ebben az időpontban már van felvéve Tv műsor", TvProgramCreateEditExceptionDetails.Collision);
+                    foreach (TvProgram item in collision)
+                    {
+                        Console.WriteLine(item.Title);
+                    }
+                    throw new TvProgramCreateEditException($"Ebben az időpontban már van felvéve Tv műsor\n{program.Title} {program.StartTime.TimeOfDay} - {program.EndTime.TimeOfDay}", TvProgramCreateEditExceptionDetails.Collision);
                 }
                 if (program.ProgramId != 0)
                 {
@@ -269,21 +270,87 @@ namespace WatchMyShow
                     return "Ismeretlen korhatár";
             }
         }
-        //Tv programok importálása XML fájlból. --> TODO: try catch
-        public void ImportTvPrograms(string filepath)
+        //Tv programok importálása XML fájlból. 
+        public bool ImportTvPrograms(string filepath)
         {
+            try
+            {
+                using (TvContext context = new TvContext())
+                {
+                    using (StreamReader sr = new StreamReader(filepath))
+                    {
+                        XmlSerializer ser = new XmlSerializer(typeof(List<TvProgram>));
+                        List<TvProgram> tvPrograms = (List<TvProgram>)ser.Deserialize(sr);
+                        foreach (var prgm in tvPrograms)
+                        {
+                            AddTvProgram(prgm);
+                            //context.Programs.Add(prgm);
+                        }
+                        return true;
+                        //context.SaveChanges();
+                    }
+                }
+            }
+
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        /// <summary>
+        /// TV műsor kimentése XML fájlba.
+        /// </summary>
+        /// <param name="filepath">Fájl teljes eléréi útvonala</param>
+        /// <param name="from">Exportálás kezdő dátuma</param>
+        /// <param name="to">Exportálás vége dátuma</param>
+        /// <param name="channels">Csatornák, melyek exportálásra kerüljenek</param>
+        public bool ExportTvPrograms(string filepath, DateTime from, DateTime to, List<string> channels)
+        {
+            DateTime fromDate = from.Date;
+            DateTime toDate = to.Date.AddDays(1);
+            List<TvProgram> programs = new List<TvProgram>();
+            XmlSerializer ser = new XmlSerializer(typeof(List<TvProgram>), new[] { typeof(TvProgram) });
             using (TvContext context = new TvContext())
             {
-                using (StreamReader sr = new StreamReader(filepath))
-                {
-                    XmlSerializer ser = new XmlSerializer(typeof(List<TvProgram>));
-                    List<TvProgram> tvPrograms = (List<TvProgram>)ser.Deserialize(sr);
-                    foreach (var prgm in tvPrograms)
+
+                using (StreamWriter sw = new StreamWriter(filepath))
+                    foreach (string channel in channels)
                     {
-                        context.Programs.Add(prgm);
+                        List<TvProgram> thisChannelsPrograms = (from p in context.Programs
+                                                                where p.StartTime >= fromDate && p.EndTime <= toDate && p.TvChannel == channel
+                                                                select (TvProgram)p).ToList();
+                        if (thisChannelsPrograms.Count > 0)
+                        {
+                            foreach (TvProgram program in thisChannelsPrograms)
+                            {
+                                programs.Add(new TvProgram()
+                                {
+                                    Title = program.Title,
+                                    Genre = program.Genre,
+                                    StartTime = program.StartTime,
+                                    EndTime = program.EndTime,
+                                    TvChannel = program.TvChannel,
+                                    AgeLimit = program.AgeLimit
+                                });
+                            }
+                        }
                     }
-                    context.SaveChanges();
+            }
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(filepath))
+                {
+                    if (programs.Count > 0)
+                    {
+                        ser.Serialize(sw, programs);
+                    }
+                    return true;
                 }
+            }
+            catch
+            {
+                return false;
             }
         }
         //TV program lefoglalása.
@@ -349,7 +416,7 @@ namespace WatchMyShow
 
         public static TvProgram GetNextProgram(TimeSpan maxRemainingTime)
         {
-            using(TvContext context = new TvContext())
+            using (TvContext context = new TvContext())
             {
                 try
                 {

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WatchMyShow.DataClasses;
 
@@ -27,10 +21,10 @@ namespace WatchMyShow.Forms
             using (TvContext context = new TvContext())
             {
                 Room[] rooms = context.Rooms.ToArray();
-                this.listView1.Items.Clear();
+                listView1.Items.Clear();
                 foreach (Room room in rooms)
                 {
-                    this.listView1.Items.Add(room.RoomId.ToString());
+                    listView1.Items.Add(room.RoomId.ToString());
                 }
             }
         }
@@ -47,9 +41,9 @@ namespace WatchMyShow.Forms
                 try
                 {
                     int roomNum = int.Parse(tbp.Input);
-                    using(TvContext context = new TvContext())
+                    using (TvContext context = new TvContext())
                     {
-                        if(context.Rooms.Find(roomNum) == null)
+                        if (context.Rooms.Find(roomNum) == null)
                         {
                             context.Rooms.Add(new Room() { RoomId = roomNum });
                             context.SaveChanges();

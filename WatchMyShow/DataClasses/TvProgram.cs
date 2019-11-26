@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace WatchMyShow.DataClasses
@@ -44,6 +38,8 @@ namespace WatchMyShow.DataClasses
         Reality = 8192
 
     }
+    [XmlInclude(typeof(WatchMyShow.DataClasses.TvProgram))]
+    [Serializable]
     public class TvProgram
     {
         /// <summary>

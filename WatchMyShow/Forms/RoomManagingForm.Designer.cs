@@ -31,8 +31,8 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.szobaszam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,6 +68,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Műveletek";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(7, 50);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "&Töröl";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(7, 20);
@@ -78,15 +87,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(7, 50);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "&Töröl";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // RoomManagingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -94,8 +94,13 @@
             this.ClientSize = new System.Drawing.Size(256, 450);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.listView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "RoomManagingForm";
-            this.Text = "RoomManagingForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "Szoba kezelő";
             this.Load += new System.EventHandler(this.RoomManagingForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);

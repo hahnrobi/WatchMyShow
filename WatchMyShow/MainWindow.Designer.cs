@@ -44,7 +44,6 @@
             this.sasdaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.dsadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button8 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fájlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bezárásToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -207,16 +206,6 @@
             this.dsadaToolStripMenuItem.Text = "dsada";
             this.dsadaToolStripMenuItem.Click += new System.EventHandler(this.dsadaToolStripMenuItem_Click);
             // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(91, 150);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(167, 23);
-            this.button8.TabIndex = 11;
-            this.button8.Text = "Statisztika";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -243,7 +232,7 @@
             this.bezárásToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.delete;
             this.bezárásToolStripMenuItem.Name = "bezárásToolStripMenuItem";
             this.bezárásToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.bezárásToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.bezárásToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.bezárásToolStripMenuItem.Text = "Bezárás";
             this.bezárásToolStripMenuItem.Click += new System.EventHandler(this.bezárásToolStripMenuItem_Click);
             // 
@@ -253,6 +242,7 @@
             this.műsorfoglalásToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.műsorfoglalásToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.műsorfoglalásToolStripMenuItem.Text = "Műsorfoglalás";
+            this.műsorfoglalásToolStripMenuItem.Click += new System.EventHandler(this.műsorfoglalásToolStripMenuItem_Click);
             // 
             // kezelésToolStripMenuItem
             // 
@@ -265,6 +255,7 @@
             // 
             // műsorokKezeléseToolStripMenuItem
             // 
+            this.műsorokKezeléseToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.wms_import;
             this.műsorokKezeléseToolStripMenuItem.Name = "műsorokKezeléseToolStripMenuItem";
             this.műsorokKezeléseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
             this.műsorokKezeléseToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
@@ -273,6 +264,7 @@
             // 
             // szobaKezelésToolStripMenuItem
             // 
+            this.szobaKezelésToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.edit;
             this.szobaKezelésToolStripMenuItem.Name = "szobaKezelésToolStripMenuItem";
             this.szobaKezelésToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+?";
             this.szobaKezelésToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemQuestion)));
@@ -380,7 +372,6 @@
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.checkBoxCountdown);
-            this.panel2.Controls.Add(this.button8);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Location = new System.Drawing.Point(335, 126);
             this.panel2.Name = "panel2";
@@ -473,7 +464,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem dsadaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sasdaToolStripMenuItem;
-        private System.Windows.Forms.Button button8;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem kezelésToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem műsorokKezeléseToolStripMenuItem;

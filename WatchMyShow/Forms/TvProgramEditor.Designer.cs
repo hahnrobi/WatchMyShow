@@ -30,7 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.programTvChannelTextBox = new System.Windows.Forms.ComboBox();
             this.programAgeLimitComboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.programGenresCheckedListBox = new System.Windows.Forms.CheckedListBox();
@@ -38,18 +38,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.programTitleTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.programScreenTimeLabel = new System.Windows.Forms.Label();
+            this.programEndPicker = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.programStartPicker = new System.Windows.Forms.DateTimePicker();
             this.programDatePicker = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.programEndPicker = new System.Windows.Forms.DateTimePicker();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.programReservedLabel = new System.Windows.Forms.Label();
             this.programDeleteReserveButton = new System.Windows.Forms.Button();
-            this.programScreenTimeLabel = new System.Windows.Forms.Label();
-            this.programTvChannelTextBox = new System.Windows.Forms.ComboBox();
+            this.programReservedLabel = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -65,7 +65,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(357, 426);
-            this.tabControl1.TabIndex = 2;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -85,22 +85,14 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Alapadatok";
             // 
-            // tabPage2
+            // programTvChannelTextBox
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.programScreenTimeLabel);
-            this.tabPage2.Controls.Add(this.programEndPicker);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.programStartPicker);
-            this.tabPage2.Controls.Add(this.programDatePicker);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(349, 400);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Időpontok";
+            this.programTvChannelTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.programTvChannelTextBox.FormattingEnabled = true;
+            this.programTvChannelTextBox.Location = new System.Drawing.Point(147, 42);
+            this.programTvChannelTextBox.Name = "programTvChannelTextBox";
+            this.programTvChannelTextBox.Size = new System.Drawing.Size(173, 21);
+            this.programTvChannelTextBox.TabIndex = 2;
             // 
             // programAgeLimitComboBox
             // 
@@ -109,7 +101,7 @@
             this.programAgeLimitComboBox.Location = new System.Drawing.Point(21, 308);
             this.programAgeLimitComboBox.Name = "programAgeLimitComboBox";
             this.programAgeLimitComboBox.Size = new System.Drawing.Size(299, 21);
-            this.programAgeLimitComboBox.TabIndex = 15;
+            this.programAgeLimitComboBox.TabIndex = 4;
             // 
             // label4
             // 
@@ -126,7 +118,7 @@
             this.programGenresCheckedListBox.Location = new System.Drawing.Point(147, 70);
             this.programGenresCheckedListBox.Name = "programGenresCheckedListBox";
             this.programGenresCheckedListBox.Size = new System.Drawing.Size(173, 214);
-            this.programGenresCheckedListBox.TabIndex = 13;
+            this.programGenresCheckedListBox.TabIndex = 3;
             // 
             // label3
             // 
@@ -151,7 +143,7 @@
             this.programTitleTextBox.Location = new System.Drawing.Point(147, 16);
             this.programTitleTextBox.Name = "programTitleTextBox";
             this.programTitleTextBox.Size = new System.Drawing.Size(173, 20);
-            this.programTitleTextBox.TabIndex = 9;
+            this.programTitleTextBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -162,40 +154,41 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Cím";
             // 
-            // programStartPicker
+            // tabPage2
             // 
-            this.programStartPicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.programStartPicker.Location = new System.Drawing.Point(68, 48);
-            this.programStartPicker.Name = "programStartPicker";
-            this.programStartPicker.ShowUpDown = true;
-            this.programStartPicker.Size = new System.Drawing.Size(107, 20);
-            this.programStartPicker.TabIndex = 5;
-            this.programStartPicker.ValueChanged += new System.EventHandler(this.programStartPicker_ValueChanged);
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.programScreenTimeLabel);
+            this.tabPage2.Controls.Add(this.programEndPicker);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.programStartPicker);
+            this.tabPage2.Controls.Add(this.programDatePicker);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(349, 400);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Időpontok";
             // 
-            // programDatePicker
+            // programScreenTimeLabel
             // 
-            this.programDatePicker.Location = new System.Drawing.Point(57, 22);
-            this.programDatePicker.Name = "programDatePicker";
-            this.programDatePicker.Size = new System.Drawing.Size(200, 20);
-            this.programDatePicker.TabIndex = 4;
+            this.programScreenTimeLabel.AutoSize = true;
+            this.programScreenTimeLabel.Location = new System.Drawing.Point(8, 104);
+            this.programScreenTimeLabel.Name = "programScreenTimeLabel";
+            this.programScreenTimeLabel.Size = new System.Drawing.Size(94, 13);
+            this.programScreenTimeLabel.TabIndex = 9;
+            this.programScreenTimeLabel.Text = "Játékidő: <x> perc";
             // 
-            // label5
+            // programEndPicker
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 25);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Dátum:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 52);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Kezdés";
+            this.programEndPicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.programEndPicker.Location = new System.Drawing.Point(68, 74);
+            this.programEndPicker.Name = "programEndPicker";
+            this.programEndPicker.ShowUpDown = true;
+            this.programEndPicker.Size = new System.Drawing.Size(107, 20);
+            this.programEndPicker.TabIndex = 7;
+            this.programEndPicker.ValueChanged += new System.EventHandler(this.programEndPicker_ValueChanged);
             // 
             // label7
             // 
@@ -206,15 +199,40 @@
             this.label7.TabIndex = 7;
             this.label7.Text = "Befejezés";
             // 
-            // programEndPicker
+            // label6
             // 
-            this.programEndPicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.programEndPicker.Location = new System.Drawing.Point(68, 74);
-            this.programEndPicker.Name = "programEndPicker";
-            this.programEndPicker.ShowUpDown = true;
-            this.programEndPicker.Size = new System.Drawing.Size(107, 20);
-            this.programEndPicker.TabIndex = 8;
-            this.programEndPicker.ValueChanged += new System.EventHandler(this.programEndPicker_ValueChanged);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Kezdés";
+            // 
+            // programStartPicker
+            // 
+            this.programStartPicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.programStartPicker.Location = new System.Drawing.Point(68, 48);
+            this.programStartPicker.Name = "programStartPicker";
+            this.programStartPicker.ShowUpDown = true;
+            this.programStartPicker.Size = new System.Drawing.Size(107, 20);
+            this.programStartPicker.TabIndex = 6;
+            this.programStartPicker.ValueChanged += new System.EventHandler(this.programStartPicker_ValueChanged);
+            // 
+            // programDatePicker
+            // 
+            this.programDatePicker.Location = new System.Drawing.Point(57, 22);
+            this.programDatePicker.Name = "programDatePicker";
+            this.programDatePicker.Size = new System.Drawing.Size(200, 20);
+            this.programDatePicker.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 25);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Dátum:";
             // 
             // tabPage3
             // 
@@ -228,15 +246,15 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Foglalás";
             // 
-            // saveButton
+            // programDeleteReserveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(268, 428);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 3;
-            this.saveButton.Text = "&Mentés";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.programDeleteReserveButton.Location = new System.Drawing.Point(10, 23);
+            this.programDeleteReserveButton.Name = "programDeleteReserveButton";
+            this.programDeleteReserveButton.Size = new System.Drawing.Size(111, 23);
+            this.programDeleteReserveButton.TabIndex = 9;
+            this.programDeleteReserveButton.Text = "Foglalás törlése";
+            this.programDeleteReserveButton.UseVisualStyleBackColor = true;
+            this.programDeleteReserveButton.Click += new System.EventHandler(this.programDeleteReserveButton_Click);
             // 
             // programReservedLabel
             // 
@@ -247,33 +265,15 @@
             this.programReservedLabel.TabIndex = 0;
             this.programReservedLabel.Text = "Ezt a műsort a következő szoba foglalta le:";
             // 
-            // programDeleteReserveButton
+            // saveButton
             // 
-            this.programDeleteReserveButton.Location = new System.Drawing.Point(10, 23);
-            this.programDeleteReserveButton.Name = "programDeleteReserveButton";
-            this.programDeleteReserveButton.Size = new System.Drawing.Size(111, 23);
-            this.programDeleteReserveButton.TabIndex = 1;
-            this.programDeleteReserveButton.Text = "Foglalás törlése";
-            this.programDeleteReserveButton.UseVisualStyleBackColor = true;
-            this.programDeleteReserveButton.Click += new System.EventHandler(this.programDeleteReserveButton_Click);
-            // 
-            // programScreenTimeLabel
-            // 
-            this.programScreenTimeLabel.AutoSize = true;
-            this.programScreenTimeLabel.Location = new System.Drawing.Point(8, 104);
-            this.programScreenTimeLabel.Name = "programScreenTimeLabel";
-            this.programScreenTimeLabel.Size = new System.Drawing.Size(94, 13);
-            this.programScreenTimeLabel.TabIndex = 9;
-            this.programScreenTimeLabel.Text = "Játékidő: <x> perc";
-            // 
-            // programTvChannelTextBox
-            // 
-            this.programTvChannelTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.programTvChannelTextBox.FormattingEnabled = true;
-            this.programTvChannelTextBox.Location = new System.Drawing.Point(147, 42);
-            this.programTvChannelTextBox.Name = "programTvChannelTextBox";
-            this.programTvChannelTextBox.Size = new System.Drawing.Size(173, 21);
-            this.programTvChannelTextBox.TabIndex = 16;
+            this.saveButton.Location = new System.Drawing.Point(268, 428);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 8;
+            this.saveButton.Text = "&Mentés";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // TvProgramEditor
             // 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WatchMyShow.DataClasses;
 
 namespace WatchMyShow
@@ -14,7 +10,8 @@ namespace WatchMyShow
         WrongDateRange,
         Unknown
     }
-    class TvProgramCreateEditException : Exception
+    [Serializable]
+    internal class TvProgramCreateEditException : Exception
     {
         public string Msg { get; set; }
         public TvProgram Program { get; set; }
@@ -22,8 +19,8 @@ namespace WatchMyShow
         public TvProgramCreateEditException(string Message, TvProgramCreateEditExceptionDetails details)
         {
             {
-                this.Msg = Message;
-                this.Details = details;
+                Msg = Message;
+                Details = details;
             }
         }
     }

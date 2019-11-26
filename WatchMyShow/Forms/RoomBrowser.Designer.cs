@@ -84,8 +84,13 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "RoomBrowser";
-            this.Text = "RoomBrowser";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "Szobaválasztó";
             this.Load += new System.EventHandler(this.RoomBrowser_Load);
             this.ResumeLayout(false);
 

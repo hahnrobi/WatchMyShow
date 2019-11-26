@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WatchMyShow.DataClasses;
 
@@ -19,16 +13,17 @@ namespace WatchMyShow.Forms
             UpdateRoomsList();
         }
         public Room Room { get; private set; }
-        Room[] rooms;
+
+        private Room[] rooms;
         private void UpdateRoomsList()
         {
             using (TvContext context = new TvContext())
             {
                 rooms = context.Rooms.ToArray();
-                this.listView1.Items.Clear();
+                listView1.Items.Clear();
                 foreach (Room room in rooms)
                 {
-                    this.listView1.Items.Add(room.RoomId.ToString());
+                    listView1.Items.Add(room.RoomId.ToString());
                 }
             }
         }
@@ -41,9 +36,9 @@ namespace WatchMyShow.Forms
         {
             if (listView1.SelectedIndices.Count > 0)
             {
-                this.Room = rooms[listView1.SelectedIndices[0]];
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                Room = rooms[listView1.SelectedIndices[0]];
+                DialogResult = DialogResult.OK;
+                Close();
             }
             else
             {

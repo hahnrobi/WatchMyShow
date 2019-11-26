@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using WatchMyShow.DataClasses;
 
@@ -14,7 +7,7 @@ namespace WatchMyShow.Forms
     public partial class TvProgramEditor : Form
     {
         private TvProgram tvProgram;
-        TvProgramManager manager;
+        private TvProgramManager manager;
 
         public TvProgram TvProgram
         {
@@ -28,55 +21,55 @@ namespace WatchMyShow.Forms
             manager = new TvProgramManager();
             tvProgram = new TvProgram();
             programTvChannelTextBox.Items.AddRange(manager.GetTvChannels().ToArray());
-            
-            this.tabControl1.TabPages.RemoveAt(this.tabControl1.TabPages.Count - 1);
+
+            tabControl1.TabPages.RemoveAt(tabControl1.TabPages.Count - 1);
             //Genre Selector
             foreach (string genre in TvProgramManager.GetAllGenresAsString())
             {
-                this.programGenresCheckedListBox.Items.Add(genre);
+                programGenresCheckedListBox.Items.Add(genre);
             }
 
             //Age Limit Selector
-            this.programAgeLimitComboBox.Items.AddRange(TvProgramManager.GetAllAgeLimitMessages());
-            this.programAgeLimitComboBox.SelectedIndex = this.programAgeLimitComboBox.Items.Count - 1;
+            programAgeLimitComboBox.Items.AddRange(TvProgramManager.GetAllAgeLimitMessages());
+            programAgeLimitComboBox.SelectedIndex = programAgeLimitComboBox.Items.Count - 1;
             setAgeLimitListBox(AgeLimit.Above18);
 
-            this.programScreenTimeLabel.Text = $"Játékidő: {calcScreenTime()} perc";
+            programScreenTimeLabel.Text = $"Játékidő: {calcScreenTime()} perc";
         }
         public TvProgramEditor(TvProgram importProgram)
         {
             InitializeComponent();
             manager = new TvProgramManager();
             programTvChannelTextBox.Items.AddRange(manager.GetTvChannels().ToArray());
-            this.tvProgram = importProgram;
-            this.programTitleTextBox.Text = tvProgram.Title;
-            this.programTvChannelTextBox.Text = tvProgram.TvChannel;
-            this.programDatePicker.Value = tvProgram.StartTime.Date;
-            this.programStartPicker.Value = tvProgram.StartTime;
-            this.programEndPicker.Value = tvProgram.EndTime;
-            this.programGenresCheckedListBox.Items.Clear();
+            tvProgram = importProgram;
+            programTitleTextBox.Text = tvProgram.Title;
+            programTvChannelTextBox.Text = tvProgram.TvChannel;
+            programDatePicker.Value = tvProgram.StartTime.Date;
+            programStartPicker.Value = tvProgram.StartTime;
+            programEndPicker.Value = tvProgram.EndTime;
+            programGenresCheckedListBox.Items.Clear();
 
             //Genre Selector
             foreach (string genre in TvProgramManager.GetAllGenresAsString())
             {
-                this.programGenresCheckedListBox.Items.Add(genre);
+                programGenresCheckedListBox.Items.Add(genre);
             }
             getCheckedGenres(tvProgram.Genre);
 
             //Age Limit Selector
-            this.programAgeLimitComboBox.Items.AddRange(TvProgramManager.GetAllAgeLimitMessages());
-            this.programAgeLimitComboBox.SelectedIndex = this.programAgeLimitComboBox.Items.Count - 1;
+            programAgeLimitComboBox.Items.AddRange(TvProgramManager.GetAllAgeLimitMessages());
+            programAgeLimitComboBox.SelectedIndex = programAgeLimitComboBox.Items.Count - 1;
             setAgeLimitListBox(tvProgram.AgeLimit);
 
-            this.programScreenTimeLabel.Text = $"Játékidő: {calcScreenTime()} perc";
+            programScreenTimeLabel.Text = $"Játékidő: {calcScreenTime()} perc";
 
-            if(this.tvProgram.ReservedRoomId != null)
+            if (tvProgram.ReservedRoomId != null)
             {
-                this.programReservedLabel.Text = "Ezt a műsort az alábbi szoba foglalta le: " + this.tvProgram.ReservedRoomId;
+                programReservedLabel.Text = "Ezt a műsort az alábbi szoba foglalta le: " + tvProgram.ReservedRoomId;
             }
             else
             {
-                this.tabControl1.TabPages.RemoveAt(this.tabControl1.TabPages.Count - 1);
+                tabControl1.TabPages.RemoveAt(tabControl1.TabPages.Count - 1);
             }
         }
         private int calcGenre()
@@ -121,17 +114,17 @@ namespace WatchMyShow.Forms
         }
         private void GenerateNewProgram()
         {
-            this.tvProgram.Title = this.programTitleTextBox.Text;
-            this.tvProgram.TvChannel = this.programTvChannelTextBox.Text;
-            this.tvProgram.Genre = (TvProgramGenre)calcGenre();
-            this.tvProgram.AgeLimit = (AgeLimit)calcAgeLimit();
-            DateTime picker = this.programDatePicker.Value;
-            DateTime start = this.programStartPicker.Value;
-            DateTime end = this.programEndPicker.Value;
+            tvProgram.Title = programTitleTextBox.Text;
+            tvProgram.TvChannel = programTvChannelTextBox.Text;
+            tvProgram.Genre = (TvProgramGenre)calcGenre();
+            tvProgram.AgeLimit = (AgeLimit)calcAgeLimit();
+            DateTime picker = programDatePicker.Value;
+            DateTime start = programStartPicker.Value;
+            DateTime end = programEndPicker.Value;
             Console.WriteLine(tvProgram.StartTime.ToString());
             Console.WriteLine(tvProgram.EndTime.ToString());
-            this.tvProgram.StartTime = new DateTime(picker.Year, picker.Month, picker.Day, start.Hour, start.Minute, 0);
-            this.tvProgram.EndTime = new DateTime(picker.Year, picker.Month, picker.Day, end.Hour, end.Minute, 0);
+            tvProgram.StartTime = new DateTime(picker.Year, picker.Month, picker.Day, start.Hour, start.Minute, 0);
+            tvProgram.EndTime = new DateTime(picker.Year, picker.Month, picker.Day, end.Hour, end.Minute, 0);
 
             Console.WriteLine("NEW TIME:");
             Console.WriteLine(tvProgram.StartTime.ToString());
@@ -140,14 +133,15 @@ namespace WatchMyShow.Forms
         private void saveButton_Click(object sender, EventArgs e)
         {
             GenerateNewProgram();
-            
+
             try
             {
-                manager.AddTvProgram(this.tvProgram);
+                manager.AddTvProgram(tvProgram);
                 MessageBox.Show("A mentés sikeresen megtörtént.\nA frissített műsor új szűrés után jelenik csak meg.", "Sikeres mentés", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
-            }catch (TvProgramCreateEditException ex)
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            catch (TvProgramCreateEditException ex)
             {
                 MessageBox.Show(ex.Msg, "Szerkesztési hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -168,11 +162,11 @@ namespace WatchMyShow.Forms
         }
         private void programStartPicker_ValueChanged(object sender, EventArgs e)
         {
-            if(programStartPicker.Value > programEndPicker.Value)
+            if (programStartPicker.Value > programEndPicker.Value)
             {
                 programEndPicker.Value = programStartPicker.Value.AddMinutes(1);
             }
-            this.programScreenTimeLabel.Text = $"Játékidő: {calcScreenTime()} perc";
+            programScreenTimeLabel.Text = $"Játékidő: {calcScreenTime()} perc";
         }
 
         private void programEndPicker_ValueChanged(object sender, EventArgs e)
@@ -181,7 +175,7 @@ namespace WatchMyShow.Forms
             {
                 programStartPicker.Value = programEndPicker.Value;
             }
-            this.programScreenTimeLabel.Text = $"Játékidő: {calcScreenTime()} perc";
+            programScreenTimeLabel.Text = $"Játékidő: {calcScreenTime()} perc";
         }
 
         private void programDeleteReserveButton_Click(object sender, EventArgs e)
@@ -190,7 +184,7 @@ namespace WatchMyShow.Forms
             {
                 manager.DeleteReservation(tvProgram);
                 MessageBox.Show("Foglalás törlése megtörtént");
-                this.Close();
+                Close();
             }
         }
     }

@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WatchMyShow.DataClasses;
-using WatchMyShow.Forms;
 
 namespace WatchMyShow
 {
-    public enum Stats { ByGenre, ByTvChannel};
-    class TvProgramStatistics
+    public enum Stats { ByGenre, ByTvChannel };
+
+    internal class TvProgramStatistics
     {
-        
+
         public TvProgramStatistics()
         {
 
         }
-        static IEnumerable<TvProgramGenre> GetFlags(TvProgramGenre input)
+
+        private static IEnumerable<TvProgramGenre> GetFlags(TvProgramGenre input)
         {
             return Enum.GetValues(typeof(TvProgramGenre)).Cast<TvProgramGenre>()
                .Where(f => input.HasFlag(f));
@@ -53,9 +52,9 @@ namespace WatchMyShow
                 {
                     var pl = from p in context.Programs
                              where p.Reserved != null
-                            orderby p.TvChannel
-                            group p by p.TvChannel into grp
-                            select new { key = grp.Key, cnt = grp.Count() };
+                             orderby p.TvChannel
+                             group p by p.TvChannel into grp
+                             select new { key = grp.Key, cnt = grp.Count() };
                     Dictionary<string, int> channelStats = new Dictionary<string, int>();
                     foreach (var item in pl)
                     {
@@ -73,17 +72,17 @@ namespace WatchMyShow
             using (TvContext context = new TvContext())
             {
                 List<TvProgram> shows = (from p in context.Programs
-                           where p.Reserved != null && p.StartTime >= fromDate && p.EndTime <= toDate
-                           select p).ToList();
+                                         where p.Reserved != null && p.StartTime >= fromDate && p.EndTime <= toDate
+                                         select p).ToList();
                 Dictionary<DateTime, List<TvProgram>> watchDictionary = new Dictionary<DateTime, List<TvProgram>>();
-                while(fromDate < toDate)
+                while (fromDate < toDate)
                 {
                     watchDictionary.Add(fromDate, new List<TvProgram>());
                     fromDate = fromDate.AddDays(1);
                 }
                 foreach (TvProgram tvProgram in shows)
                 {
-                        watchDictionary[tvProgram.StartTime.Date].Add(tvProgram);
+                    watchDictionary[tvProgram.StartTime.Date].Add(tvProgram);
                 }
                 return watchDictionary;
             }

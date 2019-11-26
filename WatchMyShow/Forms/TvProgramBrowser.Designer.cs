@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TvProgramBrowser));
             this.channelSelector = new System.Windows.Forms.ComboBox();
             this.datePicker = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -298,9 +299,12 @@
             this.Controls.Add(this.datePicker);
             this.Controls.Add(this.channelSelector);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "TvProgramBrowser";
-            this.Text = "TvProgramBrowser";
+            this.Text = "TV műsor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TvProgramBrowser_FormClosing);
             this.Load += new System.EventHandler(this.TvProgramBrowser_Load);
             this.menuStrip1.ResumeLayout(false);

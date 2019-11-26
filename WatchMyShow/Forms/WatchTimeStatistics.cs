@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using WatchMyShow.DataClasses;
@@ -14,7 +8,7 @@ namespace WatchMyShow.Forms
 {
     public partial class WatchTimeStatistics : Form
     {
-        TvProgramStatistics stat;
+        private TvProgramStatistics stat;
         public WatchTimeStatistics()
         {
             InitializeComponent();
@@ -38,7 +32,7 @@ namespace WatchMyShow.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Dictionary<DateTime, List<TvProgram>> s = stat.getWatchedTvPrograms(this.fromCalendarPicker.Value, this.toCalendarPicker.Value);
+            Dictionary<DateTime, List<TvProgram>> s = stat.getWatchedTvPrograms(fromCalendarPicker.Value, toCalendarPicker.Value);
             Dictionary<DateTime, TimeSpan> wStat = stat.getWatchTimeStatistics(s);
 
 
@@ -56,11 +50,11 @@ namespace WatchMyShow.Forms
             ser.IsValueShownAsLabel = true;
             foreach (KeyValuePair<DateTime, TimeSpan> item in wStat)
             {
-                
+
                 ser.Points.AddXY(item.Key, item.Value.TotalMinutes);
             }
-            this.chart1.Series.Clear();
-            this.chart1.Series.Add(ser);
+            chart1.Series.Clear();
+            chart1.Series.Add(ser);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
