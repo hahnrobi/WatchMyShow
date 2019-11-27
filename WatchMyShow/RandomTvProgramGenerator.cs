@@ -15,7 +15,7 @@ namespace WatchMyShow
         {
             r = new Random();
         }
-        public void BulkGenerate(string[] channels, DateTime fromDate, DateTime toDate)
+        public void BulkGenerate(string[] channels, DateTime fromDate, DateTime toDate, string showNamesFile)
         {
             using (TvContext context = new TvContext())
             {
@@ -34,7 +34,7 @@ namespace WatchMyShow
                 {
                     foreach (string channel in channels)
                     {
-                        List<TvProgram> todayPrograms = GenerateRandomPrograms(channel, now);
+                        List<TvProgram> todayPrograms = GenerateRandomPrograms(channel, now, showNamesFile);
                         context.Programs.AddRange(todayPrograms);
 
                     }
@@ -45,13 +45,13 @@ namespace WatchMyShow
                 context.SaveChanges();
             }
         }
-        public List<TvProgram> GenerateRandomPrograms(string channel, DateTime day)
+        public List<TvProgram> GenerateRandomPrograms(string channel, DateTime day, string showNamesFile)
         {
             List<TvProgram> programs = new List<TvProgram>();
             try
             {
                 List<string> names = new List<string>();
-                using (StreamReader sr = new StreamReader("tvShowNames.txt", Encoding.UTF8))
+                using (StreamReader sr = new StreamReader(showNamesFile, Encoding.UTF8))
                 {
                     while (!sr.EndOfStream)
                     {
@@ -76,6 +76,10 @@ namespace WatchMyShow
                     //Console.WriteLine(newProgram.EndTime);
                 }
 
+            }
+            catch(FileNotFoundException)
+            {
+                MessageBox.Show("A műsorokat tartalmazó fájl nem létezik.");
             }
             catch (Exception)
             {

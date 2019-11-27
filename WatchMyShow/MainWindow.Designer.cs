@@ -232,7 +232,7 @@
             this.bezárásToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.delete;
             this.bezárásToolStripMenuItem.Name = "bezárásToolStripMenuItem";
             this.bezárásToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.bezárásToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bezárásToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.bezárásToolStripMenuItem.Text = "Bezárás";
             this.bezárásToolStripMenuItem.Click += new System.EventHandler(this.bezárásToolStripMenuItem_Click);
             // 
@@ -429,7 +429,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(650, 400);
             this.Name = "MainWindow";
-            this.Text = "MainWindow";
+            this.Text = "Watch My Show v1.0 - Készítette: Hahn Róbert";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

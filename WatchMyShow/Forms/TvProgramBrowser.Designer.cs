@@ -205,9 +205,9 @@
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 116);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 87);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(404, 490);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(408, 490);
             this.flowLayoutPanel1.TabIndex = 3;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -233,9 +233,10 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadingLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 594);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 588);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(428, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -287,7 +288,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 616);
+            this.ClientSize = new System.Drawing.Size(428, 610);
             this.Controls.Add(this.buttonCalendarForward);
             this.Controls.Add(this.buttonCalendarBackward);
             this.Controls.Add(this.buttonChannelForward);

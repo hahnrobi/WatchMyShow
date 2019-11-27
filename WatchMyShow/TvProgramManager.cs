@@ -109,7 +109,7 @@ namespace WatchMyShow
                 context.SaveChanges();
             }
         }
-        public void AddTvProgram(TvProgram program)
+        public bool ValidateProgram(TvProgram program)
         {
             if (program.Title == "")
             {
@@ -145,20 +145,30 @@ namespace WatchMyShow
                 {
                     throw new TvProgramCreateEditException($"Ebben az időpontban már van felvéve Tv műsor\n{program.Title} {program.StartTime.TimeOfDay} - {program.EndTime.TimeOfDay}", TvProgramCreateEditExceptionDetails.Collision);
                 }
-                if (program.ProgramId != 0)
+                return true;
+            }
+        }
+        public void AddTvProgram(TvProgram program)
+        {
+            if (this.ValidateProgram(program))
+            {
+                using (TvContext context = new TvContext())
                 {
-                    TvProgram old = context.Programs.First(p => p.ProgramId == program.ProgramId);
-                    context.Entry(old).State = System.Data.Entity.EntityState.Modified;
-                    context.Entry(old).CurrentValues.SetValues(program);
-                    //Console.WriteLine(context.Entry(old).Entity.Title);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    context.Programs.Add(program);
-                    context.SaveChanges();
-                }
+                    if (program.ProgramId != 0)
+                    {
+                        TvProgram old = context.Programs.First(p => p.ProgramId == program.ProgramId);
+                        context.Entry(old).State = System.Data.Entity.EntityState.Modified;
+                        context.Entry(old).CurrentValues.SetValues(program);
+                        //Console.WriteLine(context.Entry(old).Entity.Title);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        context.Programs.Add(program);
+                        context.SaveChanges();
+                    }
 
+                }
             }
         }
         public void DeleteProgram(TvProgram program)
@@ -279,11 +289,16 @@ namespace WatchMyShow
                         List<TvProgram> tvPrograms = (List<TvProgram>)ser.Deserialize(sr);
                         foreach (var prgm in tvPrograms)
                         {
-                            AddTvProgram(prgm);
-                            //context.Programs.Add(prgm);
+                            if (this.ValidateProgram(prgm))
+                            {
+                                context.Programs.Add(prgm);
+                            }
+                            //AddTvProgram(prgm);
+
                         }
+                        context.SaveChanges();
                         return true;
-                        //context.SaveChanges();
+
                     }
                 }
             }
@@ -350,6 +365,11 @@ namespace WatchMyShow
             }
         }
         //TV program lefoglalása.
+        /// <summary>
+        /// TV program lefoglalása egy adott szobához
+        /// </summary>
+        /// <param name="program">Foglalandó műsor</param>
+        /// <param name="room">Lefoglaló szoba</param>
         public static void ReserveTvProgram(TvProgram program, Room room)
         {
             using (TvContext context = new TvContext())
@@ -368,7 +388,7 @@ namespace WatchMyShow
             }
         }
         //XMLTV fájl parse => TvProgram fájlba. DEV
-        [Obsolete("Ne használd. Az XMLTV nem ad elegendő paramértert ahhoz, hogy teljes értékű TvProgram példányt lehessen létrehozni", true)]
+        //[Obsolete("Ne használd. Az XMLTV nem ad elegendő paramértert ahhoz, hogy teljes értékű TvProgram példányt lehessen létrehozni", true)]
         //public List<TvProgram> ParseXmlTvFile(string filepath)
         //{
         //    List<TvProgram> programList = new List<TvProgram>();
@@ -410,6 +430,11 @@ namespace WatchMyShow
             return channels;
         }
 
+        /// <summary>
+        /// Adott időintervallumon belül következő TV program visszaadása, HA VAN
+        /// </summary>
+        /// <param name="maxRemainingTime">Max. intervallum amin belül kell a műsor.</param>
+        /// <returns></returns>
         public static TvProgram GetNextProgram(TimeSpan maxRemainingTime)
         {
             using (TvContext context = new TvContext())

@@ -182,7 +182,8 @@
             // 
             // programEndPicker
             // 
-            this.programEndPicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.programEndPicker.CustomFormat = "HH:mm";
+            this.programEndPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.programEndPicker.Location = new System.Drawing.Point(68, 74);
             this.programEndPicker.Name = "programEndPicker";
             this.programEndPicker.ShowUpDown = true;
@@ -210,7 +211,8 @@
             // 
             // programStartPicker
             // 
-            this.programStartPicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.programStartPicker.CustomFormat = "HH:mm";
+            this.programStartPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.programStartPicker.Location = new System.Drawing.Point(68, 48);
             this.programStartPicker.Name = "programStartPicker";
             this.programStartPicker.ShowUpDown = true;

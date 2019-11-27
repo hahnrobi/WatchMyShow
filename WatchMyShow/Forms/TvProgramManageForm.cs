@@ -66,6 +66,7 @@ namespace WatchMyShow.Forms
         public void UpdateTvShowList()
         {
             loadingLabel.Text = "Betöltés...";
+            queryLabel.Text = "";
             programList.Enabled = false;
             FilterButton.Enabled = false;
             List<string> selectedChannels = new List<string>();
@@ -106,6 +107,7 @@ namespace WatchMyShow.Forms
                 );
             }
             loadingLabel.Text = "Kész.";
+            queryLabel.Text = programList.Items.Count + " műsor listázva";
 
             if (FilterButton.InvokeRequired)
             {
@@ -265,9 +267,14 @@ namespace WatchMyShow.Forms
                             selectedChannels.Add(channelSelector.Items[i].ToString());
                         }
                     }
-                    RandomTvProgramGenerator randomTv = new RandomTvProgramGenerator();
-                    randomTv.BulkGenerate(selectedChannels.ToArray(), datePickerStart.Value, datePickerEnd.Value);
-                    UpdateTvShowList();
+                    OpenFileDialog ofd = new OpenFileDialog();
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        RandomTvProgramGenerator randomTv = new RandomTvProgramGenerator();
+                        randomTv.BulkGenerate(selectedChannels.ToArray(), datePickerStart.Value, datePickerEnd.Value, ofd.FileName);
+
+                        UpdateTvShowList();
+                    }
                 }
                 catch (TvProgramCreateEditException ex)
                 {
@@ -313,7 +320,7 @@ namespace WatchMyShow.Forms
 
         private void resetFilterButton_Click(object sender, EventArgs e)
         {
-
+            ResetFilters();
         }
 
         private void exportálásToolStripMenuItem_Click(object sender, EventArgs e)

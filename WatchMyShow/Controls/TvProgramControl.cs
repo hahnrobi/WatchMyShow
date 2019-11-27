@@ -37,7 +37,7 @@ namespace WatchMyShow
         }
         private void CheckProgramElapsedTime()
         {
-            if (program.StartTime.TimeOfDay <= DateTime.Now.TimeOfDay && program.EndTime.TimeOfDay >= DateTime.Now.TimeOfDay)
+            if (program.StartTime.Date == DateTime.Now.Date && program.StartTime.TimeOfDay <= DateTime.Now.TimeOfDay && program.EndTime.TimeOfDay >= DateTime.Now.TimeOfDay)
             {
                 TimeSpan fullTime = program.EndTime.TimeOfDay - program.StartTime.TimeOfDay;
                 TimeSpan elapsedTime = DateTime.Now.TimeOfDay - program.StartTime.TimeOfDay;
@@ -73,12 +73,12 @@ namespace WatchMyShow
         private void InitializeComponent()
         {
             BackColor = Color.White;
-            Size = new Size(303, 80);
+            Size = new Size(383, 80);
             BorderStyle = BorderStyle.FixedSingle;
             labelTitle = new Label()
             {
                 Location = new System.Drawing.Point(55, 4),
-                Size = new Size(177, 21),
+                Size = new Size(257, 21),
                 AutoSize = true,
                 MaximumSize = new Size(220, 21),
                 Font = new System.Drawing.Font("Segoe UI", 12, System.Drawing.FontStyle.Bold),
@@ -88,9 +88,9 @@ namespace WatchMyShow
             {
                 Font = new System.Drawing.Font("Segoe UI", 8, System.Drawing.FontStyle.Regular),
                 Location = new Point(56, 28),
-                Size = new Size(156, 30),
+                Size = new Size(240, 30),
                 AutoSize = true,
-                MaximumSize = new Size(156, 70),
+                MaximumSize = new Size(240, 70),
                 Text = TvProgramManager.GetGenresAsString(program.Genre)
             };
 
@@ -108,20 +108,20 @@ namespace WatchMyShow
             };
             labelStatus = new Label()
             {
-                Location = new Point(200, 60),
+                Location = new Point(280, 60),
                 Font = new System.Drawing.Font("Segoe UI", 8, System.Drawing.FontStyle.Bold),
                 Visible = false
             };
             pictureKorhatar = new PictureBox()
             {
                 Image = getAgeLimitPic(),
-                Location = new Point(267, 5),
+                Location = new Point(337, 10),
                 Size = new Size(32, 32)
             };
             buttonFoglalas = new Button()
             {
                 Text = "Foglalás",
-                Location = new Point(223, 52),
+                Location = new Point(303, 52),
                 BackColor = Control.DefaultBackColor,
                 Visible = false
             };
@@ -129,7 +129,7 @@ namespace WatchMyShow
             {
                 Visible = false,
                 Location = new Point(0, 0),
-                Size = new Size(303, 5),
+                Size = new Size(383, 5),
                 BackColor = Color.MediumVioletRed,
 
             };
@@ -254,6 +254,8 @@ namespace WatchMyShow
 
             System.Windows.Forms.ToolTip tt = new System.Windows.Forms.ToolTip();
             tt.SetToolTip(pictureKorhatar, TvProgramManager.GetAgeLimitMessage(program.AgeLimit));
+            tt.SetToolTip(labelStartTime, $"Kezdés: {program.StartTime.TimeOfDay} - Vége: {program.EndTime.TimeOfDay}");
+            tt.SetToolTip(labelTimeLength, $"Vége: {program.EndTime.TimeOfDay}");
         }
     }
 }

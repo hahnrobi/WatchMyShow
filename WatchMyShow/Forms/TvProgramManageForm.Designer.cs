@@ -67,6 +67,7 @@
             this.műsorokVéletlenszerűGenerálásaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportálásToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tVCsatornaListaFrissítéseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.queryLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -323,7 +324,8 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadingLabel});
+            this.loadingLabel,
+            this.queryLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 416);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1026, 22);
@@ -363,7 +365,7 @@
             this.létrehozásToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.add;
             this.létrehozásToolStripMenuItem.Name = "létrehozásToolStripMenuItem";
             this.létrehozásToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.létrehozásToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.létrehozásToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.létrehozásToolStripMenuItem.Text = "Létrehozás";
             this.létrehozásToolStripMenuItem.Click += new System.EventHandler(this.létrehozásToolStripMenuItem_Click);
             // 
@@ -372,7 +374,7 @@
             this.szerkesztésToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("szerkesztésToolStripMenuItem.Image")));
             this.szerkesztésToolStripMenuItem.Name = "szerkesztésToolStripMenuItem";
             this.szerkesztésToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.szerkesztésToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.szerkesztésToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.szerkesztésToolStripMenuItem.Text = "Szerkesztés";
             this.szerkesztésToolStripMenuItem.Click += new System.EventHandler(this.szerkesztésToolStripMenuItem_Click);
             // 
@@ -381,7 +383,7 @@
             this.törlésToolStripMenuItem.Image = global::WatchMyShow.Properties.Resources.delete;
             this.törlésToolStripMenuItem.Name = "törlésToolStripMenuItem";
             this.törlésToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.törlésToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.törlésToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.törlésToolStripMenuItem.Text = "Törlés";
             this.törlésToolStripMenuItem.Click += new System.EventHandler(this.törlésToolStripMenuItem_Click);
             // 
@@ -434,6 +436,11 @@
             this.tVCsatornaListaFrissítéseToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.tVCsatornaListaFrissítéseToolStripMenuItem.Text = "TV csatorna lista frissítése";
             this.tVCsatornaListaFrissítéseToolStripMenuItem.Click += new System.EventHandler(this.tVCsatornaListaFrissítéseToolStripMenuItem_Click);
+            // 
+            // queryLabel
+            // 
+            this.queryLabel.Name = "queryLabel";
+            this.queryLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // TvProgramManageForm
             // 
@@ -508,5 +515,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox onlyReserverProgramsCheckBox;
         private System.Windows.Forms.ToolStripMenuItem exportálásToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel queryLabel;
     }
 }
