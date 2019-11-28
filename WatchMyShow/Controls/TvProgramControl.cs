@@ -140,12 +140,19 @@ namespace WatchMyShow
             {
                 //Olyan műsorok lekérése, amelyek ugyanabban az időpontban vannak műsoron, mint ebbe a Controlba kapott műsor.
                 //Olyan műsor ami foglalva van, hamarabb, vagy ugyanakkor kezdődik mint a kiválasztott és később van vége, mint ahogy a kiválasztott elkezdődne.
-                var shows = from p in context.Programs
+                var shows = from vizsgalt in context.Programs
                             where
-                                p.Reserved != null &&
-                                p.StartTime <= program.StartTime &&
-                                p.EndTime > program.StartTime
-                            select p;
+                                vizsgalt.Reserved != null &&
+                                (
+                                    (vizsgalt.StartTime <= program.StartTime && vizsgalt.EndTime > program.StartTime) 
+                                    ||
+                                    (vizsgalt.StartTime >= program.StartTime && vizsgalt.EndTime <= program.EndTime)
+                                    ||
+                                    (vizsgalt.StartTime >= program.StartTime && vizsgalt.StartTime < program.EndTime)
+                                    ||
+                                    (vizsgalt.EndTime >=program.StartTime && vizsgalt.EndTime <=program.EndTime)
+                                )
+                            select vizsgalt;
                 //Látható legyen a foglalás gomb. Minden más többi esetben csak eltüntetve lesz.
                 if (room != null)
                 {
@@ -195,9 +202,9 @@ namespace WatchMyShow
                                     "{0} {1}:{2}-{3}:{4} ({5})",
                                     show.Title, //0
                                     show.StartTime.Hour, //1
-                                    show.StartTime.Minute, //2
+                                    show.StartTime.Minute.ToString("00"), //2
                                     show.EndTime.Hour, //3
-                                    show.EndTime.Minute, //4
+                                    show.EndTime.Minute.ToString("00"), //4
                                     show.TvChannel //5
                                 )
                             };
